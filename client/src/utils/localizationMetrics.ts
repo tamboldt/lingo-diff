@@ -114,7 +114,8 @@ export const checkConstraints = (text: string, constraints: { [key: string]: num
 
   // UI space constraint (mobile button width approximation)
   if (constraints.uiMobile) {
-    const estimatedWidth = metrics.characters * (metrics.script === 'Han' ? 2 : 1); // CJK characters are wider
+    const isCJK = ['Han', 'Hiragana', 'Katakana'].includes(metrics.script);
+    const estimatedWidth = metrics.characters * (isCJK ? 2 : 1); // CJK characters are wider
     checks.push({
       type: 'Mobile UI Space',
       limit: constraints.uiMobile,

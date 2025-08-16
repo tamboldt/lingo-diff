@@ -111,7 +111,9 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
           </span>
         </div>
         <div className="text-xs text-gray-400 mt-1">
-          {metrics.bytes / metrics.characters > 2 
+          {metrics.characters === 0 
+            ? 'No text' 
+            : metrics.bytes / metrics.characters > 2 
             ? 'Complex script (emoji/CJK)' 
             : metrics.bytes / metrics.characters > 1.5 
             ? 'Extended characters' 

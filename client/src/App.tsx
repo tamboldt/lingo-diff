@@ -78,48 +78,15 @@ export default function App() {
             </div>
           </div>
 
-          {/* MAIN WORKFLOW: SOURCE AND TRANSLATIONS SIDE BY SIDE */}
+          {/* MAIN WORKFLOW: TRANSLATION INPUTS AND DIFF */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            {/* LEFT: SOURCE AND TRANSLATION INPUTS */}
+            {/* LEFT: TRANSLATION CANDIDATES - THE CORE DIFF INPUTS */}
             <div className="space-y-4">
-              {/* Source Information */}
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                  <span className="text-blue-500 mr-2">🎯</span>
-                  Source Information
-                </h2>
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="sourceTerm" className="block text-sm font-medium text-gray-700">Source Text</label>
-                    <textarea
-                      id="sourceTerm"
-                      value={sourceTerm}
-                      onChange={(e) => setSourceTerm(e.target.value)}
-                      rows={2}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      placeholder="e.g., Select Room"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="context" className="block text-sm font-medium text-gray-700">Context & Usage</label>
-                    <textarea
-                      id="context"
-                      value={context}
-                      onChange={(e) => setContext(e.target.value)}
-                      rows={2}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      placeholder="e.g., Mobile app button for hotel room selection"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Translation Candidates */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                   <span className="text-green-500 mr-2">🌍</span>
-                  Translation Candidates
+                  Translation Candidates for Comparison
                 </h2>
                 <div className="space-y-4">
                   <div>
@@ -148,37 +115,8 @@ export default function App() {
               </div>
             </div>
 
-            {/* RIGHT: METRICS AND ANALYSIS */}
+            {/* RIGHT: LIVE DIFF VISUALIZATION - THE MAIN OUTPUT */}
             <div className="space-y-4">
-              {/* Metrics Cards */}
-              {sourceTerm && (
-                <div className="space-y-4">
-                  <TextMetricsCard
-                    text={sourceTerm}
-                    label="Source Text"
-                    metrics={sourceMetrics}
-                    isSource={true}
-                  />
-                  {originalText && (
-                    <TextMetricsCard
-                      text={originalText}
-                      label="Translation A"
-                      metrics={originalMetrics}
-                      constraints={constraints}
-                    />
-                  )}
-                  {modifiedText && (
-                    <TextMetricsCard
-                      text={modifiedText}
-                      label="Translation B"
-                      metrics={modifiedMetrics}
-                      constraints={constraints}
-                    />
-                  )}
-                </div>
-              )}
-
-              {/* Visual Diff Analysis */}
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                   <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,27 +127,93 @@ export default function App() {
                 </h2>
                 <DiffViewer originalText={originalText} modifiedText={modifiedText} />
               </div>
-
-              {/* AI Analysis */}
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                  AI Quality Analysis
-                </h2>
-                <p className="text-sm text-gray-600 mb-4">
-                  Generate expert linguistic analysis prompt for LLM evaluation.
-                </p>
-                <ClipboardPromptButton 
-                  sourceTerm={sourceTerm}
-                  context={context}
-                  originalText={originalText}
-                  modifiedText={modifiedText}
-                />
-              </div>
             </div>
           </div>
+
+          {/* SECONDARY ROW: CONTEXT AND METRICS */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            {/* LEFT: SOURCE INFORMATION */}
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <span className="text-blue-500 mr-2">🎯</span>
+                Source Information
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="sourceTerm" className="block text-sm font-medium text-gray-700">Source Text</label>
+                  <textarea
+                    id="sourceTerm"
+                    value={sourceTerm}
+                    onChange={(e) => setSourceTerm(e.target.value)}
+                    rows={2}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="e.g., Select Room"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="context" className="block text-sm font-medium text-gray-700">Context & Usage</label>
+                  <textarea
+                    id="context"
+                    value={context}
+                    onChange={(e) => setContext(e.target.value)}
+                    rows={2}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="e.g., Mobile app button for hotel room selection"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: AI ANALYSIS */}
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                AI Quality Analysis
+              </h2>
+              <p className="text-sm text-gray-600 mb-4">
+                Generate expert linguistic analysis prompt for LLM evaluation.
+              </p>
+              <ClipboardPromptButton 
+                sourceTerm={sourceTerm}
+                context={context}
+                originalText={originalText}
+                modifiedText={modifiedText}
+              />
+            </div>
+          </div>
+
+          {/* METRICS ROW */}
+          {(sourceTerm || originalText || modifiedText) && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {sourceTerm && (
+                <TextMetricsCard
+                  text={sourceTerm}
+                  label="Source Text"
+                  metrics={sourceMetrics}
+                  isSource={true}
+                />
+              )}
+              {originalText && (
+                <TextMetricsCard
+                  text={originalText}
+                  label="Translation A"
+                  metrics={originalMetrics}
+                  constraints={constraints}
+                />
+              )}
+              {modifiedText && (
+                <TextMetricsCard
+                  text={modifiedText}
+                  label="Translation B"
+                  metrics={modifiedMetrics}
+                  constraints={constraints}
+                />
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>
