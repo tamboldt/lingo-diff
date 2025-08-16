@@ -17,8 +17,8 @@ You are an expert linguist and localization consultant with deep knowledge of tr
 Analyze the following two translation candidates for a software application. Evaluate their accuracy, tone, and suitability for the given context. Compare them, explain the key differences, and provide a clear recommendation.
 
 **Contextual Information:**
-- **Source Term (English):** ${sourceTerm || '[Not Provided]'}
-- **Target Language:** Japanese
+- **Source Term:** ${sourceTerm || '[Not Provided]'}
+- **Target Language:** [Auto-detected from translation text]
 - **Translation Context:** ${context || '[No context provided. Assume it is a generic UI element.]'}
 
 ---
