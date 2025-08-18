@@ -1,0 +1,103 @@
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "Herramienta Profesional de Comparación de Textos",
+    "tagline": "Compara, analiza y perfecciona tu texto con herramientas de nivel profesional"
+  },
+  "navigation": {
+    "reset": "Reiniciar Todo",
+    "help": "Ayuda",
+    "language": "Idioma"
+  },
+  "textComparison": {
+    "title": "Comparación de Textos",
+    "textA": {
+      "label": "Texto A (Original)",
+      "placeholder": "Ingresa el texto original...",
+      "tooltip": "Ingresa la versión original de tu texto. Podría ser una traducción existente, primer borrador o versión actual."
+    },
+    "textB": {
+      "label": "Texto B (Revisado)",
+      "placeholder": "Ingresa el texto revisado...",
+      "tooltip": "Ingresa la versión revisada de tu texto. Podría ser una nueva traducción, versión editada u opción alternativa."
+    }
+  },
+  "context": {
+    "title": "Información de Contexto",
+    "referenceText": {
+      "label": "Texto de Referencia",
+      "placeholder": "ej., Seleccionar Habitación",
+      "tooltip": "Ingresa el texto fuente o de referencia (como el inglés original). Esto ayuda a proporcionar contexto para el análisis de comparación."
+    },
+    "usage": {
+      "label": "Contexto y Uso",
+      "placeholder": "ej., Botón de aplicación móvil para selección de habitación de hotel",
+      "tooltip": "Describe dónde y cómo se usa este texto. Incluye contexto de UI, audiencia objetivo o restricciones que afecten la elección del texto."
+    },
+    "saveButton": "💾 Guardar Comparación al Historial"
+  },
+  "analysis": {
+    "title": "Análisis Visual de Diferencias",
+    "aiTitle": "Análisis de IA",
+    "aiDescription": "Genera prompt de análisis experto para evaluación de diferencias de texto con IA.",
+    "processing": "Procesando..."
+  },
+  "csv": {
+    "title": "Importar/Exportar CSV",
+    "import": {
+      "label": "Importar Archivo CSV",
+      "tooltip": "Sube cualquier archivo CSV con columnas de texto. Detectaremos y mapearemos tus columnas automáticamente e inteligentemente.",
+      "smartDetection": "✨ Detección Inteligente: Funciona con cualquier nombre de columna en cualquier idioma",
+      "separatorDetection": "🔍 Auto-detecta separadores: coma, punto y coma, tabulación, barra",
+      "commaHandling": "📝 Maneja comas en el texto automáticamente (ej., \"Bienvenido de nuevo, Juan!\")"
+    },
+    "export": {
+      "label": "Exportar Datos",
+      "tooltip": "Exporta tus comparaciones a formato CSV. Compatible con Excel, Google Sheets y todas las aplicaciones de hoja de cálculo.",
+      "currentData": "📄 Exportar Datos Actuales",
+      "sampleFile": "📋 Descargar CSV de Ejemplo",
+      "compatibility": "💡 Formato perfecto para Excel con codificación UTF-8 adecuada"
+    },
+    "features": {
+      "title": "✨ Características de Importación Inteligente:",
+      "separatorDetection": "Auto-detecta separadores: coma (,), punto y coma (;), tabulación, barra (|)",
+      "columnDetection": "Detecta automáticamente tipos de columna en cualquier idioma",
+      "flexibleNames": "Funciona con nombres de columna flexibles (Original/Revisado, A/B, etc.)",
+      "specialChars": "Maneja comas, comillas y caracteres especiales sin problemas",
+      "utf8Support": "Soporte perfecto UTF-8 para todo texto internacional",
+      "noTechnical": "No se requiere conocimiento técnico de formato CSV"
+    }
+  },
+  "history": {
+    "title": "Historial de Comparaciones",
+    "noHistory": "Aún no hay historial de comparaciones",
+    "clear": "Limpiar Todo"
+  },
+  "constraints": {
+    "title": "Restricciones de Texto"
+  },
+  "metrics": {
+    "characters": "Caracteres",
+    "words": "Palabras",
+    "lines": "Líneas",
+    "referenceText": "Texto de Referencia",
+    "noText": "Sin texto"
+  },
+  "messages": {
+    "success": "Éxito",
+    "error": "Error",
+    "loading": "Cargando...",
+    "fileTooBig": "Archivo demasiado grande. Por favor selecciona un archivo CSV menor a 5MB.",
+    "invalidFile": "Por favor selecciona un archivo CSV.",
+    "noDataExport": "No hay datos para exportar. Agrega algunas comparaciones de texto primero.",
+    "importSuccess": "Se importaron exitosamente {{count}} registros de comparación.",
+    "exportSuccess": "Se exportaron {{count}} registros a CSV."
+  },
+  "welcome": {
+    "title": "Bienvenido a Lingo-Diff",
+    "subtitle": "Herramienta Profesional de Comparación de Textos",
+    "description": "Compara traducciones, revisiones y variantes de texto con herramientas de análisis inteligentes.",
+    "showExample": "Mostrar Ejemplo",
+    "getStarted": "Comenzar"
+  }
+}

@@ -1,0 +1,29 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon background -->
+  <rect x="2" y="6" width="28" height="28" rx="5" fill="#3B82F6"/>
+  
+  <!-- Left panel (original) -->
+  <rect x="5" y="12" width="8" height="16" rx="1" fill="#F8FAFC" stroke="#E2E8F0"/>
+  
+  <!-- Right panel (modified) -->  
+  <rect x="19" y="12" width="8" height="16" rx="1" fill="#F8FAFC" stroke="#E2E8F0"/>
+  
+  <!-- Text lines in left panel -->
+  <rect x="6" y="15" width="6" height="1" rx="0.5" fill="#64748B"/>
+  <rect x="6" y="18" width="4" height="1" rx="0.5" fill="#EF4444"/>
+  <rect x="6" y="21" width="5" height="1" rx="0.5" fill="#64748B"/>
+  <rect x="6" y="24" width="6" height="1" rx="0.5" fill="#64748B"/>
+  
+  <!-- Text lines in right panel -->
+  <rect x="20" y="15" width="6" height="1" rx="0.5" fill="#64748B"/>
+  <rect x="20" y="18" width="5" height="1" rx="0.5" fill="#22C55E"/>
+  <rect x="20" y="21" width="5" height="1" rx="0.5" fill="#64748B"/>
+  <rect x="20" y="24" width="6" height="1" rx="0.5" fill="#64748B"/>
+  
+  <!-- Diff arrow -->
+  <path d="M14.5 19.5L16.5 17.5L16.5 21.5Z" fill="white"/>
+  
+  <!-- Text -->
+  <text x="40" y="17" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Lingo</text>
+  <text x="40" y="30" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500" fill="#3B82F6">Diff</text>
+</svg>

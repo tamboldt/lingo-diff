@@ -1,0 +1,33 @@
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "Ferramenta Profissional de Comparação de Textos"
+  },
+  "navigation": {
+    "reset": "Redefinir Tudo",
+    "help": "Ajuda",
+    "language": "Idioma"
+  },
+  "textComparison": {
+    "title": "Comparação de Textos",
+    "textA": {
+      "label": "Texto A (Original)",
+      "placeholder": "Digite o texto original..."
+    },
+    "textB": {
+      "label": "Texto B (Revisado)",
+      "placeholder": "Digite o texto revisado..."
+    }
+  },
+  "context": {
+    "title": "Informações de Contexto",
+    "referenceText": {
+      "label": "Texto de Referência",
+      "placeholder": "ex., Selecionar Quarto"
+    },
+    "usage": {
+      "label": "Contexto e Uso",
+      "placeholder": "ex., Botão do aplicativo móvel para seleção de quarto do hotel"
+    }
+  }
+}
