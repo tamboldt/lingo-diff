@@ -8,44 +8,44 @@ interface Props {
 }
 
 const generatePrompt = ({ sourceTerm, context, originalText, modifiedText }: Props) => {
-  return `**AI PROMPT: EXPERT LOCALIZATION ANALYSIS**
+  return `**AI PROMPT: EXPERT TEXT ANALYSIS**
 
 **Persona:**
-You are an expert linguist and localization consultant with deep knowledge of translation nuances, cultural context, and user interface (UI) best practices.
+You are an expert linguist and content analyst with deep knowledge of text nuances, cultural context, and communication best practices.
 
 **Task:**
-Analyze the following two translation candidates for a software application. Evaluate their accuracy, tone, and suitability for the given context. Compare them, explain the key differences, and provide a clear recommendation.
+Analyze the following two text variations. Evaluate their clarity, tone, and suitability for the given context. Compare them, explain the key differences, and provide a clear recommendation.
 
 **Contextual Information:**
-- **Source Term:** ${sourceTerm || '[Not Provided]'}
-- **Target Language:** [Auto-detected from translation text]
-- **Translation Context:** ${context || '[No context provided. Assume it is a generic UI element.]'}
+- **Reference Text:** ${sourceTerm || '[Not Provided]'}
+- **Language:** [Auto-detected from text content]
+- **Usage Context:** ${context || '[No context provided. Assume general text usage.]'}
 
 ---
 
-**Translation Candidates to Analyze:**
+**Text Variations to Analyze:**
 
-**Candidate 1 (Original):**
+**Version A (Original):**
 ${originalText}
 
-**Candidate 2 (Modified):**
+**Version B (Revised):**
 ${modifiedText}
 
 ---
 
 **Required Analysis (Provide your response in this exact format):**
 
-### 1. Analysis of Candidate 1
-- **Accuracy & Tone:** Does it accurately convey the source meaning? What is its tone (e.g., formal, casual, direct)?
-- **Suitability for Context:** How well does it fit the specified Translation Context?
+### 1. Analysis of Version A
+- **Clarity & Tone:** How clear is the message? What is its tone (e.g., formal, casual, direct)?
+- **Context Suitability:** How well does it fit the specified usage context?
 
-### 2. Analysis of Candidate 2
-- **Accuracy & Tone:** Does it accurately convey the source meaning? What is its tone?
-- **Suitability for Context:** How well does it fit the specified Translation Context?
+### 2. Analysis of Version B
+- **Clarity & Tone:** How clear is the message? What is its tone?
+- **Context Suitability:** How well does it fit the specified usage context?
 
 ### 3. Comparative Analysis & Recommendation
-- **Key Differences:** What are the most important linguistic differences between them? (e.g., "Candidate 2 omits particles for brevity, making it more direct.")
-- **Final Recommendation:** Which candidate is better for the given context and why?`;
+- **Key Differences:** What are the most important differences between them? (e.g., "Version B is more concise, making it more direct.")
+- **Final Recommendation:** Which version is better for the given context and why?`;
 };
 
 export const ClipboardPromptButton = ({ sourceTerm, context, originalText, modifiedText }: Props) => {
@@ -53,12 +53,12 @@ export const ClipboardPromptButton = ({ sourceTerm, context, originalText, modif
 
   const handleCopy = () => {
     if (!originalText && !modifiedText) {
-      alert('Please provide text for at least one translation candidate before copying.');
+      alert('Please provide text for at least one version before copying.');
       return;
     }
     
     if (!sourceTerm && !context) {
-        if (!confirm("You have not provided a Source Term or Context. The AI's analysis will be less accurate. Do you want to continue?")) {
+        if (!confirm("You have not provided a Reference Text or Context. The AI's analysis will be less accurate. Do you want to continue?")) {
             return;
         }
     }
