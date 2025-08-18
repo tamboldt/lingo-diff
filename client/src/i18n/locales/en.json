@@ -1,0 +1,103 @@
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "Professional Text Comparison Tool",
+    "tagline": "Compare, analyze, and perfect your text with professional-grade tools"
+  },
+  "navigation": {
+    "reset": "Reset All",
+    "help": "Help",
+    "language": "Language"
+  },
+  "textComparison": {
+    "title": "Text Comparison",
+    "textA": {
+      "label": "Text A (Original)",
+      "placeholder": "Enter original text...",
+      "tooltip": "Enter the original version of your text. This could be an existing translation, first draft, or current version."
+    },
+    "textB": {
+      "label": "Text B (Revised)",
+      "placeholder": "Enter revised text...",
+      "tooltip": "Enter the revised version of your text. This could be a new translation, edited version, or alternative option."
+    }
+  },
+  "context": {
+    "title": "Context Information",
+    "referenceText": {
+      "label": "Reference Text",
+      "placeholder": "e.g., Select Room",
+      "tooltip": "Enter the source or reference text (like the original English). This helps provide context for comparison analysis."
+    },
+    "usage": {
+      "label": "Context & Usage",
+      "placeholder": "e.g., Mobile app button for hotel room selection",
+      "tooltip": "Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice."
+    },
+    "saveButton": "💾 Save Comparison to History"
+  },
+  "analysis": {
+    "title": "Visual Difference Analysis",
+    "aiTitle": "AI Analysis",
+    "aiDescription": "Generate expert analysis prompt for AI evaluation of text differences.",
+    "processing": "Processing..."
+  },
+  "csv": {
+    "title": "CSV Import/Export",
+    "import": {
+      "label": "Import CSV File",
+      "tooltip": "Upload any CSV file with text columns. We'll automatically detect and map your columns intelligently.",
+      "smartDetection": "✨ Smart Detection: Works with any column names in any language",
+      "separatorDetection": "🔍 Auto-detects separators: comma, semicolon, tab, pipe",
+      "commaHandling": "📝 Handles commas in text automatically (e.g., \"Welcome back, John!\")"
+    },
+    "export": {
+      "label": "Export Data",
+      "tooltip": "Export your comparisons to CSV format. Compatible with Excel, Google Sheets, and all spreadsheet applications.",
+      "currentData": "📄 Export Current Data",
+      "sampleFile": "📋 Download Sample CSV",
+      "compatibility": "💡 Perfect format for Excel with proper UTF-8 encoding"
+    },
+    "features": {
+      "title": "✨ Smart Import Features:",
+      "separatorDetection": "Auto-detects separators: comma (,), semicolon (;), tab, pipe (|)",
+      "columnDetection": "Automatically detects column types in any language",
+      "flexibleNames": "Works with flexible column names (Original/Revised, A/B, etc.)",
+      "specialChars": "Handles commas, quotes, and special characters seamlessly",
+      "utf8Support": "Perfect UTF-8 support for all international text",
+      "noTechnical": "No technical CSV formatting knowledge required"
+    }
+  },
+  "history": {
+    "title": "Comparison History",
+    "noHistory": "No comparison history yet",
+    "clear": "Clear All"
+  },
+  "constraints": {
+    "title": "Text Constraints"
+  },
+  "metrics": {
+    "characters": "Characters",
+    "words": "Words",
+    "lines": "Lines",
+    "referenceText": "Reference Text",
+    "noText": "No text"
+  },
+  "messages": {
+    "success": "Success",
+    "error": "Error",
+    "loading": "Loading...",
+    "fileTooBig": "File too large. Please select a CSV file smaller than 5MB.",
+    "invalidFile": "Please select a CSV file.",
+    "noDataExport": "No data to export. Add some text comparisons first.",
+    "importSuccess": "Successfully imported {{count}} comparison records.",
+    "exportSuccess": "Exported {{count}} records to CSV."
+  },
+  "welcome": {
+    "title": "Welcome to Lingo-Diff",
+    "subtitle": "Professional Text Comparison Tool",
+    "description": "Compare translations, revisions, and text variants with intelligent analysis tools.",
+    "showExample": "Show Example",
+    "getStarted": "Get Started"
+  }
+}
