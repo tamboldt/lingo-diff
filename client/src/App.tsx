@@ -4,11 +4,8 @@ import { ClipboardPromptButton } from './components/ClipboardPromptButton';
 import { Header } from './components/Header';
 import { WelcomeModal } from './components/WelcomeModal';
 import { TextMetricsCard } from './components/TextMetricsCard';
-import { ConstraintsPanel } from './components/ConstraintsPanel';
-import { CSVManager } from './components/CSVManager';
-import { ComparisonHistory } from './components/ComparisonHistory';
 import { InfoTooltip } from './components/Tooltip';
-import { LLMIntegration } from './components/LLMIntegration';
+import { SidePanel } from './components/SidePanel';
 import { getTextMetrics } from './utils/localizationMetrics';
 import { TextComparisonRecord } from './utils/csvHandler';
 
@@ -157,31 +154,10 @@ export default function App() {
       )}
       <Header onReset={handleReset} onResetWelcome={handleResetWelcome} />
       <main id="main-content" className="p-4 sm:p-6 md:p-8" role="main">
-        <div className="max-w-7xl mx-auto space-y-6">
-          
-          {/* TOP ROW: CONTROLS */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="lg:col-span-1">
-              <CSVManager 
-                onImportRecords={handleImportRecords}
-                currentRecords={currentRecords}
-              />
-            </div>
-            <div className="lg:col-span-1">
-              <ConstraintsPanel constraints={constraints} onConstraintsChange={setConstraints} />
-            </div>
-            <div className="lg:col-span-1">
-              <ComparisonHistory
-                records={comparisonHistory}
-                onSelectRecord={handleSelectRecord}
-                onDeleteRecord={handleDeleteRecord}
-                onClearHistory={handleClearHistory}
-              />
-            </div>
-          </div>
+        <div className="max-w-6xl mx-auto">{/* Reduced max width for better focus on main content */}
 
-          {/* MAIN WORKFLOW: TRANSLATION INPUTS AND DIFF */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* MAIN WORKFLOW: TEXT INPUTS AND DIFF */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">{/* Increased gap for better spacing */}
             
             {/* LEFT: TRANSLATION CANDIDATES - THE CORE DIFF INPUTS */}
             <div className="space-y-4">
@@ -256,10 +232,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* SECONDARY ROW: CONTEXT AND METRICS */}
+          {/* CONTEXT INPUTS - Moved inline for better UX */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            {/* LEFT: SOURCE INFORMATION */}
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
               <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                 <span className="text-blue-500 mr-2">📄</span>
@@ -313,27 +287,18 @@ export default function App() {
               </div>
             </div>
 
-            {/* RIGHT: AI ANALYSIS */}
-            <div className="space-y-4">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                  AI Analysis
-                </h2>
-                <p className="text-sm text-gray-600 mb-4">
-                  Generate expert analysis prompt for AI evaluation of text differences.
-                </p>
-                <ClipboardPromptButton 
-                  sourceTerm={sourceTerm}
-                  context={context}
-                  originalText={originalText}
-                  modifiedText={modifiedText}
-                />
-              </div>
-              
-              <LLMIntegration
+            {/* AI PROMPT GENERATOR */}
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                AI Analysis
+              </h2>
+              <p className="text-sm text-gray-600 mb-4">
+                Generate expert analysis prompt for AI evaluation of text differences.
+              </p>
+              <ClipboardPromptButton 
                 sourceTerm={sourceTerm}
                 context={context}
                 originalText={originalText}
@@ -373,6 +338,22 @@ export default function App() {
           )}
         </div>
       </main>
+
+      {/* Side Panel for Advanced Controls */}
+      <SidePanel
+        onImportRecords={handleImportRecords}
+        currentRecords={currentRecords}
+        constraints={constraints}
+        onConstraintsChange={setConstraints}
+        comparisonHistory={comparisonHistory}
+        onSelectRecord={handleSelectRecord}
+        onDeleteRecord={handleDeleteRecord}
+        onClearHistory={handleClearHistory}
+        sourceTerm={sourceTerm}
+        context={context}
+        originalText={originalText}
+        modifiedText={modifiedText}
+      />
     </div>
   );
 } 

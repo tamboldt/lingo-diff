@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FEATURES } from '../config/features';
+import { AIAnalysisModal } from './AIAnalysisModal';
 
 interface LLMIntegrationProps {
   sourceTerm: string;
@@ -23,6 +24,7 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   const [analysis, setAnalysis] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [lastAnalysisTime, setLastAnalysisTime] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // Don't render if feature is disabled
   if (!FEATURES.LLM_INTEGRATION) {
@@ -95,6 +97,9 @@ Please be specific about differences and provide actionable insights.`;
 - Difference: ${Math.abs(originalText.length - modifiedText.length)} characters
 
 **Recommendation**: ${originalText.length > modifiedText.length ? 'Text B is recommended for better conciseness.' : 'Text A provides more detailed information.'}`);
+
+      // Open modal to show results
+      setIsModalOpen(true);
 
     } catch (err) {
       setError('Failed to analyze text. Please check your API key and try again.');
@@ -201,12 +206,20 @@ Please be specific about differences and provide actionable insights.`;
             </div>
           )}
 
-          {/* Analysis Results */}
-          {analysis && (
+          {/* Show Results Button */}
+          {analysis && !isAnalyzing && (
             <div className="p-4 bg-purple-50 border border-purple-200 rounded-md">
-              <h4 className="font-medium text-purple-800 mb-2">AI Analysis Results:</h4>
-              <div className="text-sm text-purple-700 whitespace-pre-line">
-                {analysis}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-medium text-purple-800">AI Analysis Complete</h4>
+                  <p className="text-sm text-purple-600">Click to view detailed analysis results</p>
+                </div>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-4 py-2 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700 transition-colors"
+                >
+                  View Results
+                </button>
               </div>
             </div>
           )}
@@ -220,6 +233,14 @@ Please be specific about differences and provide actionable insights.`;
           </div>
         </div>
       )}
+
+      {/* AI Analysis Modal */}
+      <AIAnalysisModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        analysis={analysis}
+        isAnalyzing={isAnalyzing}
+      />
     </div>
   );
 };
