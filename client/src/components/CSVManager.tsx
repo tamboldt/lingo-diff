@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { parseCSV, exportToCSV, generateSampleCSV, TextComparisonRecord, ImportValidation } from '../utils/csvHandler';
+import { parseSmartCSV, exportSmartCSV, generateSampleCSV, TextComparisonRecord, SmartCSVResult } from '../utils/smartCSV';
+import { InfoTooltip } from './Tooltip';
 import { CSVPreviewModal } from './CSVPreviewModal';
 
 interface CSVManagerProps {
@@ -16,7 +17,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [importMessage, setImportMessage] = useState<string>('');
-  const [validationResults, setValidationResults] = useState<ImportValidation | null>(null);
+  const [smartResults, setSmartResults] = useState<SmartCSVResult | null>(null);
   const [previewRecords, setPreviewRecords] = useState<TextComparisonRecord[] | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,11 +43,11 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
     setIsProcessing(true);
     try {
       const content = await file.text();
-      const results = parseCSV(content);
-      setValidationResults(results);
+      const results = parseSmartCSV(content);
+      setSmartResults(results);
 
-      if (results.valid && results.records.length > 0) {
-        // Show preview instead of immediately importing
+      if (results.success && results.records.length > 0) {
+        // Show preview instead of immediately importing (our enhancement)
         setPreviewRecords(results.records);
         setImportStatus('idle');
         setImportMessage('');
@@ -73,7 +74,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
       return;
     }
 
-    const csvContent = exportToCSV(currentRecords);
+    const csvContent = exportSmartCSV(currentRecords);
     // Add BOM for Excel UTF-8 compatibility
     const BOM = '\uFEFF';
     const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -135,7 +136,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
   const clearStatus = () => {
     setImportStatus('idle');
     setImportMessage('');
-    setValidationResults(null);
+    setSmartResults(null);
     setPreviewRecords(null);
   };
 
@@ -165,7 +166,10 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
         <div className="mt-4 space-y-4">
           {/* Import Section */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Import CSV File</label>
+            <div className="flex items-center gap-2 mb-2">
+              <label className="block text-sm font-medium text-gray-700">Import CSV File</label>
+              <InfoTooltip content="Upload any CSV file with text columns. We'll automatically detect and map your columns intelligently." />
+            </div>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <input
@@ -183,30 +187,38 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
                   </svg>
                 )}
               </div>
-              <p className="text-xs text-gray-500">
-                Required columns: Reference_Text, Context, Text_A, Text_B
-              </p>
+              <div className="text-xs space-y-1">
+                <p className="text-green-600">✨ Smart Detection: Works with any column names in any language</p>
+                <p className="text-blue-600">🔍 Auto-detects separators: comma, semicolon, tab, pipe</p>
+                <p className="text-purple-600">📝 Handles commas in text automatically (e.g., "Welcome back, John!")</p>
+              </div>
             </div>
           </div>
 
           {/* Export Section */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Export Data</label>
+            <div className="flex items-center gap-2 mb-2">
+              <label className="block text-sm font-medium text-gray-700">Export Data</label>
+              <InfoTooltip content="Export your comparisons to CSV format. Compatible with Excel, Google Sheets, and all spreadsheet applications." />
+            </div>
             <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleExport}
                 disabled={currentRecords.length === 0}
                 className="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                Export Current Data
+                📄 Export Current Data
               </button>
               <button
                 onClick={downloadSampleCSV}
                 className="px-3 py-2 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 transition-colors"
               >
-                Download Sample CSV
+                📋 Download Sample CSV
               </button>
             </div>
+            <p className="text-xs text-gray-500 mt-2">
+              💡 Perfect format for Excel with proper UTF-8 encoding
+            </p>
           </div>
 
           {/* Show preview button when records are ready */}
@@ -252,12 +264,24 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
                   )}
                   <div>
                     <p className="text-sm font-medium">{importMessage}</p>
-                    {validationResults && validationResults.errors.length > 0 && (
+                    {smartResults && smartResults.errors.length > 0 && (
                       <ul className="mt-2 text-xs space-y-1">
-                        {validationResults.errors.map((error, index) => (
+                        {smartResults.errors.map((error, index) => (
                           <li key={index}>• {error}</li>
                         ))}
                       </ul>
+                    )}
+                    {smartResults && smartResults.success && smartResults.mapping && smartResults.mapping.length > 0 && (
+                      <div className="mt-2 text-xs">
+                        <p className="font-medium text-green-700">Smart Column Mapping:</p>
+                        <ul className="mt-1 space-y-1">
+                          {smartResults.mapping.filter(m => m.confidence > 0.6).map((mapping, index) => (
+                            <li key={index} className="text-green-600">
+                              "{mapping.detected}" → {mapping.mapped} ({Math.round(mapping.confidence * 100)}% confidence)
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -273,13 +297,15 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
             </div>
           )}
 
-          {/* CSV Format Help */}
-          <div className="text-xs text-gray-600 bg-gray-50 p-3 rounded-md">
-            <p className="font-medium mb-1">CSV Format Guide:</p>
-            <p>• Headers: Reference_Text, Context, Text_A, Text_B, Notes (optional)</p>
-            <p>• Text_A and Text_B: At least one must contain text</p>
-            <p>• Use quotes for text containing commas or line breaks</p>
-            <p>• Download sample CSV to see the exact format</p>
+          {/* Smart Import Help */}
+          <div className="text-xs text-gray-600 bg-blue-50 p-3 rounded-md border border-blue-200">
+            <p className="font-medium mb-1 text-blue-800">✨ Smart Import Features:</p>
+            <p className="text-blue-700">• Auto-detects separators: comma (,), semicolon (;), tab, pipe (|)</p>
+            <p className="text-blue-700">• Automatically detects column types in any language</p>
+            <p className="text-blue-700">• Works with flexible column names (Original/Revised, A/B, etc.)</p>
+            <p className="text-blue-700">• Handles commas, quotes, and special characters seamlessly</p>
+            <p className="text-blue-700">• Perfect UTF-8 support for all international text</p>
+            <p className="text-blue-700">• No technical CSV formatting knowledge required</p>
           </div>
         </div>
       )}

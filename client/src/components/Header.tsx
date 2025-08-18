@@ -1,4 +1,17 @@
 import React from 'react';
+import { FEATURES } from '../config/features';
+
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({ 
+  t: (key: string) => {
+    if (key === 'app.title') return 'Lingo-Diff';
+    if (key === 'app.subtitle') return 'Professional Text Comparison Tool';
+    if (key === 'navigation.reset') return 'Reset All';
+    return key.split('.').pop() || key;
+  }
+});
+
+const MockLanguageSelector = () => null;
 
 interface HeaderProps {
   onReset: () => void;
@@ -6,6 +19,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
+  const { t } = mockUseTranslation(); // Always use mock for now since i18n is disabled
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
             onClick={() => window.location.href = '/'}
             title="Go to homepage"
           >
-            <svg className="w-8 h-8 text-blue-600 mr-3" fill="none" viewBox="0 0 32 32">
+            <svg className="w-8 h-8 text-blue-600 mr-3" fill="none" viewBox="0 0 32 32" aria-label="Lingo-Diff logo">
               {/* Background */}
               <rect width="32" height="32" rx="6" fill="currentColor"/>
               
@@ -38,24 +53,31 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
               {/* Diff arrow */}
               <path d="M15 15L17 13L17 17Z" fill="white"/>
             </svg>
-            <h1 className="text-2xl font-bold text-gray-900">Lingo-Diff</h1>
-            <span className="ml-2 text-sm text-gray-500">Linguistic Diff Checker</span>
+            <h1 className="text-2xl font-bold text-gray-900">
+              {t('app.title')}
+            </h1>
+            <span className="ml-2 text-sm text-gray-500">
+              {t('app.subtitle')}
+            </span>
           </div>
-          <div className="flex space-x-2">
-            <button
-              onClick={onReset}
-              className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors"
-            >
-              Reset All
-            </button>
-            {onResetWelcome && (
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {FEATURES.I18N_ENABLED && <MockLanguageSelector />}
+            <div className="flex space-x-1 sm:space-x-2">
               <button
-                onClick={onResetWelcome}
-                className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors"
+                onClick={onReset}
+                className="px-3 py-2 sm:py-1 text-sm bg-red-100 text-red-700 rounded-md hover:bg-red-200 transition-colors touch-manipulation"
               >
-                Reset Welcome
+                {t('navigation.reset')}
               </button>
-            )}
+              {onResetWelcome && (
+                <button
+                  onClick={onResetWelcome}
+                  className="px-3 py-2 sm:py-1 text-sm bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors touch-manipulation"
+                >
+                  Reset Welcome
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

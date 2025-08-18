@@ -7,7 +7,7 @@ import { TextMetricsCard } from './components/TextMetricsCard';
 import { InfoTooltip } from './components/Tooltip';
 import { SidePanel } from './components/SidePanel';
 import { getTextMetrics } from './utils/localizationMetrics';
-import { TextComparisonRecord } from './utils/csvHandler';
+import { TextComparisonRecord } from './utils/smartCSV';
 
 export default function App() {
   // State for all user inputs
@@ -159,9 +159,9 @@ export default function App() {
           {/* MAIN WORKFLOW: TEXT INPUTS AND DIFF */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">{/* Increased gap for better spacing */}
             
-            {/* LEFT: TRANSLATION CANDIDATES - THE CORE DIFF INPUTS */}
+            {/* LEFT: TEXT COMPARISON - THE CORE DIFF INPUTS */}
             <div className="space-y-4">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
                 <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                   <span className="text-green-500 mr-2">📝</span>
                   Text Comparison
@@ -177,7 +177,7 @@ export default function App() {
                       value={originalText}
                       onChange={(e) => setOriginalText(e.target.value)}
                       rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4"
                       placeholder="Enter original text..."
                       aria-describedby="candidate1-help"
                     />
@@ -200,7 +200,7 @@ export default function App() {
                       value={modifiedText}
                       onChange={(e) => setModifiedText(e.target.value)}
                       rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4"
                       placeholder="Enter revised text..."
                       aria-describedby="candidate2-help"
                     />
@@ -250,7 +250,7 @@ export default function App() {
                     value={sourceTerm}
                     onChange={(e) => setSourceTerm(e.target.value)}
                     rows={2}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm py-3 px-4"
                     placeholder="e.g., Select Room"
                     aria-describedby="sourceTerm-help"
                   />
@@ -268,7 +268,7 @@ export default function App() {
                     value={context}
                     onChange={(e) => setContext(e.target.value)}
                     rows={2}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm py-3 px-4"
                     placeholder="e.g., Mobile app button for hotel room selection"
                     aria-describedby="context-help"
                   />

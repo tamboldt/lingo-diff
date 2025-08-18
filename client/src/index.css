@@ -43,4 +43,53 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  direction: rtl;
+}
+
+/* RTL margin adjustments */
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  margin-right: 0.75rem;
+  margin-left: 0;
+}
+
+[dir="rtl"] .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .mr-3 {
+  margin-right: 0;
+  margin-left: 0.75rem;
+}
+
+[dir="rtl"] .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Arabic and Hebrew font optimization */
+[lang="ar"], [lang="he"] {
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans Arabic', 'Noto Sans Hebrew', sans-serif;
+}
+
+/* RTL text alignment for form fields */
+[dir="rtl"] input, [dir="rtl"] textarea {
+  text-align: right;
+}
+
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
 } 
