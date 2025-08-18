@@ -7,6 +7,8 @@ import { TextMetricsCard } from './components/TextMetricsCard';
 import { ConstraintsPanel } from './components/ConstraintsPanel';
 import { CSVManager } from './components/CSVManager';
 import { ComparisonHistory } from './components/ComparisonHistory';
+import { InfoTooltip } from './components/Tooltip';
+import { LLMIntegration } from './components/LLMIntegration';
 import { getTextMetrics } from './utils/localizationMetrics';
 import { TextComparisonRecord } from './utils/csvHandler';
 
@@ -140,6 +142,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Skip to main content link for screen readers */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      >
+        Skip to main content
+      </a>
       {isWelcomeVisible && (
         <WelcomeModal 
           onClose={handleCloseWelcome}
@@ -147,7 +156,7 @@ export default function App() {
         />
       )}
       <Header onReset={handleReset} onResetWelcome={handleResetWelcome} />
-      <main className="p-4 sm:p-6 md:p-8">
+      <main id="main-content" className="p-4 sm:p-6 md:p-8" role="main">
         <div className="max-w-7xl mx-auto space-y-6">
           
           {/* TOP ROW: CONTROLS */}
@@ -183,7 +192,10 @@ export default function App() {
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="candidate1" className="block text-sm font-medium text-gray-700">Text A (Original)</label>
+                    <div className="flex items-center gap-2 mb-1">
+                      <label htmlFor="candidate1" className="block text-sm font-medium text-gray-700">Text A (Original)</label>
+                      <InfoTooltip content="Enter the original version of your text. This could be an existing translation, first draft, or current version." />
+                    </div>
                     <textarea
                       id="candidate1"
                       value={originalText}
@@ -191,10 +203,22 @@ export default function App() {
                       rows={3}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
                       placeholder="Enter original text..."
+                      aria-describedby="candidate1-help"
                     />
+                    <div className="flex justify-between items-center mt-1">
+                      <div id="candidate1-help" className="sr-only">
+                        Enter the original version of your text for comparison
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        {originalText.length} characters
+                      </span>
+                    </div>
                   </div>
                   <div>
-                    <label htmlFor="candidate2" className="block text-sm font-medium text-gray-700">Text B (Revised)</label>
+                    <div className="flex items-center gap-2 mb-1">
+                      <label htmlFor="candidate2" className="block text-sm font-medium text-gray-700">Text B (Revised)</label>
+                      <InfoTooltip content="Enter the revised version of your text. This could be a new translation, edited version, or alternative option." />
+                    </div>
                     <textarea
                       id="candidate2"
                       value={modifiedText}
@@ -202,7 +226,16 @@ export default function App() {
                       rows={3}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
                       placeholder="Enter revised text..."
+                      aria-describedby="candidate2-help"
                     />
+                    <div className="flex justify-between items-center mt-1">
+                      <div id="candidate2-help" className="sr-only">
+                        Enter the revised version of your text for comparison
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        {modifiedText.length} characters
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -234,7 +267,10 @@ export default function App() {
               </h2>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="sourceTerm" className="block text-sm font-medium text-gray-700">Reference Text</label>
+                  <div className="flex items-center gap-2 mb-1">
+                    <label htmlFor="sourceTerm" className="block text-sm font-medium text-gray-700">Reference Text</label>
+                    <InfoTooltip content="Enter the source or reference text (like the original English). This helps provide context for comparison analysis." />
+                  </div>
                   <textarea
                     id="sourceTerm"
                     value={sourceTerm}
@@ -242,10 +278,17 @@ export default function App() {
                     rows={2}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     placeholder="e.g., Select Room"
+                    aria-describedby="sourceTerm-help"
                   />
+                  <div id="sourceTerm-help" className="sr-only">
+                    Enter the source or reference text for context
+                  </div>
                 </div>
                 <div>
-                  <label htmlFor="context" className="block text-sm font-medium text-gray-700">Context & Usage</label>
+                  <div className="flex items-center gap-2 mb-1">
+                    <label htmlFor="context" className="block text-sm font-medium text-gray-700">Context & Usage</label>
+                    <InfoTooltip content="Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice." />
+                  </div>
                   <textarea
                     id="context"
                     value={context}
@@ -253,7 +296,11 @@ export default function App() {
                     rows={2}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     placeholder="e.g., Mobile app button for hotel room selection"
+                    aria-describedby="context-help"
                   />
+                  <div id="context-help" className="sr-only">
+                    Describe where and how this text is used
+                  </div>
                 </div>
                 {(originalText || modifiedText) && (
                   <button
@@ -267,17 +314,26 @@ export default function App() {
             </div>
 
             {/* RIGHT: AI ANALYSIS */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-              <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
-                <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-                AI Analysis
-              </h2>
-              <p className="text-sm text-gray-600 mb-4">
-                Generate expert analysis prompt for AI evaluation of text differences.
-              </p>
-              <ClipboardPromptButton 
+            <div className="space-y-4">
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  AI Analysis
+                </h2>
+                <p className="text-sm text-gray-600 mb-4">
+                  Generate expert analysis prompt for AI evaluation of text differences.
+                </p>
+                <ClipboardPromptButton 
+                  sourceTerm={sourceTerm}
+                  context={context}
+                  originalText={originalText}
+                  modifiedText={modifiedText}
+                />
+              </div>
+              
+              <LLMIntegration
                 sourceTerm={sourceTerm}
                 context={context}
                 originalText={originalText}

@@ -1,0 +1,4 @@
+Reference Text;Context;Text A;Text B;Notes
+"Select Room";"Mobile app button";"チェックイン時にお部屋を選択";"チェックイン時お部屋選択";"Japanese particle comparison"
+"Welcome Message";"User greeting";"Welcome back, John!";"Hi John, welcome back!";"Testing semicolon separator with commas in text"
+"Error Dialog";"System notification";"File not found, please try again";"Error: File missing, check path";"European CSV format example"

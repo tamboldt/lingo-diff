@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { parseCSV, exportToCSV, generateSampleCSV, TextComparisonRecord, ImportValidation } from '../utils/csvHandler';
+import { CSVPreviewModal } from './CSVPreviewModal';
 
 interface CSVManagerProps {
   onImportRecords: (records: TextComparisonRecord[]) => void;
@@ -16,6 +17,9 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [importMessage, setImportMessage] = useState<string>('');
   const [validationResults, setValidationResults] = useState<ImportValidation | null>(null);
+  const [previewRecords, setPreviewRecords] = useState<TextComparisonRecord[] | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,15 +39,17 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
       return;
     }
 
+    setIsProcessing(true);
     try {
       const content = await file.text();
       const results = parseCSV(content);
       setValidationResults(results);
 
       if (results.valid && results.records.length > 0) {
-        onImportRecords(results.records);
-        setImportStatus('success');
-        setImportMessage(`Successfully imported ${results.records.length} comparison records.`);
+        // Show preview instead of immediately importing
+        setPreviewRecords(results.records);
+        setImportStatus('idle');
+        setImportMessage('');
       } else {
         setImportStatus('error');
         setImportMessage(results.errors.join('. '));
@@ -52,6 +58,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
       setImportStatus('error');
       setImportMessage('Failed to read CSV file. Please check the file format.');
     }
+    setIsProcessing(false);
 
     // Reset file input
     if (fileInputRef.current) {
@@ -104,10 +111,32 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
     }
   };
 
+  const handleConfirmImport = () => {
+    if (previewRecords) {
+      onImportRecords(previewRecords);
+      setImportStatus('success');
+      setImportMessage(`Successfully imported ${previewRecords.length} comparison records.`);
+      setPreviewRecords(null);
+      setIsModalOpen(false);
+    }
+  };
+
+  const handleCancelImport = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDiscardPreview = () => {
+    setPreviewRecords(null);
+    setIsModalOpen(false);
+    setImportStatus('idle');
+    setImportMessage('');
+  };
+
   const clearStatus = () => {
     setImportStatus('idle');
     setImportMessage('');
     setValidationResults(null);
+    setPreviewRecords(null);
   };
 
   return (
@@ -138,13 +167,22 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Import CSV File</label>
             <div className="flex flex-col gap-2">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".csv"
-                onChange={handleFileUpload}
-                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-              />
+              <div className="flex items-center gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".csv"
+                  onChange={handleFileUpload}
+                  disabled={isProcessing}
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 disabled:opacity-50"
+                />
+                {isProcessing && (
+                  <svg className="w-5 h-5 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                )}
+              </div>
               <p className="text-xs text-gray-500">
                 Required columns: Reference_Text, Context, Text_A, Text_B
               </p>
@@ -170,6 +208,29 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
               </button>
             </div>
           </div>
+
+          {/* Show preview button when records are ready */}
+          {previewRecords && (
+            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+              <p className="text-sm text-blue-800 mb-2">
+                ✅ Ready to import {previewRecords.length} records
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-3 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                >
+                  Preview Import Data
+                </button>
+                <button
+                  onClick={handleDiscardPreview}
+                  className="px-3 py-2 text-sm bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+                >
+                  Discard
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Status Messages */}
           {importStatus !== 'idle' && (
@@ -221,6 +282,16 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
             <p>• Download sample CSV to see the exact format</p>
           </div>
         </div>
+      )}
+
+      {/* CSV Preview Modal */}
+      {previewRecords && (
+        <CSVPreviewModal
+          records={previewRecords}
+          onConfirm={handleConfirmImport}
+          onCancel={handleCancelImport}
+          isOpen={isModalOpen}
+        />
       )}
     </div>
   );

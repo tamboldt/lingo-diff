@@ -1,0 +1,4 @@
+Reference Text,Context & Usage,Original Version,Revised Version,Comments
+Select Room,Mobile app button for hotel room selection,チェックイン時にお部屋を選択,チェックイン時お部屋選択,Comparing Japanese translations
+Save Changes,Form submission in admin panel,Save Changes,Save,Testing mobile button constraints
+File Not Found,Error message in file manager,The requested file could not be found,File not found. Please check the path,Error message clarity test

@@ -1,0 +1,4 @@
+reference_text,context,text_a,text_b,notes
+Select Room,Mobile app button,チェックイン時にお部屋を選択,チェックイン時お部屋選択,Japanese particle comparison
+Save Changes,Form submission button,Save Changes,Save,Button text length test
+Welcome Back,User greeting message,Welcome back John!,Hi John! Welcome back!,Greeting style comparison

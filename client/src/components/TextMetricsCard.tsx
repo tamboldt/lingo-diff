@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextMetrics, ConstraintCheck, checkConstraints } from '../utils/localizationMetrics';
+import { TextMetrics, checkConstraints } from '../utils/localizationMetrics';
 
 interface TextMetricsCardProps {
   text: string;

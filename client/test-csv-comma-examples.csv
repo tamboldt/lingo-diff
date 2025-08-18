@@ -1,0 +1,7 @@
+"Reference Text","Context","Text A","Text B","Notes"
+"Welcome Message","User greeting interface","Welcome back, John!","Hi John, welcome back to the system!","Testing comma handling in names and greetings"
+"Error Dialog","System error notification","File not found, please try again","Error: File missing, check your path","Comma-separated error message examples"
+"Navigation Menu","Website header navigation","Home, About, Contact, Support","Home | About | Contact | Support","Different separator styles in navigation"
+"Product List","E-commerce category display","Phones, Tablets, Laptops, Accessories","Phones • Tablets • Laptops • Accessories","Product category with comma separation"
+"Address Format","User profile form","123 Main St, Apt 4B, New York, NY 10001","123 Main St, Apt 4B
+New York, NY 10001","Address formatting with multiple commas"

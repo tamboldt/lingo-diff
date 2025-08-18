@@ -11,8 +11,28 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <svg className="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            <svg className="w-8 h-8 text-blue-600 mr-3" fill="none" viewBox="0 0 32 32">
+              {/* Background */}
+              <rect width="32" height="32" rx="6" fill="currentColor"/>
+              
+              {/* Left panel (original) */}
+              <rect x="4" y="8" width="10" height="16" rx="2" fill="white" stroke="#E5E7EB"/>
+              
+              {/* Right panel (modified) */}  
+              <rect x="18" y="8" width="10" height="16" rx="2" fill="white" stroke="#E5E7EB"/>
+              
+              {/* Text lines in left panel */}
+              <rect x="6" y="11" width="6" height="1" rx="0.5" fill="#6B7280"/>
+              <rect x="6" y="14" width="4" height="1" rx="0.5" fill="#DC2626"/> {/* Red for removed */}
+              <rect x="6" y="17" width="5" height="1" rx="0.5" fill="#6B7280"/>
+              
+              {/* Text lines in right panel */}
+              <rect x="20" y="11" width="6" height="1" rx="0.5" fill="#6B7280"/>
+              <rect x="20" y="14" width="5" height="1" rx="0.5" fill="#16A34A"/> {/* Green for added */}
+              <rect x="20" y="17" width="5" height="1" rx="0.5" fill="#6B7280"/>
+              
+              {/* Diff arrow */}
+              <path d="M15 15L17 13L17 17Z" fill="white"/>
             </svg>
             <h1 className="text-2xl font-bold text-gray-900">Lingo-Diff</h1>
             <span className="ml-2 text-sm text-gray-500">Linguistic Diff Checker</span>

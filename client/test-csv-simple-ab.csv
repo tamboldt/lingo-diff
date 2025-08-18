@@ -1,0 +1,4 @@
+Source,Usage,A,B,Notes
+Select Room,Button text,First option here,Second option here,Simple A/B test
+Login,Authentication,Log In,Sign In,Login button variants
+Cancel,Action button,Cancel,Annuler,English vs French
