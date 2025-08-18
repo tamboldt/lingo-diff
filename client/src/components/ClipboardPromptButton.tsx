@@ -49,7 +49,7 @@ ${modifiedText}
 };
 
 export const ClipboardPromptButton = ({ sourceTerm, context, originalText, modifiedText }: Props) => {
-  const [buttonText, setButtonText] = useState('📋 Copy Prompt for AI Analysis');
+  const [buttonText, setButtonText] = useState('📋 Copy Prompt → Paste in ChatGPT/Claude');
 
   const handleCopy = () => {
     if (!originalText && !modifiedText) {
@@ -67,7 +67,7 @@ export const ClipboardPromptButton = ({ sourceTerm, context, originalText, modif
 
     navigator.clipboard.writeText(promptText).then(() => {
         setButtonText('✅ Copied to Clipboard!');
-        setTimeout(() => setButtonText('📋 Copy Prompt for AI Analysis'), 2000);
+        setTimeout(() => setButtonText('📋 Copy Prompt → Paste in ChatGPT/Claude'), 2000);
     }, (err) => {
         console.error('Could not copy text: ', err);
         alert('Failed to copy prompt.');

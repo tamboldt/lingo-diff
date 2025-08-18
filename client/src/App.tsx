@@ -6,6 +6,7 @@ import { WelcomeModal } from './components/WelcomeModal';
 import { TextMetricsCard } from './components/TextMetricsCard';
 import { InfoTooltip } from './components/Tooltip';
 import { SidePanel } from './components/SidePanel';
+import { AIAnalysisModal } from './components/AIAnalysisModal';
 import { getTextMetrics } from './utils/localizationMetrics';
 import { TextComparisonRecord } from './utils/smartCSV';
 
@@ -18,6 +19,14 @@ export default function App() {
   const [isWelcomeVisible, setIsWelcomeVisible] = useState(false);
   const [constraints, setConstraints] = useState<{ [key: string]: number }>({});
   const [comparisonHistory, setComparisonHistory] = useState<TextComparisonRecord[]>([]);
+  
+  // AI Analysis Modal state
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  const [aiAnalysis, setAIAnalysis] = useState<string>('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  
+  // UI state for progressive disclosure
+  const [showContextSection, setShowContextSection] = useState(false);
 
   // Check for first-time visitors and load history
   useEffect(() => {
@@ -103,6 +112,22 @@ export default function App() {
     localStorage.removeItem('lingoDiffHistory');
   };
 
+  // AI Analysis Modal handlers
+  const handleOpenAIModal = (analysis: string, analyzing: boolean = false) => {
+    setAIAnalysis(analysis);
+    setIsAnalyzing(analyzing);
+    setIsAIModalOpen(true);
+  };
+
+  const handleCloseAIModal = () => {
+    setIsAIModalOpen(false);
+  };
+
+  const handleUpdateAIAnalysis = (analysis: string, analyzing: boolean = false) => {
+    setAIAnalysis(analysis);
+    setIsAnalyzing(analyzing);
+  };
+
   // Handler for saving current comparison to history
   const handleSaveComparison = () => {
     if (!originalText && !modifiedText) {
@@ -154,10 +179,43 @@ export default function App() {
       )}
       <Header onReset={handleReset} onResetWelcome={handleResetWelcome} />
       <main id="main-content" className="p-4 sm:p-6 md:p-8" role="main">
-        <div className="max-w-6xl mx-auto">{/* Reduced max width for better focus on main content */}
+        <div className="max-w-6xl mx-auto">
+
+          {/* WORKFLOW GUIDE */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div className="flex items-center mb-2">
+              <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-lg font-medium text-blue-900">Quick Start Guide</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="flex items-start">
+                <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</span>
+                <div>
+                  <p className="font-medium text-blue-900">Enter Your Text</p>
+                  <p className="text-blue-700">Add both versions in the boxes below</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</span>
+                <div>
+                  <p className="font-medium text-blue-900">View Differences</p>
+                  <p className="text-blue-700">See highlighted changes instantly</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</span>
+                <div>
+                  <p className="font-medium text-blue-900">Get AI Analysis</p>
+                  <p className="text-blue-700">Copy prompt for expert evaluation</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* MAIN WORKFLOW: TEXT INPUTS AND DIFF */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">{/* Increased gap for better spacing */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">{/* Focus on main content */}
             
             {/* LEFT: TEXT COMPARISON - THE CORE DIFF INPUTS */}
             <div className="space-y-4">
@@ -219,26 +277,66 @@ export default function App() {
 
             {/* RIGHT: LIVE DIFF VISUALIZATION - THE MAIN OUTPUT */}
             <div className="space-y-4">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="bg-white p-6 rounded-lg shadow-lg border-2 border-blue-200 bg-gradient-to-br from-white to-blue-50">
+                <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                  <svg className="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
-                  Visual Difference Analysis
+                  Live Difference Analysis
+                  <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                    Real-time
+                  </span>
                 </h2>
-                <DiffViewer originalText={originalText} modifiedText={modifiedText} />
+                {(originalText || modifiedText) ? (
+                  <DiffViewer originalText={originalText} modifiedText={modifiedText} />
+                ) : (
+                  <div className="text-center py-12 text-gray-500">
+                    <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <p className="text-lg font-medium mb-2">Enter text to see differences</p>
+                    <p>Add your text versions above to see a live comparison</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* CONTEXT INPUTS - Moved inline for better UX */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-              <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                <span className="text-blue-500 mr-2">📄</span>
-                Context Information
-              </h2>
+          {/* PROGRESSIVE DISCLOSURE: ADVANCED OPTIONS */}
+          <div className="mt-8">
+            <button
+              onClick={() => setShowContextSection(!showContextSection)}
+              className="w-full bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 transition-colors mb-4"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                  </svg>
+                  <h3 className="text-lg font-semibold text-gray-800">Advanced Options</h3>
+                  <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Optional</span>
+                </div>
+                <svg 
+                  className={`w-5 h-5 text-gray-600 transition-transform ${showContextSection ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+              <p className="text-sm text-gray-600 mt-1 text-left">Add context information and AI analysis for better insights</p>
+            </button>
+
+            {showContextSection && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                  <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                    <span className="text-blue-500 mr-2">📄</span>
+                    Context Information
+                  </h2>
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -284,27 +382,35 @@ export default function App() {
                     💾 Save Comparison to History
                   </button>
                 )}
+                </div>
               </div>
-            </div>
 
-            {/* AI PROMPT GENERATOR */}
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-              <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
-                <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-                AI Analysis
-              </h2>
-              <p className="text-sm text-gray-600 mb-4">
-                Generate expert analysis prompt for AI evaluation of text differences.
-              </p>
-              <ClipboardPromptButton 
-                sourceTerm={sourceTerm}
-                context={context}
-                originalText={originalText}
-                modifiedText={modifiedText}
-              />
-            </div>
+              {/* AI PROMPT GENERATOR */}
+              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 className="text-lg font-bold text-gray-800 mb-2 flex items-center">
+                  <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  AI Analysis
+                  <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                    Free
+                  </span>
+                </h2>
+                <p className="text-sm text-gray-600 mb-4">
+                  <strong>For everyone:</strong> Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.
+                </p>
+                <ClipboardPromptButton 
+                  sourceTerm={sourceTerm}
+                  context={context}
+                  originalText={originalText}
+                  modifiedText={modifiedText}
+                />
+                <p className="text-xs text-gray-500 mt-2">
+                  💡 After copying, open your AI assistant in a new tab and paste the prompt for analysis
+                </p>
+              </div>
+              </div>
+            )}
           </div>
 
           {/* METRICS ROW */}
@@ -353,6 +459,16 @@ export default function App() {
         context={context}
         originalText={originalText}
         modifiedText={modifiedText}
+        onOpenAIModal={handleOpenAIModal}
+        onUpdateAIAnalysis={handleUpdateAIAnalysis}
+      />
+
+      {/* AI Analysis Modal - Rendered at top level for better UX */}
+      <AIAnalysisModal
+        isOpen={isAIModalOpen}
+        onClose={handleCloseAIModal}
+        analysis={aiAnalysis}
+        isAnalyzing={isAnalyzing}
       />
     </div>
   );
