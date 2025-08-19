@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FEATURES } from '../config/features';
-import { AIAnalysisModal } from './AIAnalysisModal';
 
 interface LLMIntegrationProps {
   sourceTerm: string;
@@ -8,6 +7,8 @@ interface LLMIntegrationProps {
   originalText: string;
   modifiedText: string;
   className?: string;
+  onOpenModal: (analysis: string, analyzing?: boolean) => void;
+  onUpdateAnalysis: (analysis: string, analyzing?: boolean) => void;
 }
 
 export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
@@ -15,16 +16,17 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   context,
   originalText,
   modifiedText,
-  className = ''
+  className = '',
+  onOpenModal,
+  onUpdateAnalysis
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [provider, setProvider] = useState<'groq' | 'openrouter' | 'custom'>('groq');
+  const [provider, setProvider] = useState<'groq' | 'openrouter'>('groq');
   const [apiKey, setApiKey] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [lastAnalysisTime, setLastAnalysisTime] = useState<number>(0);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // Don't render if feature is disabled
   if (!FEATURES.LLM_INTEGRATION) {
@@ -76,6 +78,9 @@ Please be specific about differences and provide actionable insights.`;
     setAnalysis('');
     setLastAnalysisTime(now);
 
+    // Open modal with analyzing state
+    onOpenModal('', true);
+
     try {
       // This would be the actual API call
       // const prompt = generatePrompt(); // Will be used when API integration is complete
@@ -83,7 +88,7 @@ Please be specific about differences and provide actionable insights.`;
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Mock analysis response
-      setAnalysis(`## Analysis Results
+      const mockAnalysis = `## Analysis Results
 
 **Accuracy Assessment**: Text B appears more concise while maintaining core meaning.
 
@@ -96,13 +101,15 @@ Please be specific about differences and provide actionable insights.`;
 - Text B: ${modifiedText.length} characters
 - Difference: ${Math.abs(originalText.length - modifiedText.length)} characters
 
-**Recommendation**: ${originalText.length > modifiedText.length ? 'Text B is recommended for better conciseness.' : 'Text A provides more detailed information.'}`);
+**Recommendation**: ${originalText.length > modifiedText.length ? 'Text B is recommended for better conciseness.' : 'Text A provides more detailed information.'}`;
 
-      // Open modal to show results
-      setIsModalOpen(true);
+      setAnalysis(mockAnalysis);
+      // Update modal with results
+      onUpdateAnalysis(mockAnalysis, false);
 
     } catch (err) {
       setError('Failed to analyze text. Please check your API key and try again.');
+      onUpdateAnalysis('', false);
     } finally {
       setIsAnalyzing(false);
     }
@@ -118,11 +125,11 @@ Please be specific about differences and provide actionable insights.`;
           <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
-          AI Analysis (Beta)
+          Direct AI Integration
         </h3>
         <div className="flex items-center gap-2">
-          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">
-            Experimental
+          <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">
+            API Key Required
           </span>
           <svg 
             className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
@@ -137,6 +144,10 @@ Please be specific about differences and provide actionable insights.`;
 
       {isExpanded && (
         <div className="mt-4 space-y-4">
+          <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-md border border-blue-200">
+            <p><strong>For advanced users:</strong> Connect your own API key for integrated analysis directly within the app. Most users should use the free AI Analysis option in the main window instead.</p>
+          </div>
+          
           {/* Provider Selection */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -147,9 +158,8 @@ Please be specific about differences and provide actionable insights.`;
               onChange={(e) => setProvider(e.target.value as any)}
               className="block w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             >
-              <option value="groq">Groq (Fast & Free)</option>
-              <option value="openrouter">OpenRouter</option>
-              <option value="custom">Custom API</option>
+              <option value="groq">Groq (Fast & Free Tier)</option>
+              <option value="openrouter">OpenRouter (Pay-per-use)</option>
             </select>
           </div>
 
@@ -215,7 +225,7 @@ Please be specific about differences and provide actionable insights.`;
                   <p className="text-sm text-purple-600">Click to view detailed analysis results</p>
                 </div>
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => onOpenModal(analysis, false)}
                   className="px-4 py-2 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700 transition-colors"
                 >
                   View Results
@@ -233,14 +243,6 @@ Please be specific about differences and provide actionable insights.`;
           </div>
         </div>
       )}
-
-      {/* AI Analysis Modal */}
-      <AIAnalysisModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        analysis={analysis}
-        isAnalyzing={isAnalyzing}
-      />
     </div>
   );
 };

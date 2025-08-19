@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "Professional Text Comparison Tool",
+    "subtitle": "Professional text comparison platform",
     "tagline": "Compare, analyze, and perfect your text with professional-grade tools"
   },
   "navigation": {
@@ -40,7 +40,10 @@
     "title": "Visual Difference Analysis",
     "aiTitle": "AI Analysis",
     "aiDescription": "Generate expert analysis prompt for AI evaluation of text differences.",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "emptyTitle": "Enter text to see differences",
+    "emptyDescription": "Add your text versions to see a live comparison",
+    "realTime": "Real-time"
   },
   "csv": {
     "title": "CSV Import/Export",
@@ -69,8 +72,8 @@
     }
   },
   "history": {
-    "title": "Comparison History",
-    "noHistory": "No comparison history yet",
+    "title": "Diff History",
+    "noHistory": "No diffs saved yet",
     "clear": "Clear All"
   },
   "constraints": {
@@ -95,7 +98,7 @@
   },
   "welcome": {
     "title": "Welcome to Lingo-Diff",
-    "subtitle": "Professional Text Comparison Tool",
+    "subtitle": "Professional text comparison platform",
     "description": "Compare translations, revisions, and text variants with intelligent analysis tools.",
     "showExample": "Show Example",
     "getStarted": "Get Started"

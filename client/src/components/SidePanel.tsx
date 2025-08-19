@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CSVManager } from './CSVManager';
 import { ConstraintsPanel } from './ConstraintsPanel';
 import { ComparisonHistory } from './ComparisonHistory';
 import { LLMIntegration } from './LLMIntegration';
-import { TextComparisonRecord } from '../utils/csvHandler';
+import { TextComparisonRecord } from '../utils/smartCSV';
+import { FEATURES } from '../config/features';
+
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({
+  t: (key: string) => {
+    const keys: { [key: string]: string } = {
+      'sidebar.tools': 'Tools',
+      'sidebar.history': 'History', 
+      'sidebar.ai': 'AI'
+    };
+    return keys[key] || key;
+  }
+});
 
 interface SidePanelProps {
+  isExpanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  
   // CSV Manager props
   onImportRecords: (records: TextComparisonRecord[]) => void;
   currentRecords: TextComparisonRecord[];
@@ -25,9 +42,15 @@ interface SidePanelProps {
   context: string;
   originalText: string;
   modifiedText: string;
+  
+  // AI Modal props
+  onOpenAIModal: (analysis: string, analyzing?: boolean) => void;
+  onUpdateAIAnalysis: (analysis: string, analyzing?: boolean) => void;
 }
 
 export const SidePanel: React.FC<SidePanelProps> = ({
+  isExpanded,
+  onToggleExpanded,
   onImportRecords,
   currentRecords,
   constraints,
@@ -39,28 +62,36 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   sourceTerm,
   context,
   originalText,
-  modifiedText
+  modifiedText,
+  onOpenAIModal,
+  onUpdateAIAnalysis
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [activeTab, setActiveTab] = useState<'tools' | 'history' | 'ai'>('tools');
 
   const tabs = [
-    { id: 'tools', label: 'Tools', icon: '🛠️' },
-    { id: 'history', label: 'History', icon: '📚' },
-    { id: 'ai', label: 'AI', icon: '🤖' }
+    { id: 'tools', label: t('sidebar.tools'), icon: '🛠️' },
+    { id: 'history', label: t('sidebar.history'), icon: '📚' },
+    { id: 'ai', label: t('sidebar.ai'), icon: '🤖' }
   ] as const;
 
   return (
     <>
       {/* Collapsible Sidebar */}
-      <div className={`fixed top-0 right-0 h-full bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30 ${
-        isExpanded ? 'w-96' : 'w-12'
-      }`}>
+      <div 
+        className={`fixed bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30`}
+        style={{ 
+          width: isExpanded ? '384px' : '48px',
+          top: '4rem',
+          right: '0',
+          height: 'calc(100vh - 4rem)'
+        }}
+      >
         
         {/* Collapse/Expand Toggle */}
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full">
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => onToggleExpanded(!isExpanded)}
             className="bg-white border border-gray-200 rounded-l-md p-2 shadow-md hover:bg-gray-50 transition-colors"
             aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
           >
@@ -79,7 +110,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
         <div className={`flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 ${
           isExpanded ? 'opacity-100' : 'opacity-0'
         } transition-opacity duration-300`}>
-          <h2 className="text-lg font-semibold text-gray-800">Tools</h2>
+          <h2 className="text-lg font-semibold text-gray-800">{t('sidebar.tools')}</h2>
         </div>
 
         {/* Tab Navigation */}
@@ -137,6 +168,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({
                 context={context}
                 originalText={originalText}
                 modifiedText={modifiedText}
+                onOpenModal={onOpenAIModal}
+                onUpdateAnalysis={onUpdateAIAnalysis}
               />
             </div>
           )}
@@ -150,7 +183,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
                 key={tab.id}
                 onClick={() => {
                   setActiveTab(tab.id);
-                  setIsExpanded(true);
+                  onToggleExpanded(true);
                 }}
                 className={`p-2 rounded-md transition-colors ${
                   activeTab === tab.id

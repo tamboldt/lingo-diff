@@ -1,1 +1,103 @@
-{"app":{"title":"Lingo-Diff","subtitle":"专业文本对比工具"},"navigation":{"reset":"全部重置","help":"帮助","language":"语言"},"textComparison":{"title":"文本对比","textA":{"label":"文本A（原始）","placeholder":"输入原始文本..."},"textB":{"label":"文本B（修订）","placeholder":"输入修订文本..."}},"context":{"title":"上下文信息","referenceText":{"label":"参考文本","placeholder":"例如：选择房间"},"usage":{"label":"上下文和用法","placeholder":"例如：酒店房间选择的移动应用按钮"}}}
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "专业文本比较平台",
+    "tagline": "使用专业分析工具比较、分析和完善您的文本"
+  },
+  "navigation": {
+    "reset": "全部重置",
+    "help": "帮助",
+    "language": "语言"
+  },
+  "textComparison": {
+    "title": "文本比较",
+    "textA": {
+      "label": "文本A（原始）",
+      "placeholder": "输入原始文本...",
+      "tooltip": "输入您文本的原始版本。这可以是现有翻译、首稿或当前版本。"
+    },
+    "textB": {
+      "label": "文本B（修订）",
+      "placeholder": "输入修订文本...",
+      "tooltip": "输入您文本的修订版本。这可以是新翻译、编辑版本或替代选项。"
+    }
+  },
+  "context": {
+    "title": "上下文信息",
+    "referenceText": {
+      "label": "参考文本",
+      "placeholder": "例如：选择房间",
+      "tooltip": "输入源文本或参考文本（如原始英文）。这有助于为比较分析提供上下文。"
+    },
+    "usage": {
+      "label": "上下文和用法",
+      "placeholder": "例如：酒店房间选择的移动应用按钮",
+      "tooltip": "描述此文本在哪里以及如何使用。包括UI上下文、目标受众或影响文本选择的约束条件。"
+    },
+    "saveButton": "💾 将比较保存到历史记录"
+  },
+  "analysis": {
+    "title": "可视化差异分析",
+    "aiTitle": "AI分析",
+    "aiDescription": "为文本差异的AI评估生成专家分析提示。",
+    "processing": "处理中..."
+  },
+  "csv": {
+    "title": "CSV导入/导出",
+    "import": {
+      "label": "导入CSV文件",
+      "tooltip": "上传任何包含文本列的CSV文件。我们将自动智能地检测和映射您的列。",
+      "smartDetection": "✨ 智能检测：适用于任何语言的任何列名",
+      "separatorDetection": "🔍 自动检测分隔符：逗号、分号、制表符、管道符",
+      "commaHandling": "📝 自动处理文本中的逗号（例如：\"欢迎回来，张先生！\"）"
+    },
+    "export": {
+      "label": "导出数据",
+      "tooltip": "将您的比较导出为CSV格式。与Excel、Google Sheets和所有电子表格应用程序兼容。",
+      "currentData": "📄 导出当前数据",
+      "sampleFile": "📋 下载示例CSV",
+      "compatibility": "💡 适用于Excel的完美格式，具有正确的UTF-8编码"
+    },
+    "features": {
+      "title": "✨ 智能导入功能：",
+      "separatorDetection": "自动检测分隔符：逗号（,）、分号（;）、制表符、管道符（|）",
+      "columnDetection": "自动检测任何语言的列类型",
+      "flexibleNames": "适用于灵活的列名（原始/修订、A/B等）",
+      "specialChars": "无缝处理逗号、引号和特殊字符",
+      "utf8Support": "对所有国际文本的完美UTF-8支持",
+      "noTechnical": "无需技术CSV格式知识"
+    }
+  },
+  "history": {
+    "title": "差异历史",
+    "noHistory": "暂无保存的差异",
+    "clear": "全部清除"
+  },
+  "constraints": {
+    "title": "文本约束"
+  },
+  "metrics": {
+    "characters": "字符",
+    "words": "词语",
+    "lines": "行",
+    "referenceText": "参考文本",
+    "noText": "无文本"
+  },
+  "messages": {
+    "success": "成功",
+    "error": "错误",
+    "loading": "加载中...",
+    "fileTooBig": "文件过大。请选择小于5MB的CSV文件。",
+    "invalidFile": "请选择CSV文件。",
+    "noDataExport": "没有可导出的数据。请先添加一些文本比较。",
+    "importSuccess": "成功导入{{count}}条比较记录。",
+    "exportSuccess": "已将{{count}}条记录导出到CSV。"
+  },
+  "welcome": {
+    "title": "欢迎使用Lingo-Diff",
+    "subtitle": "专业文本比较平台",
+    "description": "使用智能分析工具比较翻译、修订和文本变体。",
+    "showExample": "显示示例",
+    "getStarted": "开始使用"
+  }
+}
