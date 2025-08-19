@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FEATURES } from '../config/features';
-import { AIAnalysisModal } from './AIAnalysisModal';
 
 interface LLMIntegrationProps {
   sourceTerm: string;
@@ -9,6 +8,8 @@ interface LLMIntegrationProps {
   originalText: string;
   modifiedText: string;
   className?: string;
+  onOpenModal: (analysis: string, analyzing?: boolean) => void;
+  onUpdateAnalysis: (analysis: string, analyzing?: boolean) => void;
 }
 
 export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
@@ -16,17 +17,18 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   context,
   originalText,
   modifiedText,
-  className = ''
+  className = '',
+  onOpenModal,
+  onUpdateAnalysis
 }) => {
   const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
   const [isExpanded, setIsExpanded] = useState(false);
-  const [provider, setProvider] = useState<'groq' | 'openrouter' | 'custom'>('groq');
+  const [provider, setProvider] = useState<'groq' | 'openrouter'>('groq');
   const [apiKey, setApiKey] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [lastAnalysisTime, setLastAnalysisTime] = useState<number>(0);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // Don't render if feature is disabled
   if (!FEATURES.LLM_INTEGRATION) {
@@ -78,6 +80,9 @@ Please be specific about differences and provide actionable insights.`;
     setAnalysis('');
     setLastAnalysisTime(now);
 
+    // Open modal with analyzing state
+    onOpenModal('', true);
+
     try {
       // This would be the actual API call
       // const prompt = generatePrompt(); // Will be used when API integration is complete
@@ -85,7 +90,7 @@ Please be specific about differences and provide actionable insights.`;
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Mock analysis response
-      setAnalysis(`## Analysis Results
+      const mockAnalysis = `## Analysis Results
 
 **Accuracy Assessment**: Text B appears more concise while maintaining core meaning.
 
@@ -98,13 +103,15 @@ Please be specific about differences and provide actionable insights.`;
 - Text B: ${modifiedText.length} characters
 - Difference: ${Math.abs(originalText.length - modifiedText.length)} characters
 
-**Recommendation**: ${originalText.length > modifiedText.length ? 'Text B is recommended for better conciseness.' : 'Text A provides more detailed information.'}`);
+**Recommendation**: ${originalText.length > modifiedText.length ? 'Text B is recommended for better conciseness.' : 'Text A provides more detailed information.'}`;
 
-      // Open modal to show results
-      setIsModalOpen(true);
+      setAnalysis(mockAnalysis);
+      // Update modal with results
+      onUpdateAnalysis(mockAnalysis, false);
 
     } catch (err) {
       setError(t('ai.analysisFailed'));
+      onUpdateAnalysis('', false);
     } finally {
       setIsAnalyzing(false);
     }
@@ -139,6 +146,10 @@ Please be specific about differences and provide actionable insights.`;
 
       {isExpanded && (
         <div className="mt-4 space-y-4">
+          <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-md border border-blue-200">
+            <p><strong>For advanced users:</strong> Connect your own API key for integrated analysis directly within the app. Most users should use the free AI Analysis option in the main window instead.</p>
+          </div>
+          
           {/* Provider Selection */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -217,7 +228,7 @@ Please be specific about differences and provide actionable insights.`;
                   <p className="text-sm text-purple-600">{t('ai.analysisDescription')}</p>
                 </div>
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => onOpenModal(analysis, false)}
                   className="px-4 py-2 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700 transition-colors"
                 >
                   {t('ai.viewResults')}
@@ -235,14 +246,6 @@ Please be specific about differences and provide actionable insights.`;
           </div>
         </div>
       )}
-
-      {/* AI Analysis Modal */}
-      <AIAnalysisModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        analysis={analysis}
-        isAnalyzing={isAnalyzing}
-      />
     </div>
   );
 };

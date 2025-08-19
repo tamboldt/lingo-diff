@@ -1,1 +1,103 @@
-{"app":{"title":"Lingo-Diff","subtitle":"Professionelles Textvergleichs-Tool"},"navigation":{"reset":"Alles Zurücksetzen","help":"Hilfe","language":"Sprache"},"textComparison":{"title":"Textvergleich","textA":{"label":"Text A (Original)","placeholder":"Original-Text eingeben..."},"textB":{"label":"Text B (Überarbeitet)","placeholder":"Überarbeiteten Text eingeben..."}},"context":{"title":"Kontextinformationen","referenceText":{"label":"Referenztext","placeholder":"z.B., Zimmer Auswählen"},"usage":{"label":"Kontext & Verwendung","placeholder":"z.B., Mobile App-Button für Hotelzimmer-Auswahl"}},"analysis":{"title":"Visuelle Unterschiedsanalyse","aiTitle":"KI-Analyse","aiDescription":"Expertenanalyse-Prompt für KI-Bewertung von Textunterschieden generieren.","processing":"Wird verarbeitet...","visualDiff":"Visueller Diff","autoUpdating":"Automatische Aktualisierung","refreshDiff":"Diff aktualisieren","addedText":"Hinzugefügter Text","removedText":"Entfernter Text","enterBothTexts":"Beide Texte eingeben, um Unterschiede zu sehen","readyForAnalysis":"Bereit für Diff-Analyse","addTextToSee":"Text in beide Felder eingeben, um Live-Unterschiede auf Zeichenebene zu sehen","removed":"Entfernt","added":"Hinzugefügt","unchanged":"Unverändert","totalCharacters":"Gesamt: {{count}} Zeichen"}}
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "Professionelle Textvergleichsplattform",
+    "tagline": "Vergleichen Sie Textvarianten mit professionellen Analyse-Tools"
+  },
+  "navigation": {
+    "reset": "Alles zurücksetzen",
+    "help": "Hilfe",
+    "language": "Sprache"
+  },
+  "textComparison": {
+    "title": "Textvergleich",
+    "textA": {
+      "label": "Text A (original)",
+      "placeholder": "Originaltext eingeben...",
+      "tooltip": "Geben Sie die ursprüngliche Version Ihres Textes ein. Dies kann eine bestehende Übersetzung, ein erster Entwurf oder die aktuelle Version sein."
+    },
+    "textB": {
+      "label": "Text B (überarbeitet)",
+      "placeholder": "Überarbeiteten Text eingeben...",
+      "tooltip": "Geben Sie die überarbeitete Version Ihres Textes ein. Dies kann eine neue Übersetzung, bearbeitete Version oder alternative Option sein."
+    }
+  },
+  "context": {
+    "title": "Kontextinformationen",
+    "referenceText": {
+      "label": "Referenztext",
+      "placeholder": "z.B. Zimmer auswählen",
+      "tooltip": "Geben Sie den Quell- oder Referenztext ein (wie das ursprüngliche Englisch). Dies hilft bei der Kontextanalyse für den Vergleich."
+    },
+    "usage": {
+      "label": "Kontext und Verwendung",
+      "placeholder": "z.B. App-Button für Hotelzimmerauswahl",
+      "tooltip": "Beschreiben Sie, wo und wie dieser Text verwendet wird. Fügen Sie UI-Kontext, Zielgruppe oder Einschränkungen hinzu, die die Textauswahl beeinflussen."
+    },
+    "saveButton": "💾 Vergleich im Verlauf speichern"
+  },
+  "analysis": {
+    "title": "Visuelle Unterschiedsanalyse",
+    "aiTitle": "KI-Analyse",
+    "aiDescription": "Erstellen Sie einen Expertenanalyse-Prompt für die KI-Bewertung von Textunterschieden.",
+    "processing": "Wird verarbeitet..."
+  },
+  "csv": {
+    "title": "CSV-Import/Export",
+    "import": {
+      "label": "CSV-Datei importieren",
+      "tooltip": "Laden Sie beliebige CSV-Dateien mit Textspalten hoch. Wir erkennen und ordnen Ihre Spalten automatisch und intelligent zu.",
+      "smartDetection": "✨ Intelligente Erkennung: Funktioniert mit beliebigen Spaltennamen in jeder Sprache",
+      "separatorDetection": "🔍 Automatische Trenner-Erkennung: Komma, Semikolon, Tab, Pipe",
+      "commaHandling": "📝 Behandelt Kommas im Text automatisch (z.B. \"Willkommen zurück, Hans!\")"
+    },
+    "export": {
+      "label": "Daten exportieren",
+      "tooltip": "Exportieren Sie Ihre Vergleiche ins CSV-Format. Kompatibel mit Excel, Google Sheets und allen Tabellenkalkulationsprogrammen.",
+      "currentData": "📄 Aktuelle Daten exportieren",
+      "sampleFile": "📋 Beispiel-CSV herunterladen",
+      "compatibility": "💡 Perfektes Format für Excel mit korrekter UTF-8-Kodierung"
+    },
+    "features": {
+      "title": "✨ Intelligente Import-Funktionen:",
+      "separatorDetection": "Automatische Trenner-Erkennung: Komma (,), Semikolon (;), Tab, Pipe (|)",
+      "columnDetection": "Erkennt automatisch Spaltentypen in jeder Sprache",
+      "flexibleNames": "Funktioniert mit flexiblen Spaltennamen (Original/Überarbeitet, A/B, etc.)",
+      "specialChars": "Behandelt Kommas, Anführungszeichen und Sonderzeichen nahtlos",
+      "utf8Support": "Perfekte UTF-8-Unterstützung für alle internationalen Texte",
+      "noTechnical": "Keine technischen CSV-Formatierungskenntnisse erforderlich"
+    }
+  },
+  "history": {
+    "title": "Unterschiede-Verlauf",
+    "noHistory": "Noch keine Unterschiede gespeichert",
+    "clear": "Alles löschen"
+  },
+  "constraints": {
+    "title": "Textbeschränkungen"
+  },
+  "metrics": {
+    "characters": "Zeichen",
+    "words": "Wörter",
+    "lines": "Zeilen",
+    "referenceText": "Referenztext",
+    "noText": "Kein Text"
+  },
+  "messages": {
+    "success": "Erfolgreich",
+    "error": "Fehler",
+    "loading": "Wird geladen...",
+    "fileTooBig": "Datei zu groß. Bitte wählen Sie eine CSV-Datei kleiner als 5MB.",
+    "invalidFile": "Bitte wählen Sie eine CSV-Datei.",
+    "noDataExport": "Keine Daten zum Exportieren. Fügen Sie zuerst einige Textvergleiche hinzu.",
+    "importSuccess": "{{count}} Vergleichseinträge erfolgreich importiert.",
+    "exportSuccess": "{{count}} Einträge nach CSV exportiert."
+  },
+  "welcome": {
+    "title": "Willkommen bei Lingo-Diff",
+    "subtitle": "Professionelle Textvergleichsplattform",
+    "description": "Vergleichen Sie Übersetzungen, Revisionen und Textvarianten mit intelligenten Analyse-Tools.",
+    "showExample": "Beispiel anzeigen",
+    "getStarted": "Loslegen"
+  }
+}

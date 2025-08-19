@@ -1,194 +1,103 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "Professional Text Comparison Tool",
-    "tagline": "Compare, analyze, and perfect your text with professional-grade tools"
+    "subtitle": "Профессиональная платформа сравнения текстов",
+    "tagline": "Сравнивайте, анализируйте и совершенствуйте тексты с помощью профессиональных инструментов"
   },
   "navigation": {
-    "reset": "Reset All",
-    "help": "Help",
-    "language": "Language",
-    "resetWelcome": "Reset Welcome",
-    "skipToMain": "Skip to main content",
-    "close": "Close"
+    "reset": "Сбросить всё",
+    "help": "Помощь",
+    "language": "Язык"
   },
   "textComparison": {
-    "title": "Text Comparison",
+    "title": "Сравнение текстов",
     "textA": {
-      "label": "Text A (Original)",
-      "placeholder": "Enter original text...",
-      "tooltip": "Enter the original version of your text. This could be an existing translation, first draft, or current version."
+      "label": "Текст A (оригинал)",
+      "placeholder": "Введите оригинальный текст...",
+      "tooltip": "Введите оригинальную версию вашего текста. Это может быть существующий перевод, первый черновик или текущая версия."
     },
     "textB": {
-      "label": "Text B (Revised)",
-      "placeholder": "Enter revised text...",
-      "tooltip": "Enter the revised version of your text. This could be a new translation, edited version, or alternative option."
+      "label": "Текст B (отредактированный)",
+      "placeholder": "Введите отредактированный текст...",
+      "tooltip": "Введите отредактированную версию вашего текста. Это может быть новый перевод, отредактированная версия или альтернативный вариант."
     }
   },
   "context": {
-    "title": "Context Information",
+    "title": "Контекстная информация",
     "referenceText": {
-      "label": "Reference Text",
-      "placeholder": "e.g., Select Room",
-      "tooltip": "Enter the source or reference text (like the original English). This helps provide context for comparison analysis."
+      "label": "Справочный текст",
+      "placeholder": "например: Выбрать комнату",
+      "tooltip": "Введите исходный или справочный текст (например, оригинальный английский). Это поможет обеспечить контекст для сравнительного анализа."
     },
     "usage": {
-      "label": "Context & Usage",
-      "placeholder": "e.g., Mobile app button for hotel room selection",
-      "tooltip": "Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice."
+      "label": "Контекст и применение",
+      "placeholder": "например: Кнопка мобильного приложения для выбора номера в отеле",
+      "tooltip": "Опишите, где и как используется этот текст. Укажите контекст интерфейса, целевую аудиторию или ограничения, влияющие на выбор текста."
     },
-    "saveButton": "💾 Save Comparison to History"
+    "saveButton": "💾 Сохранить сравнение в историю"
   },
   "analysis": {
-    "title": "Visual Difference Analysis",
-    "aiTitle": "AI Analysis",
-    "aiDescription": "Generate expert analysis prompt for AI evaluation of text differences.",
-    "processing": "Processing...",
-    "visualDiff": "Visual Diff",
-    "autoUpdating": "Auto-updating",
-    "refreshDiff": "Refresh diff",
-    "addedText": "Added text",
-    "removedText": "Removed text",
-    "enterBothTexts": "Enter both texts to see differences",
-    "readyForAnalysis": "Ready for diff analysis",
-    "addTextToSee": "Add text to both fields to see live character-level differences",
-    "removed": "Removed",
-    "added": "Added",
-    "unchanged": "Unchanged",
-    "totalCharacters": "Total: {{count}} characters"
+    "title": "Визуальный анализ различий",
+    "aiTitle": "ИИ-анализ",
+    "aiDescription": "Создание экспертного запроса для ИИ-оценки различий в тексте.",
+    "processing": "Обработка..."
   },
   "csv": {
-    "title": "CSV Import/Export",
+    "title": "Импорт/экспорт CSV",
     "import": {
-      "label": "Import CSV File",
-      "tooltip": "Upload any CSV file with text columns. We'll automatically detect and map your columns intelligently.",
-      "smartDetection": "✨ Smart Detection: Works with any column names in any language",
-      "separatorDetection": "🔍 Auto-detects separators: comma, semicolon, tab, pipe",
-      "commaHandling": "📝 Handles commas in text automatically (e.g., \"Welcome back, John!\")"
+      "label": "Импорт CSV-файла",
+      "tooltip": "Загрузите любой CSV-файл с текстовыми столбцами. Мы автоматически и интеллектуально определим и сопоставим ваши столбцы.",
+      "smartDetection": "✨ Умное определение: работает с любыми названиями столбцов на любом языке",
+      "separatorDetection": "🔍 Автоопределение разделителей: запятая, точка с запятой, табуляция, вертикальная черта",
+      "commaHandling": "📝 Автоматически обрабатывает запятые в тексте (например: \"С возвращением, Иван!\")"
     },
     "export": {
-      "label": "Export Data",
-      "tooltip": "Export your comparisons to CSV format. Compatible with Excel, Google Sheets, and all spreadsheet applications.",
-      "currentData": "📄 Export Current Data",
-      "sampleFile": "📋 Download Sample CSV",
-      "compatibility": "💡 Perfect format for Excel with proper UTF-8 encoding"
+      "label": "Экспорт данных",
+      "tooltip": "Экспортируйте ваши сравнения в формат CSV. Совместимо с Excel, Google Sheets и всеми приложениями электронных таблиц.",
+      "currentData": "📄 Экспорт текущих данных",
+      "sampleFile": "📋 Скачать образец CSV",
+      "compatibility": "💡 Идеальный формат для Excel с правильной UTF-8 кодировкой"
     },
     "features": {
-      "title": "✨ Smart Import Features:",
-      "separatorDetection": "Auto-detects separators: comma (,), semicolon (;), tab, pipe (|)",
-      "columnDetection": "Automatically detects column types in any language",
-      "flexibleNames": "Works with flexible column names (Original/Revised, A/B, etc.)",
-      "specialChars": "Handles commas, quotes, and special characters seamlessly",
-      "utf8Support": "Perfect UTF-8 support for all international text",
-      "noTechnical": "No technical CSV formatting knowledge required"
+      "title": "✨ Возможности умного импорта:",
+      "separatorDetection": "Автоопределение разделителей: запятая (,), точка с запятой (;), табуляция, вертикальная черта (|)",
+      "columnDetection": "Автоматически определяет типы столбцов на любом языке",
+      "flexibleNames": "Работает с гибкими названиями столбцов (Оригинал/Отредактированный, A/B и т.д.)",
+      "specialChars": "Безупречно обрабатывает запятые, кавычки и специальные символы",
+      "utf8Support": "Идеальная поддержка UTF-8 для всех международных текстов",
+      "noTechnical": "Не требует технических знаний форматирования CSV"
     }
   },
   "history": {
-    "title": "Comparison History",
-    "noHistory": "No comparison history yet",
-    "clear": "Clear All",
-    "reference": "Reference:",
-    "context": "Context:",
-    "textA": "Text A:",
-    "textB": "Text B:",
-    "notes": "Notes:",
-    "load": "Load this comparison",
-    "delete": "Delete this comparison",
-    "empty": "(empty)"
+    "title": "История различий",
+    "noHistory": "Нет сохранённых различий",
+    "clear": "Очистить всё"
   },
   "constraints": {
-    "title": "Text Constraints"
+    "title": "Ограничения текста"
   },
   "metrics": {
-    "characters": "Characters",
-    "words": "Words",
-    "lines": "Lines",
-    "referenceText": "Reference Text",
-    "noText": "No text",
-    "textA": "Text A",
-    "textB": "Text B",
-    "bytes": "Bytes (UTF-8)",
-    "textExpansion": "Text Expansion",
-    "constraints": "Constraints",
-    "byteCharRatio": "Byte/Char Ratio",
-    "complexScript": "Complex script (emoji/CJK)",
-    "extendedCharacters": "Extended characters",
-    "basicLatin": "Basic Latin script",
-    "chars": "chars",
-    "latin": "Latin",
-    "hiragana": "Hiragana",
-    "katakana": "Katakana",
-    "cyrillic": "Cyrillic",
-    "arabic": "Arabic",
-    "hebrew": "Hebrew",
-    "devanagari": "Devanagari"
+    "characters": "Символы",
+    "words": "Слова",
+    "lines": "Строки",
+    "referenceText": "Справочный текст",
+    "noText": "Нет текста"
   },
   "messages": {
-    "success": "Success",
-    "error": "Error",
-    "loading": "Loading...",
-    "fileTooBig": "File too large. Please select a CSV file smaller than 5MB.",
-    "invalidFile": "Please select a CSV file.",
-    "noDataExport": "No data to export. Add some text comparisons first.",
-    "importSuccess": "Successfully imported {{count}} comparison records.",
-    "exportSuccess": "Exported {{count}} records to CSV."
+    "success": "Успешно",
+    "error": "Ошибка",
+    "loading": "Загрузка...",
+    "fileTooBig": "Файл слишком большой. Выберите CSV-файл размером менее 5МБ.",
+    "invalidFile": "Выберите CSV-файл.",
+    "noDataExport": "Нет данных для экспорта. Сначала добавьте несколько сравнений текстов.",
+    "importSuccess": "Успешно импортировано {{count}} записей сравнения.",
+    "exportSuccess": "{{count}} записей экспортировано в CSV."
   },
   "welcome": {
-    "title": "Welcome to Lingo-Diff Pro!",
-    "subtitle": "Professional Text Comparison Tool",
-    "description": "Professional text comparison and analysis tool. Get instant technical metrics, visual differences, and AI-powered insights for text quality evaluation.",
-    "keyFeatures": "Key Features:",
-    "feature1": "Technical Constraints: SMS byte limits, mobile UI space, character limits.",
-    "feature2": "Smart Metrics: UTF-8 byte counts, script detection, text expansion analysis.",
-    "feature3": "Visual Diff: Character-level comparison with immediate feedback.",
-    "feature4": "AI Analysis: Generate expert prompts for LLM quality evaluation.",
-    "feature5": "Universal Design: Perfect for localization, content editing, and document comparison.",
-    "tryExample": "Try Example",
-    "getStarted": "Got It, Let's Start!",
-    "showExample": "Show Example"
-  },
-  "sidebar": {
-    "tools": "Tools",
-    "history": "History",
-    "ai": "AI",
-    "collapse": "Collapse sidebar",
-    "expand": "Expand sidebar"
-  },
-  "ai": {
-    "title": "AI Analysis (Beta)",
-    "experimental": "Experimental",
-    "provider": "LLM Provider",
-    "groq": "Groq (Fast & Free)",
-    "openrouter": "OpenRouter",
-    "custom": "Custom API",
-    "apiKey": "API Key",
-    "apiKeyPlaceholder": "Enter your {{provider}} API key",
-    "apiKeyNotice": "Your API key is stored locally and never sent to our servers.",
-    "analyzeButton": "Analyze with AI",
-    "analyzing": "Analyzing...",
-    "fillBothTexts": "Fill both Text A and Text B to enable analysis",
-    "enterApiKey": "Enter your API key to enable analysis",
-    "clickToAnalyze": "Click to analyze text differences",
-    "analysisComplete": "AI Analysis Complete",
-    "viewResults": "View Results",
-    "analysisDescription": "Click to view detailed analysis results",
-    "waitCooldown": "Please wait 30 seconds between analyses to prevent abuse.",
-    "analysisFailed": "Failed to analyze text. Please check your API key and try again.",
-    "modalTitle": "AI Analysis Results",
-    "experimentalWarning": "⚠️ Experimental Feature:",
-    "requiresApiKey": "• Requires external API key (your own account)",
-    "qualityDepends": "• Analysis quality depends on chosen model",
-    "verifyManually": "• Always verify AI recommendations manually",
-    "noAnalysis": "No analysis available yet.",
-    "copyAnalysis": "Copy Analysis"
-  },
-  "clipboard": {
-    "copyPrompt": "📋 Copy Prompt for AI Analysis",
-    "copied": "✅ Copied to Clipboard!",
-    "pleaseProvideText": "Please provide text for at least one version before copying.",
-    "missingContext": "You have not provided a Reference Text or Context. The AI's analysis will be less accurate. Do you want to continue?",
-    "copyFailed": "Failed to copy prompt.",
-    "notProvided": "[Not Provided]",
-    "noContext": "[No context provided. Assume general text usage.]"
+    "title": "Добро пожаловать в Lingo-Diff",
+    "subtitle": "Профессиональная платформа сравнения текстов",
+    "description": "Сравнивайте переводы, редакции и варианты текстов с помощью интеллектуальных инструментов анализа.",
+    "showExample": "Показать пример",
+    "getStarted": "Начать"
   }
 }

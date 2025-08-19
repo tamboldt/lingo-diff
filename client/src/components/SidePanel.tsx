@@ -1,13 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 import { CSVManager } from './CSVManager';
 import { ConstraintsPanel } from './ConstraintsPanel';
 import { ComparisonHistory } from './ComparisonHistory';
 import { LLMIntegration } from './LLMIntegration';
-import { TextComparisonRecord } from '../utils/csvHandler';
+import { TextComparisonRecord } from '../utils/smartCSV';
+import { FEATURES } from '../config/features';
+
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({
+  t: (key: string) => {
+    const keys: { [key: string]: string } = {
+      'sidebar.tools': 'Tools',
+      'sidebar.history': 'History', 
+      'sidebar.ai': 'AI'
+    };
+    return keys[key] || key;
+  }
+});
 
 interface SidePanelProps {
+  isExpanded: boolean;
+  onToggleExpanded: (expanded: boolean) => void;
+  
   // CSV Manager props
   onImportRecords: (records: TextComparisonRecord[]) => void;
   currentRecords: TextComparisonRecord[];
@@ -28,11 +43,14 @@ interface SidePanelProps {
   originalText: string;
   modifiedText: string;
   
-  // Sidebar state
-  onExpandedChange?: (isExpanded: boolean) => void;
+  // AI Modal props
+  onOpenAIModal: (analysis: string, analyzing?: boolean) => void;
+  onUpdateAIAnalysis: (analysis: string, analyzing?: boolean) => void;
 }
 
 export const SidePanel: React.FC<SidePanelProps> = ({
+  isExpanded,
+  onToggleExpanded,
   onImportRecords,
   currentRecords,
   constraints,
@@ -45,16 +63,13 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   context,
   originalText,
   modifiedText,
-  onExpandedChange
+  onOpenAIModal,
+  onUpdateAIAnalysis
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
-  const [isExpanded, setIsExpanded] = useState(true);
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [activeTab, setActiveTab] = useState<'tools' | 'history' | 'ai'>('tools');
 
   // Notify parent when expanded state changes
-  useEffect(() => {
-    onExpandedChange?.(isExpanded);
-  }, [isExpanded, onExpandedChange]);
 
   const tabs = [
     { id: 'tools', label: t('sidebar.tools'), icon: '🛠️' },
@@ -76,7 +91,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
             {isExpanded ? (
               // Single collapse button when expanded
               <button
-                onClick={() => setIsExpanded(false)}
+                onClick={() => onToggleExpanded(false)}
                 className="p-2 hover:bg-gray-50 transition-colors"
                 aria-label={t('sidebar.collapse')}
               >
@@ -97,7 +112,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
                     key={tab.id}
                     onClick={() => {
                       setActiveTab(tab.id);
-                      setIsExpanded(true);
+                      onToggleExpanded(true);
                     }}
                     className={`p-2 transition-colors ${
                       activeTab === tab.id
@@ -177,6 +192,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({
                 context={context}
                 originalText={originalText}
                 modifiedText={modifiedText}
+                onOpenModal={onOpenAIModal}
+                onUpdateAnalysis={onUpdateAIAnalysis}
               />
             </div>
           )}

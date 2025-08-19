@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "Professional Text Comparison Tool",
+    "subtitle": "Professional text comparison platform",
     "tagline": "Compare, analyze, and perfect your text with professional-grade tools"
   },
   "navigation": {
@@ -55,7 +55,10 @@
     "removed": "Removed",
     "added": "Added",
     "unchanged": "Unchanged",
-    "totalCharacters": "Total: {{count}} characters"
+    "totalCharacters": "Total: {{count}} characters",
+    "emptyTitle": "Enter text to see differences",
+    "emptyDescription": "Add your text versions to see a live comparison",
+    "realTime": "Real-time"
   },
   "csv": {
     "title": "CSV Import/Export",
