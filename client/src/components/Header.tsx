@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
                   onClick={onResetWelcome}
                   className="px-3 py-2 sm:py-1 text-sm bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors touch-manipulation"
                 >
-                  Reset Welcome
+                  {t('navigation.resetWelcome')}
                 </button>
               )}
             </div>

@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { diffChars } from 'diff';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
 
 // Types for the component props
 interface DiffViewerProps {
@@ -13,6 +15,7 @@ interface DiffViewerProps {
  * Uses the 'diff' library to highlight additions (green) and deletions (red)
  */
 export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedText }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Memoize diff calculation to avoid unnecessary recalculations
@@ -41,7 +44,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         <span
           key={index}
           className="bg-green-100 text-green-800 px-1 py-0.5 rounded font-mono text-sm"
-          title="Added text"
+          title={t('analysis.addedText')}
         >
           {part.value}
         </span>
@@ -52,7 +55,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         <span
           key={index}
           className="bg-red-100 text-red-800 px-1 py-0.5 rounded font-mono text-sm line-through"
-          title="Removed text"
+          title={t('analysis.removedText')}
         >
           {part.value}
         </span>
@@ -82,7 +85,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
           <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          Visual Diff
+          {t('analysis.visualDiff')}
           {isProcessing && (
             <svg className="w-4 h-4 ml-2 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -93,14 +96,14 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         <div className="flex items-center gap-2">
           {hasBothTexts && (
             <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded">
-              Auto-updating
+              {t('analysis.autoUpdating')}
             </span>
           )}
           <button
             onClick={handleManualRefresh}
             disabled={!hasContent}
             className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            title="Refresh diff"
+            title={t('analysis.refreshDiff')}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -119,7 +122,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
                 <svg className="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.996-.833-2.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
-                <p className="text-sm">Enter both texts to see differences</p>
+                <p className="text-sm">{t('analysis.enterBothTexts')}</p>
               </div>
             )}
           </div>
@@ -128,8 +131,8 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
             <svg className="w-12 h-12 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <p className="font-medium">Ready for diff analysis</p>
-            <p className="text-sm text-gray-400 mt-1">Add text to both fields above to see live character-level differences</p>
+            <p className="font-medium">{t('analysis.readyForAnalysis')}</p>
+            <p className="text-sm text-gray-400 mt-1">{t('analysis.addTextToSee')}</p>
           </div>
         )}
       </div>
@@ -139,20 +142,20 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         <div className="flex flex-wrap gap-4">
           <div className="flex items-center">
             <span className="w-3 h-3 bg-red-100 text-red-800 rounded mr-1 flex items-center justify-center text-xs">-</span>
-            <span>Removed {diffStats.removed > 0 && `(${diffStats.removed})`}</span>
+            <span>{t('analysis.removed')} {diffStats.removed > 0 && `(${diffStats.removed})`}</span>
           </div>
           <div className="flex items-center">
             <span className="w-3 h-3 bg-green-100 text-green-800 rounded mr-1 flex items-center justify-center text-xs">+</span>
-            <span>Added {diffStats.added > 0 && `(${diffStats.added})`}</span>
+            <span>{t('analysis.added')} {diffStats.added > 0 && `(${diffStats.added})`}</span>
           </div>
           <div className="flex items-center">
             <span className="w-3 h-3 bg-gray-100 text-gray-800 rounded mr-1 flex items-center justify-center text-xs">=</span>
-            <span>Unchanged {diffStats.unchanged > 0 && `(${diffStats.unchanged})`}</span>
+            <span>{t('analysis.unchanged')} {diffStats.unchanged > 0 && `(${diffStats.unchanged})`}</span>
           </div>
         </div>
         {diffStats.total > 0 && (
           <div className="text-xs text-gray-500">
-            Total: {diffStats.total} characters
+            {`${t('analysis.totalCharacters').replace('{{count}}', diffStats.total.toString())}`}
           </div>
         )}
       </div>

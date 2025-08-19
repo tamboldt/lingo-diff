@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
 import { TextComparisonRecord } from '../utils/csvHandler';
 
 interface ComparisonHistoryProps {
@@ -16,6 +18,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
   onClearHistory,
   className = ''
 }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (records.length === 0) {
@@ -23,7 +26,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
   }
 
   const truncateText = (text: string, maxLength: number = 50) => {
-    if (!text) return '(empty)';
+    if (!text) return t('history.empty');
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
   };
 
@@ -47,7 +50,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
             <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Comparison History ({records.length})
+            {t('history.title')} ({records.length})
           </h3>
           <svg 
             className={`w-4 h-4 ml-2 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
@@ -63,9 +66,9 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
           <button
             onClick={onClearHistory}
             className="text-red-600 hover:text-red-800 text-sm"
-            title="Clear all history"
+            title={t('history.clear')}
           >
-            Clear All
+            {t('history.clear')}
           </button>
         )}
       </div>
@@ -84,26 +87,26 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
                     <div>
-                      <span className="font-medium text-gray-700">Reference:</span>
+                      <span className="font-medium text-gray-700">{t('history.reference')}</span>
                       <span className="ml-1 text-gray-600">{truncateText(record.referenceText)}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">Context:</span>
+                      <span className="font-medium text-gray-700">{t('history.context')}</span>
                       <span className="ml-1 text-gray-600">{truncateText(record.context)}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-blue-600">Text A:</span>
+                      <span className="font-medium text-blue-600">{t('history.textA')}</span>
                       <span className="ml-1 text-gray-600">{truncateText(record.textA)}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-green-600">Text B:</span>
+                      <span className="font-medium text-green-600">{t('history.textB')}</span>
                       <span className="ml-1 text-gray-600">{truncateText(record.textB)}</span>
                     </div>
                   </div>
                   
                   {record.notes && (
                     <div className="mt-2 text-xs text-gray-500">
-                      <span className="font-medium">Notes:</span> {truncateText(record.notes, 100)}
+                      <span className="font-medium">{t('history.notes')}</span> {truncateText(record.notes, 100)}
                     </div>
                   )}
                   
@@ -118,7 +121,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
                   <button
                     onClick={() => onSelectRecord(record)}
                     className="p-1 text-blue-600 hover:text-blue-800"
-                    title="Load this comparison"
+                    title={t('history.load')}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -128,7 +131,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
                   <button
                     onClick={() => record.id && onDeleteRecord(record.id)}
                     className="p-1 text-red-600 hover:text-red-800"
-                    title="Delete this comparison"
+                    title={t('history.delete')}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

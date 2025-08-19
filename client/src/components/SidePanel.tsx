@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
 import { CSVManager } from './CSVManager';
 import { ConstraintsPanel } from './ConstraintsPanel';
 import { ComparisonHistory } from './ComparisonHistory';
@@ -25,6 +27,9 @@ interface SidePanelProps {
   context: string;
   originalText: string;
   modifiedText: string;
+  
+  // Sidebar state
+  onExpandedChange?: (isExpanded: boolean) => void;
 }
 
 export const SidePanel: React.FC<SidePanelProps> = ({
@@ -39,47 +44,82 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   sourceTerm,
   context,
   originalText,
-  modifiedText
+  modifiedText,
+  onExpandedChange
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const [isExpanded, setIsExpanded] = useState(true);
   const [activeTab, setActiveTab] = useState<'tools' | 'history' | 'ai'>('tools');
 
+  // Notify parent when expanded state changes
+  useEffect(() => {
+    onExpandedChange?.(isExpanded);
+  }, [isExpanded, onExpandedChange]);
+
   const tabs = [
-    { id: 'tools', label: 'Tools', icon: '🛠️' },
-    { id: 'history', label: 'History', icon: '📚' },
-    { id: 'ai', label: 'AI', icon: '🤖' }
+    { id: 'tools', label: t('sidebar.tools'), icon: '🛠️' },
+    { id: 'history', label: t('sidebar.history'), icon: '📚' },
+    { id: 'ai', label: t('sidebar.ai'), icon: '🤖' }
   ] as const;
 
   return (
     <>
       {/* Collapsible Sidebar */}
-      <div className={`fixed top-0 right-0 h-full bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30 ${
-        isExpanded ? 'w-96' : 'w-12'
-      }`}>
+      <div 
+        className="fixed top-16 right-0 h-[calc(100vh-4rem)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
+        style={{ width: isExpanded ? '384px' : '48px' }}
+      >
         
         {/* Collapse/Expand Toggle */}
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="bg-white border border-gray-200 rounded-l-md p-2 shadow-md hover:bg-gray-50 transition-colors"
-            aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
-          >
-            <svg 
-              className={`w-4 h-4 text-gray-600 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          <div className="bg-white border border-gray-200 rounded-l-md shadow-md">
+            {isExpanded ? (
+              // Single collapse button when expanded
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="p-2 hover:bg-gray-50 transition-colors"
+                aria-label={t('sidebar.collapse')}
+              >
+                <svg 
+                  className="w-4 h-4 text-gray-600" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            ) : (
+              // Three tool icons when collapsed
+              <div className="flex flex-col">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setIsExpanded(true);
+                    }}
+                    className={`p-2 transition-colors ${
+                      activeTab === tab.id
+                        ? 'bg-blue-100 text-blue-600'
+                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                    }`}
+                    title={tab.label}
+                    aria-label={`${t('sidebar.expand')} ${tab.label}`}
+                  >
+                    <span className="text-sm">{tab.icon}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Panel Header */}
         <div className={`flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 ${
           isExpanded ? 'opacity-100' : 'opacity-0'
         } transition-opacity duration-300`}>
-          <h2 className="text-lg font-semibold text-gray-800">Tools</h2>
+          <h2 className="text-lg font-semibold text-gray-800">{t('sidebar.tools')}</h2>
         </div>
 
         {/* Tab Navigation */}
@@ -142,28 +182,6 @@ export const SidePanel: React.FC<SidePanelProps> = ({
           )}
         </div>
 
-        {/* Collapsed State Icons */}
-        {!isExpanded && (
-          <div className="flex flex-col items-center pt-4 space-y-4">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  setActiveTab(tab.id);
-                  setIsExpanded(true);
-                }}
-                className={`p-2 rounded-md transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-blue-100 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                }`}
-                title={tab.label}
-              >
-                <span className="text-lg">{tab.icon}</span>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </>
   );

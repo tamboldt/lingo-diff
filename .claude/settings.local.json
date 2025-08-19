@@ -12,7 +12,8 @@
       "Bash(npm install:*)",
       "Bash(git push:*)",
       "Bash(git fetch:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "ask": []
