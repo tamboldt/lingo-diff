@@ -21,10 +21,10 @@ const mockUseTranslation = () => ({
       'textComparison.textA.label': 'Text A (Original)',
       'textComparison.textA.placeholder': 'Enter original text...',
       'textComparison.textA.tooltip': 'Enter the original version of your text. This could be an existing translation, first draft, or current version.',
-      'textComparison.textB.label': 'Text B (Revised)', 
+      'textComparison.textB.label': 'Text B (Revised)',
       'textComparison.textB.placeholder': 'Enter revised text...',
       'textComparison.textB.tooltip': 'Enter the revised version of your text. This could be a new translation, edited version, or alternative option.',
-      'analysis.title': 'Live Difference Analysis',
+      'analysis.title': 'Visual Difference Analysis',
       'context.title': 'Context Information',
       'context.referenceText.label': 'Reference Text',
       'context.referenceText.placeholder': 'e.g., Select Room',
@@ -39,6 +39,7 @@ const mockUseTranslation = () => ({
       'metrics.characters': 'Characters',
       'metrics.words': 'Words',
       'metrics.lines': 'Lines',
+      'metrics.chars': 'chars',
       'analysis.emptyTitle': 'Enter text to see differences',
       'analysis.emptyDescription': 'Add your text versions to see a live comparison',
       'analysis.realTime': 'Real-time'
@@ -201,8 +202,11 @@ export default function App() {
     return [currentRecord, ...comparisonHistory];
   }, [sourceTerm, context, originalText, modifiedText, comparisonHistory]);
 
+  // Sidebar expanded state management
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+
   return (
-    <div className="min-h-screen bg-gray-50 pr-12">
+    <div className="min-h-screen bg-gray-50" style={{paddingRight: isSidebarExpanded ? '384px' : '48px'}}>
       {/* Skip to main content link for screen readers */}
       <a 
         href="#main-content" 
@@ -280,7 +284,7 @@ export default function App() {
                         aria-describedby="candidate1-help"
                       />
                       <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
-                        {originalText.length}
+                        {originalText.length} {t('metrics.chars')}
                       </div>
                     </div>
                     <div id="candidate1-help" className="sr-only">
@@ -303,7 +307,7 @@ export default function App() {
                         aria-describedby="candidate2-help"
                       />
                       <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
-                        {modifiedText.length}
+                        {modifiedText.length} {t('metrics.chars')}
                       </div>
                     </div>
                     <div id="candidate2-help" className="sr-only">
@@ -322,9 +326,9 @@ export default function App() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
-                  Live Difference Analysis
+                  {t('analysis.title')}
                   <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                    Real-time
+                    {t('analysis.realTime')}
                   </span>
                 </h2>
                 {(originalText || modifiedText) ? (
@@ -486,6 +490,8 @@ export default function App() {
 
       {/* Side Panel for Advanced Controls */}
       <SidePanel
+        isExpanded={isSidebarExpanded}
+        onToggleExpanded={setIsSidebarExpanded}
         onImportRecords={handleImportRecords}
         currentRecords={currentRecords}
         constraints={constraints}
