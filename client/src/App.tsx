@@ -163,7 +163,7 @@ export default function App() {
   }, [sourceTerm, context, originalText, modifiedText, comparisonHistory]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pr-12">
       {/* Skip to main content link for screen readers */}
       <a 
         href="#main-content" 
@@ -230,22 +230,22 @@ export default function App() {
                       <label htmlFor="candidate1" className="block text-sm font-medium text-gray-700">Text A (Original)</label>
                       <InfoTooltip content="Enter the original version of your text. This could be an existing translation, first draft, or current version." />
                     </div>
-                    <textarea
-                      id="candidate1"
-                      value={originalText}
-                      onChange={(e) => setOriginalText(e.target.value)}
-                      rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4"
-                      placeholder="Enter original text..."
-                      aria-describedby="candidate1-help"
-                    />
-                    <div className="flex justify-between items-center mt-1">
-                      <div id="candidate1-help" className="sr-only">
-                        Enter the original version of your text for comparison
+                    <div className="relative">
+                      <textarea
+                        id="candidate1"
+                        value={originalText}
+                        onChange={(e) => setOriginalText(e.target.value)}
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+                        placeholder="Enter original text..."
+                        aria-describedby="candidate1-help"
+                      />
+                      <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
+                        {originalText.length}
                       </div>
-                      <span className="text-xs text-gray-500">
-                        {originalText.length} characters
-                      </span>
+                    </div>
+                    <div id="candidate1-help" className="sr-only">
+                      Enter the original version of your text for comparison
                     </div>
                   </div>
                   <div>
@@ -253,22 +253,22 @@ export default function App() {
                       <label htmlFor="candidate2" className="block text-sm font-medium text-gray-700">Text B (Revised)</label>
                       <InfoTooltip content="Enter the revised version of your text. This could be a new translation, edited version, or alternative option." />
                     </div>
-                    <textarea
-                      id="candidate2"
-                      value={modifiedText}
-                      onChange={(e) => setModifiedText(e.target.value)}
-                      rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4"
-                      placeholder="Enter revised text..."
-                      aria-describedby="candidate2-help"
-                    />
-                    <div className="flex justify-between items-center mt-1">
-                      <div id="candidate2-help" className="sr-only">
-                        Enter the revised version of your text for comparison
+                    <div className="relative">
+                      <textarea
+                        id="candidate2"
+                        value={modifiedText}
+                        onChange={(e) => setModifiedText(e.target.value)}
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+                        placeholder="Enter revised text..."
+                        aria-describedby="candidate2-help"
+                      />
+                      <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
+                        {modifiedText.length}
                       </div>
-                      <span className="text-xs text-gray-500">
-                        {modifiedText.length} characters
-                      </span>
+                    </div>
+                    <div id="candidate2-help" className="sr-only">
+                      Enter the revised version of your text for comparison
                     </div>
                   </div>
                 </div>
@@ -304,6 +304,36 @@ export default function App() {
             </div>
           </div>
 
+          {/* METRICS ROW */}
+          {(sourceTerm || originalText || modifiedText) && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+              {sourceTerm && (
+                <TextMetricsCard
+                  text={sourceTerm}
+                  label="Reference Text"
+                  metrics={sourceMetrics}
+                  isSource={true}
+                />
+              )}
+              {originalText && (
+                <TextMetricsCard
+                  text={originalText}
+                  label="Text A"
+                  metrics={originalMetrics}
+                  constraints={constraints}
+                />
+              )}
+              {modifiedText && (
+                <TextMetricsCard
+                  text={modifiedText}
+                  label="Text B"
+                  metrics={modifiedMetrics}
+                  constraints={constraints}
+                />
+              )}
+            </div>
+          )}
+
           {/* PROGRESSIVE DISCLOSURE: ADVANCED OPTIONS */}
           <div className="mt-8">
             <button
@@ -327,7 +357,7 @@ export default function App() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
-              <p className="text-sm text-gray-600 mt-1 text-left">Add context information and AI analysis for better insights</p>
+              <p className="text-sm text-gray-600 mt-1 text-left">Add context information and perform AI analysis for better insights</p>
             </button>
 
             {showContextSection && (
@@ -412,36 +442,6 @@ export default function App() {
               </div>
             )}
           </div>
-
-          {/* METRICS ROW */}
-          {(sourceTerm || originalText || modifiedText) && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {sourceTerm && (
-                <TextMetricsCard
-                  text={sourceTerm}
-                  label="Reference Text"
-                  metrics={sourceMetrics}
-                  isSource={true}
-                />
-              )}
-              {originalText && (
-                <TextMetricsCard
-                  text={originalText}
-                  label="Text A"
-                  metrics={originalMetrics}
-                  constraints={constraints}
-                />
-              )}
-              {modifiedText && (
-                <TextMetricsCard
-                  text={modifiedText}
-                  label="Text B"
-                  metrics={modifiedMetrics}
-                  constraints={constraints}
-                />
-              )}
-            </div>
-          )}
         </div>
       </main>
 

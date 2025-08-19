@@ -21,7 +21,7 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   onUpdateAnalysis
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [provider, setProvider] = useState<'groq' | 'openrouter' | 'custom'>('groq');
+  const [provider, setProvider] = useState<'groq' | 'openrouter'>('groq');
   const [apiKey, setApiKey] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<string>('');
@@ -158,9 +158,8 @@ Please be specific about differences and provide actionable insights.`;
               onChange={(e) => setProvider(e.target.value as any)}
               className="block w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             >
-              <option value="groq">Groq (Fast & Free)</option>
-              <option value="openrouter">OpenRouter</option>
-              <option value="custom">Custom API</option>
+              <option value="groq">Groq (Fast & Free Tier)</option>
+              <option value="openrouter">OpenRouter (Pay-per-use)</option>
             </select>
           </div>
 
