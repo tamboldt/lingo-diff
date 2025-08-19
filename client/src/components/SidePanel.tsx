@@ -69,6 +69,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [activeTab, setActiveTab] = useState<'tools' | 'history' | 'ai'>('tools');
 
+  // Notify parent when expanded state changes
+
   const tabs = [
     { id: 'tools', label: t('sidebar.tools'), icon: '🛠️' },
     { id: 'history', label: t('sidebar.history'), icon: '📚' },
@@ -79,31 +81,53 @@ export const SidePanel: React.FC<SidePanelProps> = ({
     <>
       {/* Collapsible Sidebar */}
       <div 
-        className={`fixed bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30`}
-        style={{ 
-          width: isExpanded ? '384px' : '48px',
-          top: '4rem',
-          right: '0',
-          height: 'calc(100vh - 4rem)'
-        }}
+        className="fixed top-16 right-0 h-[calc(100vh-4rem)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
+        style={{ width: isExpanded ? '384px' : '48px' }}
       >
         
         {/* Collapse/Expand Toggle */}
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full">
-          <button
-            onClick={() => onToggleExpanded(!isExpanded)}
-            className="bg-white border border-gray-200 rounded-l-md p-2 shadow-md hover:bg-gray-50 transition-colors"
-            aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
-          >
-            <svg 
-              className={`w-4 h-4 text-gray-600 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          <div className="bg-white border border-gray-200 rounded-l-md shadow-md">
+            {isExpanded ? (
+              // Single collapse button when expanded
+              <button
+                onClick={() => onToggleExpanded(false)}
+                className="p-2 hover:bg-gray-50 transition-colors"
+                aria-label={t('sidebar.collapse')}
+              >
+                <svg 
+                  className="w-4 h-4 text-gray-600" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            ) : (
+              // Three tool icons when collapsed
+              <div className="flex flex-col">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      onToggleExpanded(true);
+                    }}
+                    className={`p-2 transition-colors ${
+                      activeTab === tab.id
+                        ? 'bg-blue-100 text-blue-600'
+                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                    }`}
+                    title={tab.label}
+                    aria-label={`${t('sidebar.expand')} ${tab.label}`}
+                  >
+                    <span className="text-sm">{tab.icon}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Panel Header */}
@@ -175,28 +199,6 @@ export const SidePanel: React.FC<SidePanelProps> = ({
           )}
         </div>
 
-        {/* Collapsed State Icons */}
-        {!isExpanded && (
-          <div className="flex flex-col items-center pt-4 space-y-4">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  setActiveTab(tab.id);
-                  onToggleExpanded(true);
-                }}
-                className={`p-2 rounded-md transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-blue-100 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                }`}
-                title={tab.label}
-              >
-                <span className="text-lg">{tab.icon}</span>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </>
   );

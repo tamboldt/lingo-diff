@@ -1,0 +1,51 @@
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "Ferramenta Profissional de Comparação de Textos"
+  },
+  "navigation": {
+    "reset": "Redefinir Tudo",
+    "help": "Ajuda",
+    "language": "Idioma"
+  },
+  "textComparison": {
+    "title": "Comparação de Textos",
+    "textA": {
+      "label": "Texto A (Original)",
+      "placeholder": "Digite o texto original..."
+    },
+    "textB": {
+      "label": "Texto B (Revisado)",
+      "placeholder": "Digite o texto revisado..."
+    }
+  },
+  "context": {
+    "title": "Informações de Contexto",
+    "referenceText": {
+      "label": "Texto de Referência",
+      "placeholder": "ex., Selecionar Quarto"
+    },
+    "usage": {
+      "label": "Contexto e Uso",
+      "placeholder": "ex., Botão do aplicativo móvel para seleção de quarto do hotel"
+    }
+  },
+  "analysis": {
+    "title": "Análise Visual de Diferenças",
+    "aiTitle": "Análise de IA",
+    "aiDescription": "Gera prompt de análise especializada para avaliação de diferenças de texto por IA.",
+    "processing": "Processando...",
+    "visualDiff": "Diff visual",
+    "autoUpdating": "Atualização automática",
+    "refreshDiff": "Atualizar diff",
+    "addedText": "Texto adicionado",
+    "removedText": "Texto removido",
+    "enterBothTexts": "Digite ambos os textos para ver as diferenças",
+    "readyForAnalysis": "Pronto para análise de diferenças",
+    "addTextToSee": "Adicione texto em ambos os campos para ver diferenças em tempo real no nível de caracteres",
+    "removed": "Removido",
+    "added": "Adicionado",
+    "unchanged": "Inalterado",
+    "totalCharacters": "Total: {{count}} caracteres"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "Herramienta profesional de comparación de textos",
+    "subtitle": "Herramienta Profesional de Comparación de Textos",
     "tagline": "Compara, analiza y perfecciona tu texto con herramientas de nivel profesional"
   },
   "navigation": {
@@ -10,7 +10,7 @@
     "language": "Idioma"
   },
   "textComparison": {
-    "title": "Comparación de textos",
+    "title": "Comparación de Textos",
     "textA": {
       "label": "Texto A (Original)",
       "placeholder": "Ingresa el texto original...",
@@ -23,21 +23,21 @@
     }
   },
   "context": {
-    "title": "Información de contexto",
+    "title": "Información de Contexto",
     "referenceText": {
-      "label": "Texto de referencia",
+      "label": "Texto de Referencia",
       "placeholder": "ej., Seleccionar Habitación",
       "tooltip": "Ingresa el texto fuente o de referencia (como el inglés original). Esto ayuda a proporcionar contexto para el análisis de comparación."
     },
     "usage": {
-      "label": "Contexto y uso",
+      "label": "Contexto y Uso",
       "placeholder": "ej., Botón de aplicación móvil para selección de habitación de hotel",
       "tooltip": "Describe dónde y cómo se usa este texto. Incluye contexto de UI, audiencia objetivo o restricciones que afecten la elección del texto."
     },
     "saveButton": "💾 Guardar Comparación al Historial"
   },
   "analysis": {
-    "title": "Análisis visual de diferencias",
+    "title": "Análisis Visual de Diferencias",
     "aiTitle": "Análisis de IA",
     "aiDescription": "Genera prompt de análisis experto para evaluación de diferencias de texto con IA.",
     "processing": "Procesando...",
@@ -55,16 +55,16 @@
     "totalCharacters": "Total: {{count}} caracteres"
   },
   "csv": {
-    "title": "Importar/exportar CSV",
+    "title": "Importar/Exportar CSV",
     "import": {
-      "label": "Importar archivo CSV",
+      "label": "Importar Archivo CSV",
       "tooltip": "Sube cualquier archivo CSV con columnas de texto. Detectaremos y mapearemos tus columnas automáticamente e inteligentemente.",
-      "smartDetection": "✨ Detección inteligente: funciona con cualquier nombre de columna en cualquier idioma",
+      "smartDetection": "✨ Detección Inteligente: Funciona con cualquier nombre de columna en cualquier idioma",
       "separatorDetection": "🔍 Auto-detecta separadores: coma, punto y coma, tabulación, barra",
       "commaHandling": "📝 Maneja comas en el texto automáticamente (ej., \"Bienvenido de nuevo, Juan!\")"
     },
     "export": {
-      "label": "Exportar datos",
+      "label": "Exportar Datos",
       "tooltip": "Exporta tus comparaciones a formato CSV. Compatible con Excel, Google Sheets y todas las aplicaciones de hoja de cálculo.",
       "currentData": "📄 Exportar Datos Actuales",
       "sampleFile": "📋 Descargar CSV de Ejemplo",
@@ -81,8 +81,8 @@
     }
   },
   "history": {
-    "title": "Historial de Diferencias",
-    "noHistory": "Aún no hay diferencias guardadas",
+    "title": "Historial de Comparaciones",
+    "noHistory": "Aún no hay historial de comparaciones",
     "clear": "Limpiar Todo"
   },
   "constraints": {
@@ -93,7 +93,24 @@
     "words": "Palabras",
     "lines": "Líneas",
     "referenceText": "Texto de Referencia",
-    "noText": "Sin texto"
+    "noText": "Sin texto",
+    "textA": "Texto A",
+    "textB": "Texto B",
+    "bytes": "Bytes (UTF-8)",
+    "textExpansion": "Expansión de Texto",
+    "constraints": "Restricciones",
+    "byteCharRatio": "Relación Byte/Carácter",
+    "complexScript": "Escritura compleja (emoji/CJK)",
+    "extendedCharacters": "Caracteres extendidos",
+    "basicLatin": "Escritura latina básica",
+    "chars": "chars",
+    "latin": "Latín",
+    "hiragana": "Hiragana",
+    "katakana": "Katakana",
+    "cyrillic": "Cirílico",
+    "arabic": "Árabe",
+    "hebrew": "Hebreo",
+    "devanagari": "Devanagari"
   },
   "messages": {
     "success": "Éxito",
@@ -106,8 +123,8 @@
     "exportSuccess": "Se exportaron {{count}} registros a CSV."
   },
   "welcome": {
-    "title": "Te damos la bienvenida a Lingo-Diff",
-    "subtitle": "Herramienta profesional de comparación de textos",
+    "title": "Bienvenido a Lingo-Diff",
+    "subtitle": "Herramienta Profesional de Comparación de Textos",
     "description": "Compara traducciones, revisiones y variantes de texto con herramientas de análisis inteligentes.",
     "showExample": "Mostrar Ejemplo",
     "getStarted": "Comenzar"

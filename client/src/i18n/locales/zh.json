@@ -7,7 +7,10 @@
   "navigation": {
     "reset": "全部重置",
     "help": "帮助",
-    "language": "语言"
+    "language": "语言",
+    "resetWelcome": "重置欢迎页",
+    "skipToMain": "跳到主要内容",
+    "close": "关闭"
   },
   "textComparison": {
     "title": "文本比较",
@@ -40,7 +43,22 @@
     "title": "可视化差异分析",
     "aiTitle": "AI分析",
     "aiDescription": "为文本差异的AI评估生成专家分析提示。",
-    "processing": "处理中..."
+    "processing": "处理中...",
+    "visualDiff": "可视化差异",
+    "autoUpdating": "自动更新",
+    "refreshDiff": "刷新差异",
+    "addedText": "添加的文本",
+    "removedText": "删除的文本",
+    "enterBothTexts": "输入两个文本以查看差异",
+    "readyForAnalysis": "准备进行差异分析",
+    "addTextToSee": "在两个字段中添加文本以查看实时字符级差异",
+    "removed": "删除",
+    "added": "添加",
+    "unchanged": "未更改",
+    "totalCharacters": "总计：{{count}} 字符",
+    "emptyTitle": "输入文本以查看差异",
+    "emptyDescription": "添加您的文本版本以查看实时比较",
+    "realTime": "实时"
   },
   "csv": {
     "title": "CSV导入/导出",
@@ -69,9 +87,17 @@
     }
   },
   "history": {
-    "title": "差异历史",
-    "noHistory": "暂无保存的差异",
-    "clear": "全部清除"
+    "title": "比较历史",
+    "noHistory": "暂无比较历史",
+    "clear": "全部清除",
+    "reference": "参考：",
+    "context": "上下文：",
+    "textA": "文本A：",
+    "textB": "文本B：",
+    "notes": "备注：",
+    "load": "加载此比较",
+    "delete": "删除此比较",
+    "empty": "（空）"
   },
   "constraints": {
     "title": "文本约束"
@@ -81,7 +107,24 @@
     "words": "词语",
     "lines": "行",
     "referenceText": "参考文本",
-    "noText": "无文本"
+    "noText": "无文本",
+    "textA": "文本A",
+    "textB": "文本B",
+    "bytes": "字节（UTF-8）",
+    "textExpansion": "文本扩展",
+    "constraints": "约束",
+    "byteCharRatio": "字节/字符比率",
+    "complexScript": "复杂脚本（emoji/CJK）",
+    "extendedCharacters": "扩展字符",
+    "basicLatin": "基本拉丁脚本",
+    "chars": "字符",
+    "latin": "拉丁",
+    "hiragana": "平假名",
+    "katakana": "片假名",
+    "cyrillic": "西里尔",
+    "arabic": "阿拉伯",
+    "hebrew": "希伯来",
+    "devanagari": "天城"
   },
   "messages": {
     "success": "成功",
@@ -94,10 +137,61 @@
     "exportSuccess": "已将{{count}}条记录导出到CSV。"
   },
   "welcome": {
-    "title": "欢迎使用Lingo-Diff",
-    "subtitle": "专业文本比较平台",
-    "description": "使用智能分析工具比较翻译、修订和文本变体。",
-    "showExample": "显示示例",
-    "getStarted": "开始使用"
+    "title": "欢迎使用Lingo-Diff专业版！",
+    "subtitle": "专业文本比较工具",
+    "description": "专业的文本比较和分析工具。获得即时技术指标、可视化差异和AI驱动的文本质量评估洞察。",
+    "keyFeatures": "主要功能：",
+    "feature1": "技术约束：短信字节限制、移动UI空间、字符限制。",
+    "feature2": "智能指标：UTF-8字节计数、脚本检测、文本扩展分析。",
+    "feature3": "可视化差异：字符级比较，即时反馈。",
+    "feature4": "AI分析：为LLM质量评估生成专家提示。",
+    "feature5": "通用设计：完美适用于本地化、内容编辑和文档比较。",
+    "tryExample": "尝试示例",
+    "getStarted": "好的，开始使用！",
+    "showExample": "显示示例"
+  },
+  "sidebar": {
+    "tools": "工具",
+    "history": "历史",
+    "ai": "AI",
+    "collapse": "折叠侧边栏",
+    "expand": "展开侧边栏"
+  },
+  "ai": {
+    "title": "AI分析（测试版）",
+    "experimental": "实验性",
+    "provider": "LLM提供商",
+    "groq": "Groq（快速且免费）",
+    "openrouter": "OpenRouter",
+    "custom": "自定义API",
+    "apiKey": "API密钥",
+    "apiKeyPlaceholder": "输入您的{{provider}} API密钥",
+    "apiKeyNotice": "您的API密钥存储在本地，永远不会发送到我们的服务器。",
+    "analyzeButton": "使用AI分析",
+    "analyzing": "分析中...",
+    "fillBothTexts": "填写文本A和文本B以启用分析",
+    "enterApiKey": "输入您的API密钥以启用分析",
+    "clickToAnalyze": "点击分析文本差异",
+    "analysisComplete": "AI分析完成",
+    "viewResults": "查看结果",
+    "analysisDescription": "点击查看详细分析结果",
+    "waitCooldown": "请等待30秒再进行分析以防止滥用。",
+    "analysisFailed": "分析文本失败。请检查您的API密钥并重试。",
+    "modalTitle": "AI分析结果",
+    "experimentalWarning": "⚠️ 实验性功能：",
+    "requiresApiKey": "• 需要外部API密钥（您自己的账户）",
+    "qualityDepends": "• 分析质量取决于所选模型",
+    "verifyManually": "• 始终手动验证AI建议",
+    "noAnalysis": "暂无分析结果。",
+    "copyAnalysis": "复制分析"
+  },
+  "clipboard": {
+    "copyPrompt": "📋 复制AI分析提示",
+    "copied": "✅ 已复制到剪贴板！",
+    "pleaseProvideText": "请在复制之前至少提供一个版本的文本。",
+    "missingContext": "您没有提供参考文本或上下文。AI的分析将不太准确。您想继续吗？",
+    "copyFailed": "复制提示失败。",
+    "notProvided": "[未提供]",
+    "noContext": "[未提供上下文。假设一般文本用法。]"
   }
 }

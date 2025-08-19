@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FEATURES } from '../config/features';
 
 interface LLMIntegrationProps {
@@ -20,6 +21,7 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   onOpenModal,
   onUpdateAnalysis
 }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
   const [isExpanded, setIsExpanded] = useState(false);
   const [provider, setProvider] = useState<'groq' | 'openrouter'>('groq');
   const [apiKey, setApiKey] = useState('');
@@ -69,7 +71,7 @@ Please be specific about differences and provide actionable insights.`;
     // Rate limiting: prevent abuse (30 second cooldown)
     const now = Date.now();
     if (now - lastAnalysisTime < 30000) {
-      setError('Please wait 30 seconds between analyses to prevent abuse.');
+      setError(t('ai.waitCooldown'));
       return;
     }
 
@@ -108,7 +110,7 @@ Please be specific about differences and provide actionable insights.`;
       onUpdateAnalysis(mockAnalysis, false);
 
     } catch (err) {
-      setError('Failed to analyze text. Please check your API key and try again.');
+      setError(t('ai.analysisFailed'));
       onUpdateAnalysis('', false);
     } finally {
       setIsAnalyzing(false);
@@ -125,11 +127,11 @@ Please be specific about differences and provide actionable insights.`;
           <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
-          Direct AI Integration
+          {t('ai.title')}
         </h3>
         <div className="flex items-center gap-2">
-          <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">
-            API Key Required
+          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">
+            {t('ai.experimental')}
           </span>
           <svg 
             className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
@@ -151,32 +153,33 @@ Please be specific about differences and provide actionable insights.`;
           {/* Provider Selection */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              LLM Provider
+              {t('ai.provider')}
             </label>
             <select
               value={provider}
               onChange={(e) => setProvider(e.target.value as any)}
               className="block w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             >
-              <option value="groq">Groq (Fast & Free Tier)</option>
-              <option value="openrouter">OpenRouter (Pay-per-use)</option>
+              <option value="groq">{t('ai.groq')}</option>
+              <option value="openrouter">{t('ai.openrouter')}</option>
+              <option value="custom">{t('ai.custom')}</option>
             </select>
           </div>
 
           {/* API Key Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              API Key
+              {t('ai.apiKey')}
             </label>
             <input
               type="password"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              placeholder={`Enter your ${provider} API key`}
+              placeholder={`${t('ai.apiKey')} (${provider})`}
               className="block w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
             />
             <p className="text-xs text-gray-500 mt-1">
-              Your API key is stored locally and never sent to our servers.
+              {t('ai.apiKeyNotice')}
             </p>
           </div>
 
@@ -186,9 +189,9 @@ Please be specific about differences and provide actionable insights.`;
             disabled={!hasRequiredData || !apiKey.trim() || isAnalyzing}
             className="w-full px-4 py-2 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             title={
-              !hasRequiredData ? "Fill both Text A and Text B to enable analysis" :
-              !apiKey.trim() ? "Enter your API key to enable analysis" :
-              "Click to analyze text differences"
+              !hasRequiredData ? t('ai.fillBothTexts') :
+              !apiKey.trim() ? t('ai.enterApiKey') :
+              t('ai.clickToAnalyze')
             }
           >
             {isAnalyzing ? (
@@ -197,14 +200,14 @@ Please be specific about differences and provide actionable insights.`;
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Analyzing...
+                {t('ai.analyzing')}
               </>
             ) : (
               <>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
-                Analyze with AI
+                {t('ai.analyzeButton')}
               </>
             )}
           </button>
@@ -221,14 +224,14 @@ Please be specific about differences and provide actionable insights.`;
             <div className="p-4 bg-purple-50 border border-purple-200 rounded-md">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="font-medium text-purple-800">AI Analysis Complete</h4>
-                  <p className="text-sm text-purple-600">Click to view detailed analysis results</p>
+                  <h4 className="font-medium text-purple-800">{t('ai.analysisComplete')}</h4>
+                  <p className="text-sm text-purple-600">{t('ai.analysisDescription')}</p>
                 </div>
                 <button
                   onClick={() => onOpenModal(analysis, false)}
                   className="px-4 py-2 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700 transition-colors"
                 >
-                  View Results
+                  {t('ai.viewResults')}
                 </button>
               </div>
             </div>
@@ -236,10 +239,10 @@ Please be specific about differences and provide actionable insights.`;
 
           {/* Info Note */}
           <div className="text-xs text-gray-600 bg-yellow-50 p-3 rounded-md border border-yellow-200">
-            <p className="font-medium mb-1 text-yellow-800">⚠️ Experimental Feature:</p>
-            <p className="text-yellow-700">• Requires external API key (your own account)</p>
-            <p className="text-yellow-700">• Analysis quality depends on chosen model</p>
-            <p className="text-yellow-700">• Always verify AI recommendations manually</p>
+            <p className="font-medium mb-1 text-yellow-800">{t('ai.experimentalWarning')}</p>
+            <p className="text-yellow-700">{t('ai.requiresApiKey')}</p>
+            <p className="text-yellow-700">{t('ai.qualityDepends')}</p>
+            <p className="text-yellow-700">{t('ai.verifyManually')}</p>
           </div>
         </div>
       )}

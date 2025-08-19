@@ -59,6 +59,7 @@ export default function App() {
   const [isWelcomeVisible, setIsWelcomeVisible] = useState(false);
   const [constraints, setConstraints] = useState<{ [key: string]: number }>({});
   const [comparisonHistory, setComparisonHistory] = useState<TextComparisonRecord[]>([]);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
   
   // AI Analysis Modal state
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
@@ -202,17 +203,14 @@ export default function App() {
     return [currentRecord, ...comparisonHistory];
   }, [sourceTerm, context, originalText, modifiedText, comparisonHistory]);
 
-  // Sidebar expanded state management
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
-
   return (
-    <div className="min-h-screen bg-gray-50" style={{paddingRight: isSidebarExpanded ? '384px' : '48px'}}>
+    <div className="min-h-screen bg-gray-50 transition-all duration-300" style={{paddingRight: isSidebarExpanded ? '384px' : '48px'}}>
       {/* Skip to main content link for screen readers */}
       <a 
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
-        Skip to main content
+        {t('navigation.skipToMain')}
       </a>
       {isWelcomeVisible && (
         <WelcomeModal 
@@ -353,7 +351,7 @@ export default function App() {
               {sourceTerm && (
                 <TextMetricsCard
                   text={sourceTerm}
-                  label="Reference Text"
+                  label={t('metrics.referenceText')}
                   metrics={sourceMetrics}
                   isSource={true}
                 />
@@ -361,7 +359,7 @@ export default function App() {
               {originalText && (
                 <TextMetricsCard
                   text={originalText}
-                  label="Text A"
+                  label={t('metrics.textA')}
                   metrics={originalMetrics}
                   constraints={constraints}
                 />
@@ -369,7 +367,7 @@ export default function App() {
               {modifiedText && (
                 <TextMetricsCard
                   text={modifiedText}
-                  label="Text B"
+                  label={t('metrics.textB')}
                   metrics={modifiedMetrics}
                   constraints={constraints}
                 />
@@ -408,13 +406,13 @@ export default function App() {
                 <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                   <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                     <span className="text-blue-500 mr-2">📄</span>
-                    Context Information
+                    {t('context.title')}
                   </h2>
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <label htmlFor="sourceTerm" className="block text-sm font-medium text-gray-700">Reference Text</label>
-                    <InfoTooltip content="Enter the source or reference text (like the original English). This helps provide context for comparison analysis." />
+                    <label htmlFor="sourceTerm" className="block text-sm font-medium text-gray-700">{t('context.referenceText.label')}</label>
+                    <InfoTooltip content={t('context.referenceText.tooltip')} />
                   </div>
                   <textarea
                     id="sourceTerm"
@@ -422,7 +420,7 @@ export default function App() {
                     onChange={(e) => setSourceTerm(e.target.value)}
                     rows={2}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm py-3 px-4"
-                    placeholder="e.g., Select Room"
+                    placeholder={t('context.referenceText.placeholder')}
                     aria-describedby="sourceTerm-help"
                   />
                   <div id="sourceTerm-help" className="sr-only">
@@ -431,8 +429,8 @@ export default function App() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <label htmlFor="context" className="block text-sm font-medium text-gray-700">Context & Usage</label>
-                    <InfoTooltip content="Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice." />
+                    <label htmlFor="context" className="block text-sm font-medium text-gray-700">{t('context.usage.label')}</label>
+                    <InfoTooltip content={t('context.usage.tooltip')} />
                   </div>
                   <textarea
                     id="context"
@@ -440,7 +438,7 @@ export default function App() {
                     onChange={(e) => setContext(e.target.value)}
                     rows={2}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm py-3 px-4"
-                    placeholder="e.g., Mobile app button for hotel room selection"
+                    placeholder={t('context.usage.placeholder')}
                     aria-describedby="context-help"
                   />
                   <div id="context-help" className="sr-only">
@@ -452,7 +450,7 @@ export default function App() {
                     onClick={handleSaveComparison}
                     className="w-full px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors"
                   >
-                    💾 Save Comparison to History
+                    {t('context.saveButton')}
                   </button>
                 )}
                 </div>
@@ -464,7 +462,7 @@ export default function App() {
                   <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
-                  AI Analysis
+                  {t('analysis.aiTitle')}
                   <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
                     Free
                   </span>

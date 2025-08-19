@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
 
 interface Props {
   sourceTerm: string;
@@ -7,7 +9,7 @@ interface Props {
   modifiedText: string;
 }
 
-const generatePrompt = ({ sourceTerm, context, originalText, modifiedText }: Props) => {
+const generatePrompt = ({ sourceTerm, context, originalText, modifiedText }: Props, t: (key: string) => string) => {
   return `**AI PROMPT: EXPERT TEXT ANALYSIS**
 
 **Persona:**
@@ -17,9 +19,9 @@ You are an expert linguist and content analyst with deep knowledge of text nuanc
 Analyze the following two text variations. Evaluate their clarity, tone, and suitability for the given context. Compare them, explain the key differences, and provide a clear recommendation.
 
 **Contextual Information:**
-- **Reference Text:** ${sourceTerm || '[Not Provided]'}
+- **Reference Text:** ${sourceTerm || t('clipboard.notProvided')}
 - **Language:** [Auto-detected from text content]
-- **Usage Context:** ${context || '[No context provided. Assume general text usage.]'}
+- **Usage Context:** ${context || t('clipboard.noContext')}
 
 ---
 
@@ -49,28 +51,29 @@ ${modifiedText}
 };
 
 export const ClipboardPromptButton = ({ sourceTerm, context, originalText, modifiedText }: Props) => {
-  const [buttonText, setButtonText] = useState('📋 Copy Prompt → Paste in ChatGPT/Claude');
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const [buttonText, setButtonText] = useState(t('clipboard.copyPrompt'));
 
   const handleCopy = () => {
     if (!originalText && !modifiedText) {
-      alert('Please provide text for at least one version before copying.');
+      alert(t('clipboard.pleaseProvideText'));
       return;
     }
     
     if (!sourceTerm && !context) {
-        if (!confirm("You have not provided a Reference Text or Context. The AI's analysis will be less accurate. Do you want to continue?")) {
+        if (!confirm(t('clipboard.missingContext'))) {
             return;
         }
     }
 
-    const promptText = generatePrompt({ sourceTerm, context, originalText, modifiedText });
+    const promptText = generatePrompt({ sourceTerm, context, originalText, modifiedText }, t);
 
     navigator.clipboard.writeText(promptText).then(() => {
-        setButtonText('✅ Copied to Clipboard!');
-        setTimeout(() => setButtonText('📋 Copy Prompt → Paste in ChatGPT/Claude'), 2000);
+        setButtonText(t('clipboard.copied'));
+        setTimeout(() => setButtonText(t('clipboard.copyPrompt')), 2000);
     }, (err) => {
         console.error('Could not copy text: ', err);
-        alert('Failed to copy prompt.');
+        alert(t('clipboard.copyFailed'));
     });
   };
 

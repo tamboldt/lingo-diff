@@ -40,7 +40,19 @@
     "title": "ניתוח ההבדלים הוויזואלי",
     "aiTitle": "ניתוח בינה מלאכותית",
     "aiDescription": "צור פרומפט ניתוח מומחה להערכת הבדלי טקסטים עם בינה מלאכותית.",
-    "processing": "מעבד..."
+    "processing": "מעבד...",
+    "visualDiff": "הבדל ויזואלי",
+    "autoUpdating": "עדכון אוטומטי",
+    "refreshDiff": "רענן הבדל",
+    "addedText": "טקסט שנוסף",
+    "removedText": "טקסט שנמחק",
+    "enterBothTexts": "הזן את שני הטקסטים כדי לראות ההבדלים",
+    "readyForAnalysis": "מוכן לניתוח הבדלים",
+    "addTextToSee": "הוסף טקסט לשני השדות כדי לראות הבדלים חיים ברמת התווים",
+    "removed": "נמחק",
+    "added": "נוסף",
+    "unchanged": "ללא שינוי",
+    "totalCharacters": "סה\"כ: {{count}} תווים"
   },
   "csv": {
     "title": "ייבוא/ייצוא CSV",

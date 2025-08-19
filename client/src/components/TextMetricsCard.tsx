@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
 import { TextMetrics, checkConstraints } from '../utils/localizationMetrics';
 
 interface TextMetricsCardProps {
@@ -18,6 +20,7 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
   isSource = false,
   className = ''
 }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
   const constraintChecks = constraints ? checkConstraints(text, constraints) : [];
 
   const getExpansionColor = (rate: number) => {
@@ -49,15 +52,15 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
       <div className="grid grid-cols-3 gap-4 mb-3">
         <div className="text-center">
           <div className="text-lg font-bold text-gray-900">{metrics.characters}</div>
-          <div className="text-xs text-gray-500">Characters</div>
+          <div className="text-xs text-gray-500">{t('metrics.characters')}</div>
         </div>
         <div className="text-center">
           <div className="text-lg font-bold text-gray-900">{metrics.bytes}</div>
-          <div className="text-xs text-gray-500">Bytes (UTF-8)</div>
+          <div className="text-xs text-gray-500">{t('metrics.bytes')}</div>
         </div>
         <div className="text-center">
           <div className="text-lg font-bold text-gray-900">{metrics.words}</div>
-          <div className="text-xs text-gray-500">Words</div>
+          <div className="text-xs text-gray-500">{t('metrics.words')}</div>
         </div>
       </div>
 
@@ -65,7 +68,7 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
       {!isSource && metrics.expansionRate !== 0 && (
         <div className="mb-3 p-2 bg-gray-50 rounded">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Text Expansion</span>
+            <span className="text-sm text-gray-600">{t('metrics.textExpansion')}</span>
             <span className={`text-sm font-semibold ${getExpansionColor(metrics.expansionRate)}`}>
               {getExpansionIcon(metrics.expansionRate)} {metrics.expansionRate > 0 ? '+' : ''}{metrics.expansionRate}%
             </span>
@@ -76,7 +79,7 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
       {/* Constraint Checks */}
       {constraintChecks.length > 0 && (
         <div className="space-y-2">
-          <div className="text-xs font-medium text-gray-700 mb-2">Constraints</div>
+          <div className="text-xs font-medium text-gray-700 mb-2">{t('metrics.constraints')}</div>
           {constraintChecks.map((check, index) => (
             <div
               key={index}
@@ -105,19 +108,19 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
       {/* Byte/Character Ratio Indicator */}
       <div className="mt-3 pt-2 border-t border-gray-100">
         <div className="flex items-center justify-between text-xs text-gray-500">
-          <span>Byte/Char Ratio</span>
+          <span>{t('metrics.byteCharRatio')}</span>
           <span className="font-mono">
             {metrics.characters > 0 ? (metrics.bytes / metrics.characters).toFixed(1) : '0.0'}x
           </span>
         </div>
         <div className="text-xs text-gray-400 mt-1">
           {metrics.characters === 0 
-            ? 'No text' 
+            ? t('metrics.noText') 
             : metrics.bytes / metrics.characters > 2 
-            ? 'Complex script (emoji/CJK)' 
+            ? t('metrics.complexScript') 
             : metrics.bytes / metrics.characters > 1.5 
-            ? 'Extended characters' 
-            : 'Basic Latin script'}
+            ? t('metrics.extendedCharacters') 
+            : t('metrics.basicLatin')}
         </div>
       </div>
     </div>

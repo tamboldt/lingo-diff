@@ -5,12 +5,14 @@ Professional text comparison platform for analyzing differences between translat
 ## ✨ Features
 
 - **Visual Diff Analysis**: Character-level comparison with color-coded changes in real-time
-- **Smart CSV Import/Export**: Auto-detects separators and column types, works with any language
-- **Complete Internationalization**: 12 languages with professional translations and RTL support
-- **Collapsible Sidebar**: Clean, space-efficient UI that doesn't obstruct main content
-- **AI Analysis Integration**: Generate expert prompts for ChatGPT/Claude evaluation
+- **Smart CSV Import/Export**: Auto-detects separators (comma, semicolon, tab) and column types, works with any language  
+- **Complete Internationalization**: 12 languages with professional translations and RTL support for Arabic/Hebrew
+- **AI Analysis Integration**: Generate expert prompts for ChatGPT/Claude evaluation with context-aware analysis
+- **Professional UX**: Collapsible sidebar with organized tools and history, optimized workflow
 - **Diff History**: Save, manage, and reload comparison sessions with full metadata
-- **Professional UX**: Optimized workflow with metrics, context fields, and intuitive navigation
+- **Context-Aware Analysis**: Reference text and usage context for better insights
+- **Character Metrics**: Real-time character counts and text expansion analysis
+- **Progressive Disclosure**: Clean, space-efficient UI that doesn't obstruct main content
 
 ## 🚀 Quick Start
 
@@ -35,13 +37,15 @@ npm run dev
 ## 🗺️ Roadmap
 
 ### ✅ Recently Completed
-- Collapsible sidebar UI replacing modal overlay
-- Complete i18n implementation with 12 languages  
-- Gender-neutral translations (Portuguese, Spanish)
-- Enhanced character counters with right-aligned styling
-- Optimized layout hierarchy (metrics before advanced options)
-- Intuitive "Diff History" naming and full sidebar utilization
-- Professional sentence case translations (except German)
+- Smart CSV system with universal compatibility and auto-detection
+- Complete internationalization (12 languages) with RTL support for Arabic/Hebrew
+- Professional UI with collapsible sidebar replacing modal overlay
+- Context-aware text comparison with reference text and usage context
+- Enhanced character counters with right-aligned styling and real-time metrics
+- History management with persistent storage and intuitive "Diff History" naming
+- AI analysis prompt generation with context-aware analysis
+- Gender-neutral translations (Portuguese, Spanish) and professional sentence case
+- Optimized layout hierarchy with progressive disclosure and clean UX
 
 ### 🔮 Next Phase  
 - Advanced CSV preview and batch processing
@@ -49,6 +53,7 @@ npm run dev
 - Interactive onboarding tutorial
 - Enhanced accessibility features
 - Performance optimizations for large texts
+- Advanced constraint validation
 
 ---
 

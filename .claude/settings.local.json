@@ -12,7 +12,12 @@
       "Bash(npm install:*)",
       "Bash(git push:*)",
       "Bash(git fetch:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(cp:*)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(done)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
