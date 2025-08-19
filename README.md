@@ -1,14 +1,16 @@
 # Lingo-Diff
 
-Professional text comparison tool for analyzing differences between translations, revisions, and text variants with intelligent analysis.
+Professional text comparison platform for analyzing differences between translations, revisions, and text variants with intelligent analysis tools.
 
 ## ✨ Features
 
-- **Visual Diff Analysis**: Character-level comparison with color-coded changes
-- **Smart CSV Import**: Auto-detects separators (comma, semicolon, tab) and column types in any language
-- **Global Support**: 12 languages with RTL support for Arabic/Hebrew
-- **AI Analysis**: Generate prompts for ChatGPT/Claude evaluation
-- **History Management**: Save and export comparison sessions
+- **Visual Diff Analysis**: Character-level comparison with color-coded changes in real-time
+- **Smart CSV Import/Export**: Auto-detects separators and column types, works with any language
+- **Complete Internationalization**: 12 languages with professional translations and RTL support
+- **Collapsible Sidebar**: Clean, space-efficient UI that doesn't obstruct main content
+- **AI Analysis Integration**: Generate expert prompts for ChatGPT/Claude evaluation
+- **Diff History**: Save, manage, and reload comparison sessions with full metadata
+- **Professional UX**: Optimized workflow with metrics, context fields, and intuitive navigation
 
 ## 🚀 Quick Start
 
@@ -32,17 +34,21 @@ npm run dev
 
 ## 🗺️ Roadmap
 
-### ✅ Completed
-- Smart CSV system with universal compatibility
-- Full internationalization (12 languages)
-- RTL support for Arabic/Hebrew
-- Professional UI with tooltips
+### ✅ Recently Completed
+- Collapsible sidebar UI replacing modal overlay
+- Complete i18n implementation with 12 languages  
+- Gender-neutral translations (Portuguese, Spanish)
+- Enhanced character counters with right-aligned styling
+- Optimized layout hierarchy (metrics before advanced options)
+- Intuitive "Diff History" naming and full sidebar utilization
+- Professional sentence case translations (except German)
 
-### 🔮 Next Phase
+### 🔮 Next Phase  
+- Advanced CSV preview and batch processing
+- Direct LLM API integration (Groq, OpenRouter)
 - Interactive onboarding tutorial
-- Advanced CSV features (preview, batch processing)
-- Direct LLM integration
-- Enhanced accessibility
+- Enhanced accessibility features
+- Performance optimizations for large texts
 
 ---
 
