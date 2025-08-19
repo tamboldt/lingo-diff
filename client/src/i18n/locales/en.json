@@ -40,7 +40,10 @@
     "title": "Visual Difference Analysis",
     "aiTitle": "AI Analysis",
     "aiDescription": "Generate expert analysis prompt for AI evaluation of text differences.",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "emptyTitle": "Enter text to see differences",
+    "emptyDescription": "Add your text versions to see a live comparison",
+    "realTime": "Real-time"
   },
   "csv": {
     "title": "CSV Import/Export",
