@@ -1,1 +1,103 @@
-{"app":{"title":"Lingo-Diff","subtitle":"プロフェッショナルテキスト比較ツール"},"navigation":{"reset":"すべてリセット","help":"ヘルプ","language":"言語"},"textComparison":{"title":"テキスト比較","textA":{"label":"テキストA（オリジナル）","placeholder":"オリジナルテキストを入力..."},"textB":{"label":"テキストB（修正版）","placeholder":"修正版テキストを入力..."}},"context":{"title":"コンテキスト情報","referenceText":{"label":"参照テキスト","placeholder":"例：ルーム選択"},"usage":{"label":"コンテキストと用途","placeholder":"例：ホテルの部屋選択用モバイルアプリボタン"}}}
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "プロフェッショナルテキスト比較プラットフォーム",
+    "tagline": "プロフェッショナル分析ツールでテキストを比較、分析、完成"
+  },
+  "navigation": {
+    "reset": "すべてリセット",
+    "help": "ヘルプ",
+    "language": "言語"
+  },
+  "textComparison": {
+    "title": "テキスト比較",
+    "textA": {
+      "label": "テキストA（オリジナル）",
+      "placeholder": "元のテキストを入力...",
+      "tooltip": "元のバージョンのテキストを入力してください。既存の翻訳、初回ドラフト、または現在のバージョンが対象です。"
+    },
+    "textB": {
+      "label": "テキストB（修正版）",
+      "placeholder": "修正したテキストを入力...",
+      "tooltip": "修正版のテキストを入力してください。新しい翻訳、編集版、または代替オプションが対象です。"
+    }
+  },
+  "context": {
+    "title": "コンテキスト情報",
+    "referenceText": {
+      "label": "参照テキスト",
+      "placeholder": "例：部屋を選択",
+      "tooltip": "ソースまたは参照テキスト（元の英語など）を入力してください。比較分析のコンテキストを提供するのに役立ちます。"
+    },
+    "usage": {
+      "label": "コンテキストと使用方法",
+      "placeholder": "例：ホテル客室選択用モバイルアプリボタン",
+      "tooltip": "このテキストがどこでどのように使用されるかを説明してください。UIコンテキスト、対象読者、またはテキスト選択に影響する制約を含めてください。"
+    },
+    "saveButton": "💾 比較を履歴に保存"
+  },
+  "analysis": {
+    "title": "視覚的差異分析",
+    "aiTitle": "AI分析",
+    "aiDescription": "テキスト差異のAI評価用エキスパート分析プロンプトを生成します。",
+    "processing": "処理中..."
+  },
+  "csv": {
+    "title": "CSVインポート/エクスポート",
+    "import": {
+      "label": "CSVファイルをインポート",
+      "tooltip": "テキスト列を含む任意のCSVファイルをアップロードしてください。列を自動的かつインテリジェントに検出してマッピングします。",
+      "smartDetection": "✨ スマート検出：任意の言語の任意の列名で動作",
+      "separatorDetection": "🔍 区切り文字自動検出：カンマ、セミコロン、タブ、パイプ",
+      "commaHandling": "📝 テキスト内のカンマを自動処理（例：「お帰りなさい、田中さん！」）"
+    },
+    "export": {
+      "label": "データをエクスポート",
+      "tooltip": "比較をCSV形式でエクスポートします。Excel、Google Sheets、すべてのスプレッドシートアプリケーションと互換性があります。",
+      "currentData": "📄 現在のデータをエクスポート",
+      "sampleFile": "📋 サンプルCSVをダウンロード",
+      "compatibility": "💡 適切なUTF-8エンコーディングでExcelに最適な形式"
+    },
+    "features": {
+      "title": "✨ スマートインポート機能：",
+      "separatorDetection": "区切り文字自動検出：カンマ（,）、セミコロン（;）、タブ、パイプ（|）",
+      "columnDetection": "任意の言語で列タイプを自動検出",
+      "flexibleNames": "柔軟な列名で動作（オリジナル/修正版、A/B等）",
+      "specialChars": "カンマ、引用符、特殊文字をシームレスに処理",
+      "utf8Support": "すべての国際テキストに対応した完璧なUTF-8サポート",
+      "noTechnical": "技術的なCSVフォーマット知識は不要"
+    }
+  },
+  "history": {
+    "title": "差分履歴",
+    "noHistory": "まだ保存された差分はありません",
+    "clear": "すべてクリア"
+  },
+  "constraints": {
+    "title": "テキスト制約"
+  },
+  "metrics": {
+    "characters": "文字",
+    "words": "単語",
+    "lines": "行",
+    "referenceText": "参照テキスト",
+    "noText": "テキストなし"
+  },
+  "messages": {
+    "success": "成功",
+    "error": "エラー",
+    "loading": "読み込み中...",
+    "fileTooBig": "ファイルが大きすぎます。5MB未満のCSVファイルを選択してください。",
+    "invalidFile": "CSVファイルを選択してください。",
+    "noDataExport": "エクスポートするデータがありません。まずテキスト比較を追加してください。",
+    "importSuccess": "{{count}}件の比較レコードを正常にインポートしました。",
+    "exportSuccess": "{{count}}件のレコードをCSVにエクスポートしました。"
+  },
+  "welcome": {
+    "title": "Lingo-Diffへようこそ",
+    "subtitle": "プロフェッショナルテキスト比較プラットフォーム",
+    "description": "インテリジェント分析ツールで翻訳、改訂、テキストバリアントを比較します。",
+    "showExample": "例を表示",
+    "getStarted": "開始"
+  }
+}

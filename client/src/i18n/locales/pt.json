@@ -1,33 +1,103 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "Ferramenta Profissional de Comparação de Textos"
+    "subtitle": "Plataforma profissional de comparação de texto",
+    "tagline": "Compare, analise e aperfeiçoe seus textos com ferramentas de análise profissionais"
   },
   "navigation": {
-    "reset": "Redefinir Tudo",
+    "reset": "Redefinir tudo",
     "help": "Ajuda",
     "language": "Idioma"
   },
   "textComparison": {
-    "title": "Comparação de Textos",
+    "title": "Comparação de texto",
     "textA": {
-      "label": "Texto A (Original)",
-      "placeholder": "Digite o texto original..."
+      "label": "Texto A (original)",
+      "placeholder": "Digite o texto original...",
+      "tooltip": "Digite a versão original do seu texto. Pode ser uma tradução existente, primeiro rascunho ou versão atual."
     },
     "textB": {
-      "label": "Texto B (Revisado)",
-      "placeholder": "Digite o texto revisado..."
+      "label": "Texto B (revisado)",
+      "placeholder": "Digite o texto revisado...",
+      "tooltip": "Digite a versão revisada do seu texto. Pode ser uma nova tradução, versão editada ou opção alternativa."
     }
   },
   "context": {
-    "title": "Informações de Contexto",
+    "title": "Informações de contexto",
     "referenceText": {
-      "label": "Texto de Referência",
-      "placeholder": "ex., Selecionar Quarto"
+      "label": "Texto de referência",
+      "placeholder": "ex.: Selecionar quarto",
+      "tooltip": "Digite o texto fonte ou de referência (como o inglês original). Isso ajuda a fornecer contexto para análise de comparação."
     },
     "usage": {
-      "label": "Contexto e Uso",
-      "placeholder": "ex., Botão do aplicativo móvel para seleção de quarto do hotel"
+      "label": "Contexto e uso",
+      "placeholder": "ex.: Botão de aplicativo móvel para seleção de quarto de hotel",
+      "tooltip": "Descreva onde e como este texto é usado. Inclua contexto de interface, público-alvo ou restrições que afetam a escolha do texto."
+    },
+    "saveButton": "💾 Salvar comparação no histórico"
+  },
+  "analysis": {
+    "title": "Análise visual de diferenças",
+    "aiTitle": "Análise de IA",
+    "aiDescription": "Gere prompt de análise especializada para avaliação de IA das diferenças de texto.",
+    "processing": "Processando..."
+  },
+  "csv": {
+    "title": "Importar/exportar CSV",
+    "import": {
+      "label": "Importar arquivo CSV",
+      "tooltip": "Carregue qualquer arquivo CSV com colunas de texto. Detectaremos e mapearemos suas colunas automaticamente e de forma inteligente.",
+      "smartDetection": "✨ Detecção inteligente: funciona com qualquer nome de coluna em qualquer idioma",
+      "separatorDetection": "🔍 Detecção automática de separadores: vírgula, ponto e vírgula, tab, pipe",
+      "commaHandling": "📝 Lida com vírgulas no texto automaticamente (ex.: \"Bem-vindo de volta, João!\")"
+    },
+    "export": {
+      "label": "Exportar dados",
+      "tooltip": "Exporte suas comparações para formato CSV. Compatível com Excel, Google Sheets e todos os aplicativos de planilha.",
+      "currentData": "📄 Exportar dados atuais",
+      "sampleFile": "📋 Baixar CSV de exemplo",
+      "compatibility": "💡 Formato perfeito para Excel com codificação UTF-8 adequada"
+    },
+    "features": {
+      "title": "✨ Recursos de importação inteligente:",
+      "separatorDetection": "Detecção automática de separadores: vírgula (,), ponto e vírgula (;), tab, pipe (|)",
+      "columnDetection": "Detecta automaticamente tipos de coluna em qualquer idioma",
+      "flexibleNames": "Funciona com nomes de coluna flexíveis (Original/Revisado, A/B, etc.)",
+      "specialChars": "Lida perfeitamente com vírgulas, aspas e caracteres especiais",
+      "utf8Support": "Suporte UTF-8 perfeito para todos os textos internacionais",
+      "noTechnical": "Não requer conhecimento técnico de formatação CSV"
     }
+  },
+  "history": {
+    "title": "Histórico de diferenças",
+    "noHistory": "Ainda não há diferenças salvas",
+    "clear": "Limpar tudo"
+  },
+  "constraints": {
+    "title": "Restrições de texto"
+  },
+  "metrics": {
+    "characters": "Caracteres",
+    "words": "Palavras",
+    "lines": "Linhas",
+    "referenceText": "Texto de referência",
+    "noText": "Sem texto"
+  },
+  "messages": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "loading": "Carregando...",
+    "fileTooBig": "Arquivo muito grande. Selecione um arquivo CSV menor que 5MB.",
+    "invalidFile": "Selecione um arquivo CSV.",
+    "noDataExport": "Nenhum dado para exportar. Adicione algumas comparações de texto primeiro.",
+    "importSuccess": "{{count}} registros de comparação importados com sucesso.",
+    "exportSuccess": "{{count}} registros exportados para CSV."
+  },
+  "welcome": {
+    "title": "Boas-vindas ao Lingo-Diff",
+    "subtitle": "Plataforma profissional de comparação de texto",
+    "description": "Compare traduções, revisões e variantes de texto com ferramentas de análise inteligentes.",
+    "showExample": "Mostrar exemplo",
+    "getStarted": "Começar"
   }
 }
