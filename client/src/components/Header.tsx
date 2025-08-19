@@ -1,4 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from './LanguageSelector';
 import { FEATURES } from '../config/features';
 
 // Mock functions when i18n is disabled
@@ -11,15 +13,13 @@ const mockUseTranslation = () => ({
   }
 });
 
-const MockLanguageSelector = () => null;
-
 interface HeaderProps {
   onReset: () => void;
   onResetWelcome?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
-  const { t } = mockUseTranslation(); // Always use mock for now since i18n is disabled
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
             </span>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-3">
-            {FEATURES.I18N_ENABLED && <MockLanguageSelector />}
+            {FEATURES.I18N_ENABLED && <LanguageSelector />}
             <div className="flex space-x-1 sm:space-x-2">
               <button
                 onClick={onReset}

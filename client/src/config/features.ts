@@ -1,7 +1,7 @@
 // Feature flags for enabling/disabling features
 export const FEATURES = {
   // Internationalization - set to false to disable i18n system
-  I18N_ENABLED: false,
+  I18N_ENABLED: true,
   
   // Advanced CSV features
   CSV_PREVIEW: true,

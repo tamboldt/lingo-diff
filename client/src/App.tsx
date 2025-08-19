@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DiffViewer } from './components/DiffViewer';
 import { ClipboardPromptButton } from './components/ClipboardPromptButton';
 import { Header } from './components/Header';
@@ -8,8 +9,39 @@ import { InfoTooltip } from './components/Tooltip';
 import { SidePanel } from './components/SidePanel';
 import { getTextMetrics } from './utils/localizationMetrics';
 import { TextComparisonRecord } from './utils/smartCSV';
+import { FEATURES } from './config/features';
+
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({
+  t: (key: string) => {
+    const keys: { [key: string]: string } = {
+      'textComparison.title': 'Text Comparison',
+      'textComparison.textA.label': 'Text A (Original)',
+      'textComparison.textA.placeholder': 'Enter original text...',
+      'textComparison.textA.tooltip': 'Enter the original version of your text. This could be an existing translation, first draft, or current version.',
+      'textComparison.textB.label': 'Text B (Revised)',
+      'textComparison.textB.placeholder': 'Enter revised text...',
+      'textComparison.textB.tooltip': 'Enter the revised version of your text. This could be a new translation, edited version, or alternative option.',
+      'analysis.title': 'Visual Difference Analysis',
+      'context.title': 'Context Information',
+      'context.referenceText.label': 'Reference Text',
+      'context.referenceText.placeholder': 'e.g., Select Room',
+      'context.referenceText.tooltip': 'Enter the source or reference text (like the original English). This helps provide context for comparison analysis.',
+      'context.usage.label': 'Context & Usage',
+      'context.usage.placeholder': 'e.g., Mobile app button for hotel room selection',
+      'context.usage.tooltip': 'Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice.',
+      'context.saveButton': '💾 Save Comparison to History',
+      'analysis.aiTitle': 'AI Analysis',
+      'analysis.aiDescription': 'Generate expert analysis prompt for AI evaluation of text differences.',
+      'metrics.referenceText': 'Reference Text'
+    };
+    return keys[key] || key;
+  }
+});
 
 export default function App() {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  
   // State for all user inputs
   const [sourceTerm, setSourceTerm] = useState('');
   const [context, setContext] = useState('');
@@ -138,7 +170,7 @@ export default function App() {
   }, [sourceTerm, context, originalText, modifiedText, comparisonHistory]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pr-12">
       {/* Skip to main content link for screen readers */}
       <a 
         href="#main-content" 
@@ -164,53 +196,53 @@ export default function App() {
               <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
                 <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                   <span className="text-green-500 mr-2">📝</span>
-                  Text Comparison
+                  {t('textComparison.title')}
                 </h2>
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <label htmlFor="candidate1" className="block text-sm font-medium text-gray-700">Text A (Original)</label>
-                      <InfoTooltip content="Enter the original version of your text. This could be an existing translation, first draft, or current version." />
+                      <label htmlFor="candidate1" className="block text-sm font-medium text-gray-700">{t('textComparison.textA.label')}</label>
+                      <InfoTooltip content={t('textComparison.textA.tooltip')} />
                     </div>
-                    <textarea
-                      id="candidate1"
-                      value={originalText}
-                      onChange={(e) => setOriginalText(e.target.value)}
-                      rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4"
-                      placeholder="Enter original text..."
-                      aria-describedby="candidate1-help"
-                    />
-                    <div className="flex justify-between items-center mt-1">
-                      <div id="candidate1-help" className="sr-only">
-                        Enter the original version of your text for comparison
+                    <div className="relative">
+                      <textarea
+                        id="candidate1"
+                        value={originalText}
+                        onChange={(e) => setOriginalText(e.target.value)}
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+                        placeholder={t('textComparison.textA.placeholder')}
+                        aria-describedby="candidate1-help"
+                      />
+                      <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
+                        {originalText.length} chars
                       </div>
-                      <span className="text-xs text-gray-500">
-                        {originalText.length} characters
-                      </span>
+                    </div>
+                    <div id="candidate1-help" className="sr-only">
+                      Enter the original version of your text for comparison
                     </div>
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <label htmlFor="candidate2" className="block text-sm font-medium text-gray-700">Text B (Revised)</label>
-                      <InfoTooltip content="Enter the revised version of your text. This could be a new translation, edited version, or alternative option." />
+                      <label htmlFor="candidate2" className="block text-sm font-medium text-gray-700">{t('textComparison.textB.label')}</label>
+                      <InfoTooltip content={t('textComparison.textB.tooltip')} />
                     </div>
-                    <textarea
-                      id="candidate2"
-                      value={modifiedText}
-                      onChange={(e) => setModifiedText(e.target.value)}
-                      rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4"
-                      placeholder="Enter revised text..."
-                      aria-describedby="candidate2-help"
-                    />
-                    <div className="flex justify-between items-center mt-1">
-                      <div id="candidate2-help" className="sr-only">
-                        Enter the revised version of your text for comparison
+                    <div className="relative">
+                      <textarea
+                        id="candidate2"
+                        value={modifiedText}
+                        onChange={(e) => setModifiedText(e.target.value)}
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+                        placeholder={t('textComparison.textB.placeholder')}
+                        aria-describedby="candidate2-help"
+                      />
+                      <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
+                        {modifiedText.length} chars
                       </div>
-                      <span className="text-xs text-gray-500">
-                        {modifiedText.length} characters
-                      </span>
+                    </div>
+                    <div id="candidate2-help" className="sr-only">
+                      Enter the revised version of your text for comparison
                     </div>
                   </div>
                 </div>

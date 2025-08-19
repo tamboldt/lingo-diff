@@ -52,28 +52,41 @@ export const SidePanel: React.FC<SidePanelProps> = ({
 
   return (
     <>
-      {/* Side Panel */}
-      <div className={`fixed top-0 right-0 h-full bg-white shadow-xl border-l border-gray-200 transition-transform duration-300 ease-in-out z-40 ${
-        isExpanded ? 'translate-x-0' : 'translate-x-full'
-      }`} style={{ width: '400px' }}>
+      {/* Collapsible Sidebar */}
+      <div className={`fixed top-0 right-0 h-full bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30 ${
+        isExpanded ? 'w-96' : 'w-12'
+      }`}>
         
-        {/* Panel Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50">
-          <h2 className="text-lg font-semibold text-gray-800">Controls</h2>
+        {/* Collapse/Expand Toggle */}
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full">
           <button
-            onClick={() => setIsExpanded(false)}
-            className="p-2 hover:bg-gray-200 rounded-md transition-colors"
-            aria-label="Close panel"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="bg-white border border-gray-200 rounded-l-md p-2 shadow-md hover:bg-gray-50 transition-colors"
+            aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg 
+              className={`w-4 h-4 text-gray-600 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
         </div>
 
+        {/* Panel Header */}
+        <div className={`flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 ${
+          isExpanded ? 'opacity-100' : 'opacity-0'
+        } transition-opacity duration-300`}>
+          <h2 className="text-lg font-semibold text-gray-800">Tools</h2>
+        </div>
+
         {/* Tab Navigation */}
-        <div className="flex border-b border-gray-200">
-          {tabs.map((tab) => (
+        <div className={`flex border-b border-gray-200 ${
+          isExpanded ? 'opacity-100' : 'opacity-0'
+        } transition-opacity duration-300`}>
+          {isExpanded && tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -90,9 +103,11 @@ export const SidePanel: React.FC<SidePanelProps> = ({
         </div>
 
         {/* Tab Content */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className={`flex-1 overflow-y-auto ${
+          isExpanded ? 'opacity-100' : 'opacity-0'
+        } transition-opacity duration-300 h-full`}>
           {activeTab === 'tools' && (
-            <div className="space-y-6">
+            <div className="space-y-6 p-4">
               <CSVManager 
                 onImportRecords={onImportRecords}
                 currentRecords={currentRecords}
@@ -105,46 +120,51 @@ export const SidePanel: React.FC<SidePanelProps> = ({
           )}
           
           {activeTab === 'history' && (
-            <ComparisonHistory
-              records={comparisonHistory}
-              onSelectRecord={onSelectRecord}
-              onDeleteRecord={onDeleteRecord}
-              onClearHistory={onClearHistory}
-            />
+            <div className="p-4">
+              <ComparisonHistory
+                records={comparisonHistory}
+                onSelectRecord={onSelectRecord}
+                onDeleteRecord={onDeleteRecord}
+                onClearHistory={onClearHistory}
+              />
+            </div>
           )}
           
           {activeTab === 'ai' && (
-            <LLMIntegration
-              sourceTerm={sourceTerm}
-              context={context}
-              originalText={originalText}
-              modifiedText={modifiedText}
-            />
+            <div className="p-4">
+              <LLMIntegration
+                sourceTerm={sourceTerm}
+                context={context}
+                originalText={originalText}
+                modifiedText={modifiedText}
+              />
+            </div>
           )}
         </div>
+
+        {/* Collapsed State Icons */}
+        {!isExpanded && (
+          <div className="flex flex-col items-center pt-4 space-y-4">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  setIsExpanded(true);
+                }}
+                className={`p-2 rounded-md transition-colors ${
+                  activeTab === tab.id
+                    ? 'bg-blue-100 text-blue-600'
+                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                }`}
+                title={tab.label}
+              >
+                <span className="text-lg">{tab.icon}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
-
-      {/* Toggle Button */}
-      <button
-        onClick={() => setIsExpanded(true)}
-        className={`fixed top-20 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all z-30 ${
-          isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
-        aria-label="Open controls panel"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      </button>
-
-      {/* Overlay when panel is open */}
-      {isExpanded && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-25 z-30"
-          onClick={() => setIsExpanded(false)}
-        />
-      )}
     </>
   );
 };
