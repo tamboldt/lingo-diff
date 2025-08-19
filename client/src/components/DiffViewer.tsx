@@ -14,8 +14,29 @@ interface DiffViewerProps {
  * Displays character-by-character differences between two text strings
  * Uses the 'diff' library to highlight additions (green) and deletions (red)
  */
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({
+  t: (key: string) => {
+    const keys: { [key: string]: string } = {
+      'analysis.visualDiff': 'Visual Diff',
+      'analysis.autoUpdating': 'Auto-updating',
+      'analysis.refreshDiff': 'Refresh diff',
+      'analysis.addedText': 'Added text',
+      'analysis.removedText': 'Removed text',
+      'analysis.enterBothTexts': 'Enter both texts to see differences',
+      'analysis.readyForAnalysis': 'Ready for diff analysis',
+      'analysis.addTextToSee': 'Add text to both fields to see live character-level differences',
+      'analysis.removed': 'Removed',
+      'analysis.added': 'Added',
+      'analysis.unchanged': 'Unchanged',
+      'analysis.totalCharacters': 'Total: {{count}} characters'
+    };
+    return keys[key] || key;
+  }
+});
+
 export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedText }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Memoize diff calculation to avoid unnecessary recalculations

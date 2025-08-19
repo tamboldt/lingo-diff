@@ -36,41 +36,24 @@ npm run dev
 
 ## 🗺️ Roadmap
 
-<<<<<<< HEAD
-### ✅ Completed
-- Smart CSV system with universal compatibility
-- Full internationalization (12 languages) 
-- RTL support for Arabic/Hebrew
-- Professional UI with collapsible sidebar
-- Context-aware text comparison
-- Character count tracking and metrics
-- History management with persistent storage
-- AI analysis prompt generation
-=======
 ### ✅ Recently Completed
-- Collapsible sidebar UI replacing modal overlay
-- Complete i18n implementation with 12 languages  
-- Gender-neutral translations (Portuguese, Spanish)
-- Enhanced character counters with right-aligned styling
-- Optimized layout hierarchy (metrics before advanced options)
-- Intuitive "Diff History" naming and full sidebar utilization
-- Professional sentence case translations (except German)
->>>>>>> origin/main
+- Smart CSV system with universal compatibility and auto-detection
+- Complete internationalization (12 languages) with RTL support for Arabic/Hebrew
+- Professional UI with collapsible sidebar replacing modal overlay
+- Context-aware text comparison with reference text and usage context
+- Enhanced character counters with right-aligned styling and real-time metrics
+- History management with persistent storage and intuitive "Diff History" naming
+- AI analysis prompt generation with context-aware analysis
+- Gender-neutral translations (Portuguese, Spanish) and professional sentence case
+- Optimized layout hierarchy with progressive disclosure and clean UX
 
 ### 🔮 Next Phase  
 - Advanced CSV preview and batch processing
 - Direct LLM API integration (Groq, OpenRouter)
 - Interactive onboarding tutorial
-<<<<<<< HEAD
-- Advanced CSV features (preview, batch processing)
-- Direct LLM integration (experimental)
-- Enhanced accessibility features
-- Batch text processing
-- Advanced constraint validation
-=======
 - Enhanced accessibility features
 - Performance optimizations for large texts
->>>>>>> origin/main
+- Advanced constraint validation
 
 ---
 
