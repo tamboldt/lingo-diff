@@ -1,1 +1,194 @@
-{"app":{"title":"Lingo-Diff","subtitle":"Профессиональный инструмент сравнения текстов"},"navigation":{"reset":"Сбросить всё","help":"Справка","language":"Язык"},"textComparison":{"title":"Сравнение текстов","textA":{"label":"Текст A (Оригинал)","placeholder":"Введите оригинальный текст..."},"textB":{"label":"Текст B (Исправленный)","placeholder":"Введите исправленный текст..."}},"context":{"title":"Контекстная информация","referenceText":{"label":"Справочный текст","placeholder":"напр., Выбрать комнату"},"usage":{"label":"Контекст и использование","placeholder":"напр., Кнопка мобильного приложения для выбора номера отеля"}}}
+{
+  "app": {
+    "title": "Lingo-Diff",
+    "subtitle": "Professional Text Comparison Tool",
+    "tagline": "Compare, analyze, and perfect your text with professional-grade tools"
+  },
+  "navigation": {
+    "reset": "Reset All",
+    "help": "Help",
+    "language": "Language",
+    "resetWelcome": "Reset Welcome",
+    "skipToMain": "Skip to main content",
+    "close": "Close"
+  },
+  "textComparison": {
+    "title": "Text Comparison",
+    "textA": {
+      "label": "Text A (Original)",
+      "placeholder": "Enter original text...",
+      "tooltip": "Enter the original version of your text. This could be an existing translation, first draft, or current version."
+    },
+    "textB": {
+      "label": "Text B (Revised)",
+      "placeholder": "Enter revised text...",
+      "tooltip": "Enter the revised version of your text. This could be a new translation, edited version, or alternative option."
+    }
+  },
+  "context": {
+    "title": "Context Information",
+    "referenceText": {
+      "label": "Reference Text",
+      "placeholder": "e.g., Select Room",
+      "tooltip": "Enter the source or reference text (like the original English). This helps provide context for comparison analysis."
+    },
+    "usage": {
+      "label": "Context & Usage",
+      "placeholder": "e.g., Mobile app button for hotel room selection",
+      "tooltip": "Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice."
+    },
+    "saveButton": "💾 Save Comparison to History"
+  },
+  "analysis": {
+    "title": "Visual Difference Analysis",
+    "aiTitle": "AI Analysis",
+    "aiDescription": "Generate expert analysis prompt for AI evaluation of text differences.",
+    "processing": "Processing...",
+    "visualDiff": "Visual Diff",
+    "autoUpdating": "Auto-updating",
+    "refreshDiff": "Refresh diff",
+    "addedText": "Added text",
+    "removedText": "Removed text",
+    "enterBothTexts": "Enter both texts to see differences",
+    "readyForAnalysis": "Ready for diff analysis",
+    "addTextToSee": "Add text to both fields to see live character-level differences",
+    "removed": "Removed",
+    "added": "Added",
+    "unchanged": "Unchanged",
+    "totalCharacters": "Total: {{count}} characters"
+  },
+  "csv": {
+    "title": "CSV Import/Export",
+    "import": {
+      "label": "Import CSV File",
+      "tooltip": "Upload any CSV file with text columns. We'll automatically detect and map your columns intelligently.",
+      "smartDetection": "✨ Smart Detection: Works with any column names in any language",
+      "separatorDetection": "🔍 Auto-detects separators: comma, semicolon, tab, pipe",
+      "commaHandling": "📝 Handles commas in text automatically (e.g., \"Welcome back, John!\")"
+    },
+    "export": {
+      "label": "Export Data",
+      "tooltip": "Export your comparisons to CSV format. Compatible with Excel, Google Sheets, and all spreadsheet applications.",
+      "currentData": "📄 Export Current Data",
+      "sampleFile": "📋 Download Sample CSV",
+      "compatibility": "💡 Perfect format for Excel with proper UTF-8 encoding"
+    },
+    "features": {
+      "title": "✨ Smart Import Features:",
+      "separatorDetection": "Auto-detects separators: comma (,), semicolon (;), tab, pipe (|)",
+      "columnDetection": "Automatically detects column types in any language",
+      "flexibleNames": "Works with flexible column names (Original/Revised, A/B, etc.)",
+      "specialChars": "Handles commas, quotes, and special characters seamlessly",
+      "utf8Support": "Perfect UTF-8 support for all international text",
+      "noTechnical": "No technical CSV formatting knowledge required"
+    }
+  },
+  "history": {
+    "title": "Comparison History",
+    "noHistory": "No comparison history yet",
+    "clear": "Clear All",
+    "reference": "Reference:",
+    "context": "Context:",
+    "textA": "Text A:",
+    "textB": "Text B:",
+    "notes": "Notes:",
+    "load": "Load this comparison",
+    "delete": "Delete this comparison",
+    "empty": "(empty)"
+  },
+  "constraints": {
+    "title": "Text Constraints"
+  },
+  "metrics": {
+    "characters": "Characters",
+    "words": "Words",
+    "lines": "Lines",
+    "referenceText": "Reference Text",
+    "noText": "No text",
+    "textA": "Text A",
+    "textB": "Text B",
+    "bytes": "Bytes (UTF-8)",
+    "textExpansion": "Text Expansion",
+    "constraints": "Constraints",
+    "byteCharRatio": "Byte/Char Ratio",
+    "complexScript": "Complex script (emoji/CJK)",
+    "extendedCharacters": "Extended characters",
+    "basicLatin": "Basic Latin script",
+    "chars": "chars",
+    "latin": "Latin",
+    "hiragana": "Hiragana",
+    "katakana": "Katakana",
+    "cyrillic": "Cyrillic",
+    "arabic": "Arabic",
+    "hebrew": "Hebrew",
+    "devanagari": "Devanagari"
+  },
+  "messages": {
+    "success": "Success",
+    "error": "Error",
+    "loading": "Loading...",
+    "fileTooBig": "File too large. Please select a CSV file smaller than 5MB.",
+    "invalidFile": "Please select a CSV file.",
+    "noDataExport": "No data to export. Add some text comparisons first.",
+    "importSuccess": "Successfully imported {{count}} comparison records.",
+    "exportSuccess": "Exported {{count}} records to CSV."
+  },
+  "welcome": {
+    "title": "Welcome to Lingo-Diff Pro!",
+    "subtitle": "Professional Text Comparison Tool",
+    "description": "Professional text comparison and analysis tool. Get instant technical metrics, visual differences, and AI-powered insights for text quality evaluation.",
+    "keyFeatures": "Key Features:",
+    "feature1": "Technical Constraints: SMS byte limits, mobile UI space, character limits.",
+    "feature2": "Smart Metrics: UTF-8 byte counts, script detection, text expansion analysis.",
+    "feature3": "Visual Diff: Character-level comparison with immediate feedback.",
+    "feature4": "AI Analysis: Generate expert prompts for LLM quality evaluation.",
+    "feature5": "Universal Design: Perfect for localization, content editing, and document comparison.",
+    "tryExample": "Try Example",
+    "getStarted": "Got It, Let's Start!",
+    "showExample": "Show Example"
+  },
+  "sidebar": {
+    "tools": "Tools",
+    "history": "History",
+    "ai": "AI",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
+  },
+  "ai": {
+    "title": "AI Analysis (Beta)",
+    "experimental": "Experimental",
+    "provider": "LLM Provider",
+    "groq": "Groq (Fast & Free)",
+    "openrouter": "OpenRouter",
+    "custom": "Custom API",
+    "apiKey": "API Key",
+    "apiKeyPlaceholder": "Enter your {{provider}} API key",
+    "apiKeyNotice": "Your API key is stored locally and never sent to our servers.",
+    "analyzeButton": "Analyze with AI",
+    "analyzing": "Analyzing...",
+    "fillBothTexts": "Fill both Text A and Text B to enable analysis",
+    "enterApiKey": "Enter your API key to enable analysis",
+    "clickToAnalyze": "Click to analyze text differences",
+    "analysisComplete": "AI Analysis Complete",
+    "viewResults": "View Results",
+    "analysisDescription": "Click to view detailed analysis results",
+    "waitCooldown": "Please wait 30 seconds between analyses to prevent abuse.",
+    "analysisFailed": "Failed to analyze text. Please check your API key and try again.",
+    "modalTitle": "AI Analysis Results",
+    "experimentalWarning": "⚠️ Experimental Feature:",
+    "requiresApiKey": "• Requires external API key (your own account)",
+    "qualityDepends": "• Analysis quality depends on chosen model",
+    "verifyManually": "• Always verify AI recommendations manually",
+    "noAnalysis": "No analysis available yet.",
+    "copyAnalysis": "Copy Analysis"
+  },
+  "clipboard": {
+    "copyPrompt": "📋 Copy Prompt for AI Analysis",
+    "copied": "✅ Copied to Clipboard!",
+    "pleaseProvideText": "Please provide text for at least one version before copying.",
+    "missingContext": "You have not provided a Reference Text or Context. The AI's analysis will be less accurate. Do you want to continue?",
+    "copyFailed": "Failed to copy prompt.",
+    "notProvided": "[Not Provided]",
+    "noContext": "[No context provided. Assume general text usage.]"
+  }
+}

@@ -10,6 +10,15 @@ export const LanguageSelector: React.FC = () => {
   const currentLanguage = i18n.language;
   const currentIsRTL = isRTL(currentLanguage);
 
+  // Sort languages alphabetically based on current locale
+  const sortedLanguages = Object.entries(LANGUAGE_NAMES).sort(([, nameA], [, nameB]) => {
+    return nameA.localeCompare(nameB, currentLanguage, { 
+      sensitivity: 'base',
+      numeric: true,
+      ignorePunctuation: true 
+    });
+  });
+
   const handleLanguageChange = (languageCode: string) => {
     i18n.changeLanguage(languageCode);
     setIsOpen(false);
@@ -74,7 +83,7 @@ export const LanguageSelector: React.FC = () => {
       {isOpen && (
         <div className={`absolute ${currentIsRTL ? 'left-0' : 'right-0'} z-50 mt-2 w-64 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}>
           <div className="py-1 max-h-80 overflow-y-auto">
-            {Object.entries(LANGUAGE_NAMES).map(([code, name]) => (
+            {sortedLanguages.map(([code, name]) => (
               <button
                 key={code}
                 onClick={() => handleLanguageChange(code)}

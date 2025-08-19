@@ -19,7 +19,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
   className = ''
 }) => {
   const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   if (records.length === 0) {
     return null;
