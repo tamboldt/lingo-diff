@@ -81,7 +81,8 @@
     "words": "単語",
     "lines": "行",
     "referenceText": "参照テキスト",
-    "noText": "テキストなし"
+    "noText": "テキストなし",
+    "chars": "文字"
   },
   "messages": {
     "success": "成功",

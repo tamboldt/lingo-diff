@@ -93,7 +93,8 @@
     "words": "מילים",
     "lines": "שורות",
     "referenceText": "טקסט ייחוס",
-    "noText": "אין טקסט"
+    "noText": "אין טקסט",
+    "chars": "תווים"
   },
   "messages": {
     "success": "הצלחה",
