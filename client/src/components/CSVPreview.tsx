@@ -46,7 +46,8 @@ export const CSVPreview: React.FC<CSVPreviewProps> = ({
   onCancel,
   className = ''
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();\n  const displayRecords = records.slice(0, 5); // Show first 5 records
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const displayRecords = records.slice(0, 5); // Show first 5 records
   const hasMoreRecords = records.length > 5;
 
   return (
