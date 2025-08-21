@@ -81,7 +81,8 @@
     "words": "단어",
     "lines": "줄",
     "referenceText": "참조 텍스트",
-    "noText": "텍스트 없음"
+    "noText": "텍스트 없음",
+    "chars": "문자"
   },
   "messages": {
     "success": "성공",

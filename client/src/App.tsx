@@ -39,7 +39,7 @@ const mockUseTranslation = () => ({
       'metrics.characters': 'Characters',
       'metrics.words': 'Words',
       'metrics.lines': 'Lines',
-      'metrics.chars': 'chars',
+      'metrics.chars': 'characters',
       'analysis.emptyTitle': 'Enter text to see differences',
       'analysis.emptyDescription': 'Add your text versions to see a live comparison',
       'analysis.realTime': 'Real-time',
@@ -51,9 +51,11 @@ const mockUseTranslation = () => ({
       'welcome.step3.title': 'Get AI Analysis',
       'welcome.step3.description': 'Copy prompt for expert evaluation',
       'advancedOptions.title': 'Advanced Options',
+      'advancedOptions.optional': 'Optional',
       'advancedOptions.description': 'Add context information and perform AI analysis for better insights',
       'constraints.technicalConstraints': 'Technical Constraints',
-      'constraints.quickPresets': 'Quick Presets'
+      'constraints.quickPresets': 'Quick Presets',
+      'ai.forEveryone': 'For everyone:'
     };
     return keys[key] || key;
   }
@@ -479,7 +481,7 @@ export default function App() {
                   </span>
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
-                  <strong>For everyone:</strong> Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.
+                  <strong>{t('ai.forEveryone')}</strong> Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.
                 </p>
                 <ClipboardPromptButton 
                   sourceTerm={sourceTerm}

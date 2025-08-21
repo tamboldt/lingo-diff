@@ -81,7 +81,8 @@
     "words": "Слова",
     "lines": "Строки",
     "referenceText": "Справочный текст",
-    "noText": "Нет текста"
+    "noText": "Нет текста",
+    "chars": "символы"
   },
   "messages": {
     "success": "Успешно",
