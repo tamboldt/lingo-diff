@@ -1,7 +1,44 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { parseSmartCSV, exportSmartCSV, generateSampleCSV, TextComparisonRecord, SmartCSVResult } from '../utils/smartCSV';
 import { InfoTooltip } from './Tooltip';
 import { CSVPreviewModal } from './CSVPreviewModal';
+import { FEATURES } from '../config/features';
+
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({
+  t: (key: string, params?: any) => {
+    const keys: { [key: string]: string } = {
+      'csv.import.label': 'Import CSV File',
+      'csv.import.tooltip': 'Upload any CSV file with text columns. We\'ll automatically detect and map your columns intelligently.',
+      'csv.import.smartDetection': '✨ Smart Detection: Works with any column names in any language',
+      'csv.import.separatorDetection': '🔍 Auto-detects separators: comma, semicolon, tab, pipe',
+      'csv.import.commaHandling': '📝 Handles commas in text automatically (e.g., "Welcome back, John!")',
+      'csv.export.label': 'Export Data',
+      'csv.export.tooltip': 'Export your comparisons to CSV format. Compatible with Excel, Google Sheets, and all spreadsheet applications.',
+      'csv.export.currentData': '📄 Export Current Data',
+      'csv.export.sampleFile': '📋 Download Sample CSV',
+      'csv.export.compatibility': '💡 Perfect format for Excel with proper UTF-8 encoding',
+      'csv.features.title': '✨ Smart Import Features:',
+      'csv.features.separatorDetection': 'Auto-detects separators: comma (,), semicolon (;), tab, pipe (|)',
+      'csv.features.columnDetection': 'Automatically detects column types in any language',
+      'csv.features.flexibleNames': 'Works with flexible column names (Original/Revised, A/B, etc.)',
+      'csv.features.specialChars': 'Handles commas, quotes, and special characters seamlessly',
+      'csv.features.utf8Support': 'Perfect UTF-8 support for all international text',
+      'csv.features.noTechnical': 'No technical CSV formatting knowledge required',
+      'messages.invalidFile': 'Please select a CSV file.',
+      'messages.fileTooBig': 'File too large. Please select a CSV file smaller than 5MB.',
+      'messages.importSuccess': 'Successfully imported {{count}} comparison records.',
+      'messages.exportSuccess': 'Exported {{count}} records to CSV.',
+      'messages.noDataExport': 'No data to export. Add some text comparisons first.'
+    };
+    let result = keys[key] || key;
+    if (params && params.count !== undefined) {
+      result = result.replace('{{count}}', params.count.toString());
+    }
+    return result;
+  }
+});
 
 interface CSVManagerProps {
   onImportRecords: (records: TextComparisonRecord[]) => void;
@@ -14,6 +51,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
   currentRecords,
   className = ''
 }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [importMessage, setImportMessage] = useState<string>('');
@@ -29,14 +67,14 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
 
     if (!file.name.toLowerCase().endsWith('.csv')) {
       setImportStatus('error');
-      setImportMessage('Please select a CSV file.');
+      setImportMessage(t('messages.invalidFile'));
       return;
     }
 
     // Check file size (limit to 5MB)
     if (file.size > 5 * 1024 * 1024) {
       setImportStatus('error');
-      setImportMessage('File too large. Please select a CSV file smaller than 5MB.');
+      setImportMessage(t('messages.fileTooBig'));
       return;
     }
 
@@ -70,7 +108,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
   const handleExport = () => {
     if (currentRecords.length === 0) {
       setImportStatus('error');
-      setImportMessage('No data to export. Add some text comparisons first.');
+      setImportMessage(t('messages.noDataExport'));
       return;
     }
 
@@ -90,7 +128,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
       document.body.removeChild(link);
       
       setImportStatus('success');
-      setImportMessage(`Exported ${currentRecords.length} records to CSV.`);
+      setImportMessage(t('messages.exportSuccess', { count: currentRecords.length }));
     }
   };
 
@@ -116,7 +154,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
     if (previewRecords) {
       onImportRecords(previewRecords);
       setImportStatus('success');
-      setImportMessage(`Successfully imported ${previewRecords.length} comparison records.`);
+      setImportMessage(t('messages.importSuccess', { count: previewRecords.length }));
       setPreviewRecords(null);
       setIsModalOpen(false);
     }
@@ -167,8 +205,8 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
           {/* Import Section */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <label className="block text-sm font-medium text-gray-700">Import CSV File</label>
-              <InfoTooltip content="Upload any CSV file with text columns. We'll automatically detect and map your columns intelligently." />
+              <label className="block text-sm font-medium text-gray-700">{t('csv.import.label')}</label>
+              <InfoTooltip content={t('csv.import.tooltip')} />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
@@ -188,9 +226,9 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
                 )}
               </div>
               <div className="text-xs space-y-1">
-                <p className="text-green-600">✨ Smart Detection: Works with any column names in any language</p>
-                <p className="text-blue-600">🔍 Auto-detects separators: comma, semicolon, tab, pipe</p>
-                <p className="text-purple-600">📝 Handles commas in text automatically (e.g., "Welcome back, John!")</p>
+                <p className="text-green-600">{t('csv.import.smartDetection')}</p>
+                <p className="text-blue-600">{t('csv.import.separatorDetection')}</p>
+                <p className="text-purple-600">{t('csv.import.commaHandling')}</p>
               </div>
             </div>
           </div>
@@ -198,8 +236,8 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
           {/* Export Section */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <label className="block text-sm font-medium text-gray-700">Export Data</label>
-              <InfoTooltip content="Export your comparisons to CSV format. Compatible with Excel, Google Sheets, and all spreadsheet applications." />
+              <label className="block text-sm font-medium text-gray-700">{t('csv.export.label')}</label>
+              <InfoTooltip content={t('csv.export.tooltip')} />
             </div>
             <div className="flex flex-col sm:flex-row gap-2">
               <button
@@ -207,17 +245,17 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
                 disabled={currentRecords.length === 0}
                 className="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                📄 Export Current Data
+{t('csv.export.currentData')}
               </button>
               <button
                 onClick={downloadSampleCSV}
                 className="px-3 py-2 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 transition-colors"
               >
-                📋 Download Sample CSV
+{t('csv.export.sampleFile')}
               </button>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              💡 Perfect format for Excel with proper UTF-8 encoding
+{t('csv.export.compatibility')}
             </p>
           </div>
 
@@ -299,13 +337,13 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
 
           {/* Smart Import Help */}
           <div className="text-xs text-gray-600 bg-blue-50 p-3 rounded-md border border-blue-200">
-            <p className="font-medium mb-1 text-blue-800">✨ Smart Import Features:</p>
-            <p className="text-blue-700">• Auto-detects separators: comma (,), semicolon (;), tab, pipe (|)</p>
-            <p className="text-blue-700">• Automatically detects column types in any language</p>
-            <p className="text-blue-700">• Works with flexible column names (Original/Revised, A/B, etc.)</p>
-            <p className="text-blue-700">• Handles commas, quotes, and special characters seamlessly</p>
-            <p className="text-blue-700">• Perfect UTF-8 support for all international text</p>
-            <p className="text-blue-700">• No technical CSV formatting knowledge required</p>
+            <p className="font-medium mb-1 text-blue-800">{t('csv.features.title')}</p>
+            <p className="text-blue-700">• {t('csv.features.separatorDetection')}</p>
+            <p className="text-blue-700">• {t('csv.features.columnDetection')}</p>
+            <p className="text-blue-700">• {t('csv.features.flexibleNames')}</p>
+            <p className="text-blue-700">• {t('csv.features.specialChars')}</p>
+            <p className="text-blue-700">• {t('csv.features.utf8Support')}</p>
+            <p className="text-blue-700">• {t('csv.features.noTechnical')}</p>
           </div>
         </div>
       )}
