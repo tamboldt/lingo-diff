@@ -7,8 +7,9 @@ import { FEATURES } from '../config/features';
 
 // Mock functions when i18n is disabled
 const mockUseTranslation = () => ({
-  t: (key: string, params?: any) => {
+  t: (key: string, params?: { [key: string]: any }) => {
     const keys: { [key: string]: string } = {
+      'csv.title': 'CSV Import/Export',
       'csv.import.label': 'Import CSV File',
       'csv.import.tooltip': 'Upload any CSV file with text columns. We\'ll automatically detect and map your columns intelligently.',
       'csv.import.smartDetection': '✨ Smart Detection: Works with any column names in any language',
@@ -26,15 +27,22 @@ const mockUseTranslation = () => ({
       'csv.features.specialChars': 'Handles commas, quotes, and special characters seamlessly',
       'csv.features.utf8Support': 'Perfect UTF-8 support for all international text',
       'csv.features.noTechnical': 'No technical CSV formatting knowledge required',
+      'csv.preview.ready': '✅ Ready to import {{count}} records',
+      'csv.preview.button': 'Preview Import Data',
+      'csv.preview.discard': 'Discard',
+      'csv.mapping.title': 'Smart Column Mapping:',
       'messages.invalidFile': 'Please select a CSV file.',
       'messages.fileTooBig': 'File too large. Please select a CSV file smaller than 5MB.',
+      'messages.noDataExport': 'No data to export. Add some text comparisons first.',
       'messages.importSuccess': 'Successfully imported {{count}} comparison records.',
       'messages.exportSuccess': 'Exported {{count}} records to CSV.',
-      'messages.noDataExport': 'No data to export. Add some text comparisons first.'
+      'messages.readFailed': 'Failed to read CSV file. Please check the file format.'
     };
     let result = keys[key] || key;
-    if (params && params.count !== undefined) {
-      result = result.replace('{{count}}', params.count.toString());
+    if (params) {
+      Object.keys(params).forEach(param => {
+        result = result.replace(new RegExp(`{{${param}}}`, 'g'), params[param]);
+      });
     }
     return result;
   }
@@ -95,7 +103,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
       }
     } catch (error) {
       setImportStatus('error');
-      setImportMessage('Failed to read CSV file. Please check the file format.');
+      setImportMessage(t('messages.readFailed'));
     }
     setIsProcessing(false);
 
@@ -188,7 +196,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
           <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
           </svg>
-          CSV Import/Export
+          {t('csv.title')}
         </h3>
         <svg 
           className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
@@ -245,17 +253,17 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
                 disabled={currentRecords.length === 0}
                 className="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-{t('csv.export.currentData')}
+                {t('csv.export.currentData')}
               </button>
               <button
                 onClick={downloadSampleCSV}
                 className="px-3 py-2 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 transition-colors"
               >
-{t('csv.export.sampleFile')}
+                {t('csv.export.sampleFile')}
               </button>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-{t('csv.export.compatibility')}
+              {t('csv.export.compatibility')}
             </p>
           </div>
 
@@ -263,20 +271,20 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
           {previewRecords && (
             <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
               <p className="text-sm text-blue-800 mb-2">
-                ✅ Ready to import {previewRecords.length} records
+                {t('csv.preview.ready', { count: previewRecords.length })}
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setIsModalOpen(true)}
                   className="px-3 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
-                  Preview Import Data
+                  {t('csv.preview.button')}
                 </button>
                 <button
                   onClick={handleDiscardPreview}
                   className="px-3 py-2 text-sm bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
                 >
-                  Discard
+                  {t('csv.preview.discard')}
                 </button>
               </div>
             </div>
@@ -311,7 +319,7 @@ export const CSVManager: React.FC<CSVManagerProps> = ({
                     )}
                     {smartResults && smartResults.success && smartResults.mapping && smartResults.mapping.length > 0 && (
                       <div className="mt-2 text-xs">
-                        <p className="font-medium text-green-700">Smart Column Mapping:</p>
+                        <p className="font-medium text-green-700">{t('csv.mapping.title')}</p>
                         <ul className="mt-1 space-y-1">
                           {smartResults.mapping.filter(m => m.confidence > 0.6).map((mapping, index) => (
                             <li key={index} className="text-green-600">

@@ -84,6 +84,45 @@
       "specialChars": "Handles commas, quotes, and special characters seamlessly",
       "utf8Support": "Perfect UTF-8 support for all international text",
       "noTechnical": "No technical CSV formatting knowledge required"
+    },
+    "preview": {
+      "title": "Import Preview",
+      "recordsFound": "{{count}} record{{plural}} found",
+      "referenceText": "Reference Text",
+      "context": "Context",
+      "textA": "Text A",
+      "textB": "Text B",
+      "notes": "Notes",
+      "moreRecords": "... and {{count}} more records",
+      "summary": "Import Summary:",
+      "totalRecords": "Total Records:",
+      "withReference": "With Reference:",
+      "withContext": "With Context:",
+      "readyToCompare": "Ready to Compare:",
+      "cancel": "Cancel",
+      "import": "Import {{count}} Record{{plural}}",
+      "ready": "✅ Ready to import {{count}} records",
+      "button": "Preview Import Data",
+      "discard": "Discard",
+      "modal": {
+        "title": "CSV Import Preview",
+        "summary": "Import Summary:",
+        "totalRecords": "Total Records:",
+        "withReference": "With Reference:",
+        "withContext": "With Context:",
+        "readyToCompare": "Ready to Compare:",
+        "referenceText": "Reference Text",
+        "context": "Context",
+        "textA": "Text A (Original)",
+        "textB": "Text B (Revised)",
+        "notes": "Notes",
+        "moreRecords": "... and {{count}} more records will be imported",
+        "cancel": "Cancel",
+        "import": "Import {{count}} Record{{plural}}"
+      }
+    },
+    "mapping": {
+      "title": "Smart Column Mapping:"
     }
   },
   "history": {
@@ -100,7 +139,23 @@
     "empty": "(empty)"
   },
   "constraints": {
-    "title": "Text Constraints"
+    "title": "Technical Constraints",
+    "quickPresets": "Quick Presets",
+    "sms": "SMS Bytes",
+    "characterLimit": "Character Limit",
+    "mobileUI": "Mobile UI (chars)",
+    "activeConstraints": "Active Constraints:",
+    "smsLabel": "SMS",
+    "mobileUILabel": "Mobile UI",
+    "charactersLabel": "Characters",
+    "presets": {
+      "sms": "SMS (160 bytes)",
+      "tweet": "Tweet (280 chars)",
+      "mobileBtnShort": "Mobile Button (12 chars)",
+      "mobileBtnLong": "Mobile Button (20 chars)",
+      "metaTitle": "Meta Title (60 chars)",
+      "metaDesc": "Meta Description (160 chars)"
+    }
   },
   "metrics": {
     "characters": "Characters",
@@ -212,5 +267,20 @@
     "copyFailed": "Failed to copy prompt.",
     "notProvided": "[Not Provided]",
     "noContext": "[No context provided. Assume general text usage.]"
+  },
+  "quickStart": {
+    "title": "Quick Start Guide",
+    "step1": {
+      "title": "Enter Your Text",
+      "description": "Add both versions in the boxes below"
+    },
+    "step2": {
+      "title": "View Differences",
+      "description": "See highlighted changes instantly"
+    },
+    "step3": {
+      "title": "Get AI Analysis",
+      "description": "Copy prompt for expert evaluation"
+    }
   }
 }
