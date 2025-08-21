@@ -21,7 +21,9 @@
       "Bash(do if ! grep -q '\"\"chars\"\":' \"$file\")",
       "Bash(then echo \"Missing chars in: $file\")",
       "Bash(fi)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(do)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []
