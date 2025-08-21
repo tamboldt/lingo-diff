@@ -45,7 +45,8 @@ export const CSVPreviewModal: React.FC<CSVPreviewModalProps> = ({
   onCancel,
   isOpen
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();\n  if (!isOpen) return null;
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  if (!isOpen) return null;
 
   const displayRecords = records.slice(0, 10); // Show first 10 records
   const hasMoreRecords = records.length > 10;
