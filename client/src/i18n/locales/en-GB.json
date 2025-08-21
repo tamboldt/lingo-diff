@@ -2,7 +2,7 @@
   "app": {
     "title": "Lingo-Diff",
     "subtitle": "Professional Text Comparison Tool",
-    "tagline": "Compare, analyze, and perfect your text with professional-grade tools"
+    "tagline": "Compare, analyse, and perfect your text with professional-grade tools"
   },
   "navigation": {
     "reset": "Reset All",
@@ -55,7 +55,10 @@
     "removed": "Removed",
     "added": "Added",
     "unchanged": "Unchanged",
-    "totalCharacters": "Total: {{count}} characters"
+    "totalCharacters": "Total: {{count}} characters",
+    "emptyTitle": "Enter text to see differences",
+    "emptyDescription": "Add your text versions to see a live comparison",
+    "realTime": "Real-time"
   },
   "csv": {
     "title": "CSV Import/Export",
@@ -142,9 +145,9 @@
     "feature2": "Smart Metrics: UTF-8 byte counts, script detection, text expansion analysis.",
     "feature3": "Visual Diff: Character-level comparison with immediate feedback.",
     "feature4": "AI Analysis: Generate expert prompts for LLM quality evaluation.",
-    "feature5": "Universal Design: Perfect for localization, content editing, and document comparison.",
+    "feature5": "Universal Design: Perfect for localisation, content editing, and document comparison.",
     "tryExample": "Try Example",
-    "getStarted": "Got It, Let's Start!",
+    "getStarted": "Okay, Let's Start!",
     "showExample": "Show Example"
   },
   "sidebar": {
@@ -164,16 +167,16 @@
     "apiKey": "API Key",
     "apiKeyPlaceholder": "Enter your {{provider}} API key",
     "apiKeyNotice": "Your API key is stored locally and never sent to our servers.",
-    "analyzeButton": "Analyze with AI",
-    "analyzing": "Analyzing...",
+    "analyzeButton": "Analyse with AI",
+    "analyzing": "Analysing...",
     "fillBothTexts": "Fill both Text A and Text B to enable analysis",
     "enterApiKey": "Enter your API key to enable analysis",
-    "clickToAnalyze": "Click to analyze text differences",
+    "clickToAnalyze": "Click to analyse text differences",
     "analysisComplete": "AI Analysis Complete",
     "viewResults": "View Results",
     "analysisDescription": "Click to view detailed analysis results",
     "waitCooldown": "Please wait 30 seconds between analyses to prevent abuse.",
-    "analysisFailed": "Failed to analyze text. Please check your API key and try again.",
+    "analysisFailed": "Failed to analyse text. Please check your API key and try again.",
     "modalTitle": "AI Analysis Results",
     "experimentalWarning": "⚠️ Experimental Feature:",
     "requiresApiKey": "• Requires external API key (your own account)",

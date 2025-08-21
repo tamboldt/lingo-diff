@@ -55,7 +55,12 @@
     "removed": "Removed",
     "added": "Added",
     "unchanged": "Unchanged",
-    "totalCharacters": "Total: {{count}} characters"
+    "totalCharacters": "Total: {{count}} characters",
+    "emptyTitle": "Enter text to see differences",
+
+    "emptyDescription": "Add your text versions to see a live comparison",
+
+    "realTime": "Real-time"
   },
   "csv": {
     "title": "CSV Import/Export",

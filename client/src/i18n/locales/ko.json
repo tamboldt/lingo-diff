@@ -1,103 +1,197 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "전문 텍스트 비교 플랫폼",
-    "tagline": "전문 분석 도구로 텍스트를 비교, 분석, 완성하세요"
+    "subtitle": "전문가용 텍스트 비교 도구",
+    "tagline": "전문가 수준의 도구로 텍스트를 비교, 분석하고 완성하세요"
   },
   "navigation": {
-    "reset": "모두 재설정",
+    "reset": "모두 초기화",
     "help": "도움말",
-    "language": "언어"
+    "language": "언어",
+    "resetWelcome": "시작 화면 초기화",
+    "skipToMain": "메인 콘텐츠로 건너뛰기",
+    "close": "닫기"
   },
   "textComparison": {
     "title": "텍스트 비교",
     "textA": {
       "label": "텍스트 A (원본)",
-      "placeholder": "원본 텍스트를 입력하세요...",
-      "tooltip": "텍스트의 원본 버전을 입력하세요. 기존 번역, 초안 또는 현재 버전일 수 있습니다."
+      "placeholder": "원본 텍스트 입력...",
+      "tooltip": "텍스트의 원본 버전을 입력하세요. 기존 번역본, 초안 또는 현재 버전일 수 있습니다."
     },
     "textB": {
       "label": "텍스트 B (수정본)",
-      "placeholder": "수정된 텍스트를 입력하세요...",
-      "tooltip": "텍스트의 수정된 버전을 입력하세요. 새로운 번역, 편집된 버전 또는 대안일 수 있습니다."
+      "placeholder": "수정된 텍스트 입력...",
+      "tooltip": "텍스트의 수정 버전을 입력하세요. 새로운 번역본, 편집본 또는 대안일 수 있습니다."
     }
   },
   "context": {
-    "title": "맥락 정보",
+    "title": "문맥 정보",
     "referenceText": {
       "label": "참조 텍스트",
-      "placeholder": "예: 방 선택",
-      "tooltip": "소스 또는 참조 텍스트(원본 영어 등)를 입력하세요. 비교 분석을 위한 맥락을 제공하는 데 도움이 됩니다."
+      "placeholder": "예: Select Room",
+      "tooltip": "소스 또는 참조 텍스트(예: 원본 영어)를 입력하세요. 비교 분석을 위한 문맥을 제공하는 데 도움이 됩니다."
     },
     "usage": {
-      "label": "맥락 및 사용법",
-      "placeholder": "예: 호텔 객실 선택용 모바일 앱 버튼",
-      "tooltip": "이 텍스트가 어디서 어떻게 사용되는지 설명하세요. UI 맥락, 대상 독자 또는 텍스트 선택에 영향을 미치는 제약 조건을 포함하세요."
+      "label": "문맥 및 사용처",
+      "placeholder": "예: 호텔 객실 선택을 위한 모바일 앱 버튼",
+      "tooltip": "이 텍스트가 어디서 어떻게 사용되는지 설명해주세요. UI 문맥, 대상 고객 또는 텍스트 선택에 영향을 미치는 제약 조건을 포함하세요."
     },
-    "saveButton": "💾 비교를 기록에 저장"
+    "saveButton": "💾 비교 기록에 저장"
   },
   "analysis": {
     "title": "시각적 차이 분석",
     "aiTitle": "AI 분석",
-    "aiDescription": "텍스트 차이의 AI 평가를 위한 전문가 분석 프롬프트를 생성합니다.",
-    "processing": "처리 중..."
+    "aiDescription": "텍스트 차이점에 대한 AI 평가를 위해 전문가 분석 프롬프트를 생성합니다.",
+    "processing": "처리 중...",
+    "visualDiff": "시각적 차이",
+    "autoUpdating": "자동 업데이트 중",
+    "refreshDiff": "차이 새로고침",
+    "addedText": "추가된 텍스트",
+    "removedText": "제거된 텍스트",
+    "enterBothTexts": "차이점을 보려면 두 텍스트를 모두 입력하세요",
+    "readyForAnalysis": "차이 분석 준비 완료",
+    "addTextToSee": "실시간으로 문자 수준의 차이점을 보려면 두 필드에 모두 텍스트를 추가하세요",
+    "removed": "제거됨",
+    "added": "추가됨",
+    "unchanged": "변경 없음",
+    "totalCharacters": "총: {{count}}자",
+    "emptyTitle": "텍스트를 입력하여 차이점 보기",
+    "emptyDescription": "실시간 비교를 보려면 텍스트 버전을 추가하세요",
+    "realTime": "실시간"
   },
   "csv": {
     "title": "CSV 가져오기/내보내기",
     "import": {
       "label": "CSV 파일 가져오기",
-      "tooltip": "텍스트 열이 있는 모든 CSV 파일을 업로드하세요. 열을 자동으로 지능적으로 감지하고 매핑합니다.",
-      "smartDetection": "✨ 스마트 감지: 모든 언어의 모든 열 이름과 작동",
-      "separatorDetection": "🔍 구분자 자동 감지: 쉼표, 세미콜론, 탭, 파이프",
-      "commaHandling": "📝 텍스트 내 쉼표를 자동으로 처리 (예: \"안녕하세요, 김씨!\")"
+      "tooltip": "텍스트 열이 있는 CSV 파일을 업로드하세요. 열을 자동으로 감지하고 지능적으로 매핑합니다.",
+      "smartDetection": "✨ 스마트 감지: 모든 언어의 열 이름과 호환",
+      "separatorDetection": "🔍 구분 기호 자동 감지: 쉼표, 세미콜론, 탭, 파이프",
+      "commaHandling": "📝 텍스트 내 쉼표 자동 처리 (예: \"다시 오신 것을 환영합니다, John님!\")"
     },
     "export": {
       "label": "데이터 내보내기",
-      "tooltip": "비교 결과를 CSV 형식으로 내보내세요. Excel, Google Sheets 및 모든 스프레드시트 애플리케이션과 호환됩니다.",
+      "tooltip": "비교 결과를 CSV 형식으로 내보냅니다. Excel, Google Sheets 및 모든 스프레드시트 애플리케이션과 호환됩니다.",
       "currentData": "📄 현재 데이터 내보내기",
       "sampleFile": "📋 샘플 CSV 다운로드",
       "compatibility": "💡 적절한 UTF-8 인코딩으로 Excel에 완벽한 형식"
     },
     "features": {
       "title": "✨ 스마트 가져오기 기능:",
-      "separatorDetection": "구분자 자동 감지: 쉼표(,), 세미콜론(;), 탭, 파이프(|)",
+      "separatorDetection": "구분 기호 자동 감지: 쉼표(,), 세미콜론(;), 탭, 파이프(|)",
       "columnDetection": "모든 언어에서 열 유형을 자동으로 감지",
-      "flexibleNames": "유연한 열 이름과 작동 (원본/수정본, A/B 등)",
-      "specialChars": "쉼표, 따옴표 및 특수 문자를 완벽하게 처리",
+      "flexibleNames": "유연한 열 이름 사용 가능 (원본/수정본, A/B 등)",
+      "specialChars": "쉼표, 따옴표 및 특수 문자를 원활하게 처리",
       "utf8Support": "모든 국제 텍스트에 대한 완벽한 UTF-8 지원",
-      "noTechnical": "기술적인 CSV 형식 지식이 필요하지 않음"
+      "noTechnical": "CSV 서식에 대한 기술적 지식 불필요"
     }
   },
   "history": {
-    "title": "차이점 기록",
-    "noHistory": "아직 저장된 차이점이 없습니다",
-    "clear": "모두 지우기"
+    "title": "비교 기록",
+    "noHistory": "아직 비교 기록이 없습니다",
+    "clear": "모두 지우기",
+    "reference": "참조:",
+    "context": "문맥:",
+    "textA": "텍스트 A:",
+    "textB": "텍스트 B:",
+    "notes": "메모:",
+    "load": "이 비교 불러오기",
+    "delete": "이 비교 삭제하기",
+    "empty": "(비어 있음)"
   },
   "constraints": {
-    "title": "텍스트 제약"
+    "title": "텍스트 제약 조건"
   },
   "metrics": {
-    "characters": "문자",
-    "words": "단어",
-    "lines": "줄",
+    "characters": "글자 수",
+    "words": "단어 수",
+    "lines": "줄 수",
     "referenceText": "참조 텍스트",
-    "noText": "텍스트 없음"
+    "noText": "텍스트 없음",
+    "textA": "텍스트 A",
+    "textB": "텍스트 B",
+    "bytes": "바이트 (UTF-8)",
+    "textExpansion": "텍스트 확장",
+    "constraints": "제약 조건",
+    "byteCharRatio": "바이트/글자 비율",
+    "complexScript": "복합 스크립트 (이모지/CJK)",
+    "extendedCharacters": "확장 문자",
+    "basicLatin": "기본 라틴 스크립트",
+    "chars": "자",
+    "latin": "라틴",
+    "hiragana": "히라가나",
+    "katakana": "가타카나",
+    "cyrillic": "키릴",
+    "arabic": "아랍",
+    "hebrew": "히브리",
+    "devanagari": "데바나가리"
   },
   "messages": {
     "success": "성공",
     "error": "오류",
-    "loading": "로딩 중...",
+    "loading": "로드 중...",
     "fileTooBig": "파일이 너무 큽니다. 5MB 미만의 CSV 파일을 선택하세요.",
     "invalidFile": "CSV 파일을 선택하세요.",
     "noDataExport": "내보낼 데이터가 없습니다. 먼저 텍스트 비교를 추가하세요.",
-    "importSuccess": "{{count}}개의 비교 레코드를 성공적으로 가져왔습니다.",
-    "exportSuccess": "{{count}}개의 레코드를 CSV로 내보냈습니다."
+    "importSuccess": "{{count}}개의 비교 기록을 성공적으로 가져왔습니다.",
+    "exportSuccess": "{{count}}개의 기록을 CSV로 내보냈습니다."
   },
   "welcome": {
-    "title": "Lingo-Diff에 오신 것을 환영합니다",
-    "subtitle": "전문 텍스트 비교 플랫폼",
-    "description": "지능형 분석 도구로 번역, 수정 및 텍스트 변형을 비교하세요.",
-    "showExample": "예시 보기",
-    "getStarted": "시작하기"
+    "title": "Lingo-Diff Pro에 오신 것을 환영합니다!",
+    "subtitle": "전문가용 텍스트 비교 도구",
+    "description": "전문가용 텍스트 비교 및 분석 도구. 텍스트 품질 평가를 위한 즉각적인 기술 메트릭, 시각적 차이점 및 AI 기반 통찰력을 얻으세요.",
+    "keyFeatures": "주요 기능:",
+    "feature1": "기술적 제약: SMS 바이트 제한, 모바일 UI 공간, 글자 수 제한.",
+    "feature2": "스마트 메트릭: UTF-8 바이트 수, 스크립트 감지, 텍스트 확장 분석.",
+    "feature3": "시각적 차이: 즉각적인 피드백과 함께 문자 수준 비교.",
+    "feature4": "AI 분석: LLM 품질 평가를 위한 전문가 프롬프트 생성.",
+    "feature5": "범용 디자인: 현지화, 콘텐츠 편집 및 문서 비교에 적합합니다.",
+    "tryExample": "예제 사용해보기",
+    "getStarted": "확인, 시작하겠습니다!",
+    "showExample": "예제 보기"
+  },
+  "sidebar": {
+    "tools": "도구",
+    "history": "기록",
+    "ai": "AI",
+    "collapse": "사이드바 축소",
+    "expand": "사이드바 확장"
+  },
+  "ai": {
+    "title": "AI 분석 (베타)",
+    "experimental": "실험적 기능",
+    "provider": "LLM 제공자",
+    "groq": "Groq (빠르고 무료)",
+    "openrouter": "OpenRouter",
+    "custom": "사용자 지정 API",
+    "apiKey": "API 키",
+    "apiKeyPlaceholder": "{{provider}} API 키를 입력하세요",
+    "apiKeyNotice": "API 키는 로컬에 저장되며 서버로 전송되지 않습니다.",
+    "analyzeButton": "AI로 분석",
+    "analyzing": "분석 중...",
+    "fillBothTexts": "분석을 활성화하려면 텍스트 A와 텍스트 B를 모두 채우세요",
+    "enterApiKey": "분석을 활성화하려면 API 키를 입력하세요",
+    "clickToAnalyze": "클릭하여 텍스트 차이점 분석",
+    "analysisComplete": "AI 분석 완료",
+    "viewResults": "결과 보기",
+    "analysisDescription": "클릭하여 자세한 분석 결과 보기",
+    "waitCooldown": "남용을 방지하기 위해 분석 사이에 30초 동안 기다려 주세요.",
+    "analysisFailed": "텍스트 분석에 실패했습니다. API 키를 확인하고 다시 시도하세요.",
+    "modalTitle": "AI 분석 결과",
+    "experimentalWarning": "⚠️ 실험적 기능:",
+    "requiresApiKey": "• 외부 API 키가 필요합니다 (사용자 본인 계정)",
+    "qualityDepends": "• 분석 품질은 선택한 모델에 따라 다릅니다",
+    "verifyManually": "• AI 추천 사항은 항상 직접 확인하세요",
+    "noAnalysis": "아직 분석 결과가 없습니다.",
+    "copyAnalysis": "분석 복사"
+  },
+  "clipboard": {
+    "copyPrompt": "📋 AI 분석용 프롬프트 복사",
+    "copied": "✅ 클립보드에 복사되었습니다!",
+    "pleaseProvideText": "복사하기 전에 최소한 하나의 버전에 대한 텍스트를 제공하세요.",
+    "missingContext": "참조 텍스트나 문맥을 제공하지 않았습니다. AI의 분석이 덜 정확할 수 있습니다. 계속하시겠습니까?",
+    "copyFailed": "프롬프트 복사에 실패했습니다.",
+    "notProvided": "[제공되지 않음]",
+    "noContext": "[문맥이 제공되지 않았습니다. 일반적인 텍스트 사용으로 간주합니다.]"
   }
 }
