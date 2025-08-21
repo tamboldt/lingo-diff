@@ -125,6 +125,9 @@
     "arabic": "Arabe",
     "hebrew": "Hébreu",
     "devanagari": "Devanagari"
+    "referenceText": "Texte de référence",
+    "noText": "Aucun texte",
+    "chars": "caractères"
   },
   "messages": {
     "success": "Succès",

@@ -1,4 +1,31 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
+
+// Mock functions when i18n is disabled
+const mockUseTranslation = () => ({
+  t: (key: string) => {
+    const keys: { [key: string]: string } = {
+      'constraints.title': 'Technical Constraints',
+      'constraints.technicalConstraints': 'Technical Constraints',
+      'constraints.quickPresets': 'Quick Presets',
+      'constraints.sms': 'SMS Bytes',
+      'constraints.characterLimit': 'Character Limit',
+      'constraints.mobileUI': 'Mobile UI (chars)',
+      'constraints.activeConstraints': 'Active Constraints:',
+      'constraints.smsLabel': 'SMS',
+      'constraints.mobileUILabel': 'Mobile UI',
+      'constraints.charactersLabel': 'Characters',
+      'constraints.presets.sms': 'SMS (160 bytes)',
+      'constraints.presets.tweet': 'Tweet (280 chars)',
+      'constraints.presets.mobileBtnShort': 'Mobile Button (12 chars)',
+      'constraints.presets.mobileBtnLong': 'Mobile Button (20 chars)',
+      'constraints.presets.metaTitle': 'Meta Title (60 chars)',
+      'constraints.presets.metaDesc': 'Meta Description (160 chars)'
+    };
+    return keys[key] || key;
+  }
+});
 
 interface ConstraintsPanelProps {
   constraints: { [key: string]: number };
@@ -9,6 +36,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
   constraints,
   onConstraintsChange
 }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleConstraintChange = (key: string, value: string) => {
@@ -25,12 +53,12 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
   };
 
   const presets = {
-    sms: { label: 'SMS (160 bytes)', value: 160 },
-    tweet: { label: 'Tweet (280 chars)', value: 280 },
-    mobileBtnShort: { label: 'Mobile Button (12 chars)', value: 12 },
-    mobileBtnLong: { label: 'Mobile Button (20 chars)', value: 20 },
-    metaTitle: { label: 'Meta Title (60 chars)', value: 60 },
-    metaDesc: { label: 'Meta Description (160 chars)', value: 160 },
+    sms: { label: t('constraints.presets.sms'), value: 160 },
+    tweet: { label: t('constraints.presets.tweet'), value: 280 },
+    mobileBtnShort: { label: t('constraints.presets.mobileBtnShort'), value: 12 },
+    mobileBtnLong: { label: t('constraints.presets.mobileBtnLong'), value: 20 },
+    metaTitle: { label: t('constraints.presets.metaTitle'), value: 60 },
+    metaDesc: { label: t('constraints.presets.metaDesc'), value: 160 },
   };
 
   return (
@@ -43,7 +71,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
           <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
           </svg>
-          Technical Constraints
+          {t('constraints.title')}
         </h3>
         <svg 
           className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
@@ -59,7 +87,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
         <div className="mt-4 space-y-4">
           {/* Quick Presets */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Quick Presets</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('constraints.quickPresets')}</label>
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(presets).map(([key, preset]) => (
                 <button
@@ -79,7 +107,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
           {/* Custom Constraints */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="sms-limit" className="block text-xs font-medium text-gray-700">SMS Bytes</label>
+              <label htmlFor="sms-limit" className="block text-xs font-medium text-gray-700">{t('constraints.sms')}</label>
               <input
                 id="sms-limit"
                 type="number"
@@ -91,7 +119,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
             </div>
             
             <div>
-              <label htmlFor="char-limit" className="block text-xs font-medium text-gray-700">Character Limit</label>
+              <label htmlFor="char-limit" className="block text-xs font-medium text-gray-700">{t('constraints.characterLimit')}</label>
               <input
                 id="char-limit"
                 type="number"
@@ -103,7 +131,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
             </div>
             
             <div>
-              <label htmlFor="ui-limit" className="block text-xs font-medium text-gray-700">Mobile UI (chars)</label>
+              <label htmlFor="ui-limit" className="block text-xs font-medium text-gray-700">{t('constraints.mobileUI')}</label>
               <input
                 id="ui-limit"
                 type="number"
@@ -118,14 +146,14 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
           {/* Active Constraints Display */}
           {Object.keys(constraints).length > 0 && (
             <div className="pt-2 border-t border-gray-100">
-              <div className="text-xs text-gray-600 mb-2">Active Constraints:</div>
+              <div className="text-xs text-gray-600 mb-2">{t('constraints.activeConstraints')}</div>
               <div className="flex flex-wrap gap-2">
                 {Object.entries(constraints).map(([key, value]) => (
                   <span
                     key={key}
                     className="inline-flex items-center text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded"
                   >
-                    {key === 'sms' ? 'SMS' : key === 'uiMobile' ? 'Mobile UI' : 'Characters'}: {value}
+                    {key === 'sms' ? t('constraints.smsLabel') : key === 'uiMobile' ? t('constraints.mobileUILabel') : t('constraints.charactersLabel')}: {value}
                     <button
                       onClick={() => handleConstraintChange(key, '')}
                       className="ml-1 text-blue-600 hover:text-blue-800"

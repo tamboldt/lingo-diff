@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translation files
+import en from './locales/en.json';
 import enUS from './locales/en-US.json';
 import enGB from './locales/en-GB.json';
 import es419 from './locales/es-419.json';
@@ -18,6 +19,7 @@ import zh from './locales/zh.json';
 import hi from './locales/hi.json';
 
 const resources = {
+  'en': { translation: en },
   'en-US': { translation: enUS },
   'en-GB': { translation: enGB },
   'es-419': { translation: es419 },
@@ -38,6 +40,7 @@ export const RTL_LANGUAGES = ['ar', 'he'];
 
 // Language display names in their native scripts  
 export const LANGUAGE_NAMES = {
+  'en': 'English',
   'en-US': 'English (US)',
   'en-GB': 'English (UK)',
   'es-419': 'Español (Latinoamérica)',

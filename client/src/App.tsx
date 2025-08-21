@@ -39,10 +39,23 @@ const mockUseTranslation = () => ({
       'metrics.characters': 'Characters',
       'metrics.words': 'Words',
       'metrics.lines': 'Lines',
-      'metrics.chars': 'chars',
+      'metrics.chars': 'characters',
       'analysis.emptyTitle': 'Enter text to see differences',
       'analysis.emptyDescription': 'Add your text versions to see a live comparison',
-      'analysis.realTime': 'Real-time'
+      'analysis.realTime': 'Real-time',
+      'welcome.quickStartGuide': 'Quick Start Guide',
+      'welcome.step1.title': 'Enter Your Text',
+      'welcome.step1.description': 'Add both versions in the boxes below',
+      'welcome.step2.title': 'View Differences',
+      'welcome.step2.description': 'See highlighted changes instantly',
+      'welcome.step3.title': 'Get AI Analysis',
+      'welcome.step3.description': 'Copy prompt for expert evaluation',
+      'advancedOptions.title': 'Advanced Options',
+      'advancedOptions.optional': 'Optional',
+      'advancedOptions.description': 'Add context information and perform AI analysis for better insights',
+      'constraints.technicalConstraints': 'Technical Constraints',
+      'constraints.quickPresets': 'Quick Presets',
+      'ai.forEveryone': 'For everyone:'
     };
     return keys[key] || key;
   }
@@ -228,28 +241,28 @@ export default function App() {
               <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <h3 className="text-lg font-medium text-blue-900">Quick Start Guide</h3>
+              <h3 className="text-lg font-medium text-blue-900">{t('welcome.quickStartGuide')}</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-start">
                 <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</span>
                 <div>
-                  <p className="font-medium text-blue-900">Enter Your Text</p>
-                  <p className="text-blue-700">Add both versions in the boxes below</p>
+                  <p className="font-medium text-blue-900">{t('welcome.step1.title')}</p>
+                  <p className="text-blue-700">{t('welcome.step1.description')}</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</span>
                 <div>
-                  <p className="font-medium text-blue-900">View Differences</p>
-                  <p className="text-blue-700">See highlighted changes instantly</p>
+                  <p className="font-medium text-blue-900">{t('welcome.step2.title')}</p>
+                  <p className="text-blue-700">{t('welcome.step2.description')}</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</span>
                 <div>
-                  <p className="font-medium text-blue-900">Get AI Analysis</p>
-                  <p className="text-blue-700">Copy prompt for expert evaluation</p>
+                  <p className="font-medium text-blue-900">{t('welcome.step3.title')}</p>
+                  <p className="text-blue-700">{t('welcome.step3.description')}</p>
                 </div>
               </div>
             </div>
@@ -386,7 +399,7 @@ export default function App() {
                   <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
-                  <h3 className="text-lg font-semibold text-gray-800">Advanced Options</h3>
+                  <h3 className="text-lg font-semibold text-gray-800">{t('advancedOptions.title')}</h3>
                   <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Optional</span>
                 </div>
                 <svg 
@@ -398,7 +411,7 @@ export default function App() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
-              <p className="text-sm text-gray-600 mt-1 text-left">Add context information and perform AI analysis for better insights</p>
+              <p className="text-sm text-gray-600 mt-1 text-left">{t('advancedOptions.description')}</p>
             </button>
 
             {showContextSection && (
@@ -468,7 +481,7 @@ export default function App() {
                   </span>
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
-                  <strong>For everyone:</strong> Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.
+                  <strong>{t('ai.forEveryone')}</strong> Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.
                 </p>
                 <ClipboardPromptButton 
                   sourceTerm={sourceTerm}
