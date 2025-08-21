@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FEATURES } from '../config/features';
 
 interface ConstraintsPanelProps {
   constraints: { [key: string]: number };
@@ -9,6 +11,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
   constraints,
   onConstraintsChange
 }) => {
+  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleConstraintChange = (key: string, value: string) => {
@@ -43,7 +46,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
           <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
           </svg>
-          Technical Constraints
+          {t('constraints.technicalConstraints')}
         </h3>
         <svg 
           className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
@@ -59,7 +62,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
         <div className="mt-4 space-y-4">
           {/* Quick Presets */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Quick Presets</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t('constraints.quickPresets')}</label>
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(presets).map(([key, preset]) => (
                 <button
