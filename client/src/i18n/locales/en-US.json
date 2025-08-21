@@ -55,7 +55,10 @@
     "removed": "Removed",
     "added": "Added",
     "unchanged": "Unchanged",
-    "totalCharacters": "Total: {{count}} characters"
+    "totalCharacters": "Total: {{count}} characters",
+    "emptyTitle": "Enter text to see differences",
+    "emptyDescription": "Add your text versions to see a live comparison",
+    "realTime": "Real-time"
   },
   "csv": {
     "title": "CSV Import/Export",
@@ -97,7 +100,9 @@
     "empty": "(empty)"
   },
   "constraints": {
-    "title": "Text Constraints"
+    "title": "Text Constraints",
+    "technicalConstraints": "Technical Constraints",
+    "quickPresets": "Quick Presets"
   },
   "metrics": {
     "characters": "Characters",
@@ -145,7 +150,20 @@
     "feature5": "Universal Design: Perfect for localization, content editing, and document comparison.",
     "tryExample": "Try Example",
     "getStarted": "Got It, Let's Start!",
-    "showExample": "Show Example"
+    "showExample": "Show Example",
+    "quickStartGuide": "Quick Start Guide",
+    "step1": {
+      "title": "Enter Your Text",
+      "description": "Add both versions in the boxes below"
+    },
+    "step2": {
+      "title": "View Differences", 
+      "description": "See highlighted changes instantly"
+    },
+    "step3": {
+      "title": "Get AI Analysis",
+      "description": "Copy prompt for expert evaluation"
+    }
   },
   "sidebar": {
     "tools": "Tools",
@@ -181,6 +199,10 @@
     "verifyManually": "• Always verify AI recommendations manually",
     "noAnalysis": "No analysis available yet.",
     "copyAnalysis": "Copy Analysis"
+  },
+  "advancedOptions": {
+    "title": "Advanced Options",
+    "description": "Add context information and perform AI analysis for better insights"
   },
   "clipboard": {
     "copyPrompt": "📋 Copy Prompt for AI Analysis",

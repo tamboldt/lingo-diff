@@ -140,6 +140,7 @@
   },
   "constraints": {
     "title": "Technical Constraints",
+    "technicalConstraints": "Technical Constraints",
     "quickPresets": "Quick Presets",
     "sms": "SMS Bytes",
     "characterLimit": "Character Limit",
@@ -210,7 +211,7 @@
       "description": "Add both versions in the boxes below"
     },
     "step2": {
-      "title": "View Differences", 
+      "title": "View Differences",
       "description": "See highlighted changes instantly"
     },
     "step3": {

@@ -46,13 +46,15 @@ const mockUseTranslation = () => ({
       'welcome.quickStartGuide': 'Quick Start Guide',
       'welcome.step1.title': 'Enter Your Text',
       'welcome.step1.description': 'Add both versions in the boxes below',
-      'welcome.step2.title': 'View Differences', 
+      'welcome.step2.title': 'View Differences',
       'welcome.step2.description': 'See highlighted changes instantly',
       'welcome.step3.title': 'Get AI Analysis',
       'welcome.step3.description': 'Copy prompt for expert evaluation',
       'advancedOptions.title': 'Advanced Options',
       'advancedOptions.optional': 'Optional',
       'advancedOptions.description': 'Add context information and perform AI analysis for better insights',
+      'constraints.technicalConstraints': 'Technical Constraints',
+      'constraints.quickPresets': 'Quick Presets',
       'ai.forEveryone': 'For everyone:'
     };
     return keys[key] || key;
@@ -397,7 +399,7 @@ export default function App() {
                   <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
-                  <h3 className="text-lg font-semibold text-gray-800">Advanced Options</h3>
+                  <h3 className="text-lg font-semibold text-gray-800">{t('advancedOptions.title')}</h3>
                   <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Optional</span>
                 </div>
                 <svg 
