@@ -1,59 +1,197 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "Ferramenta Profissional de Comparação de Textos"
+    "subtitle": "Ferramenta Profissional de Comparação de Texto",
+    "tagline": "Compare, analise e aperfeiçoe seu texto com ferramentas de nível profissional"
   },
   "navigation": {
     "reset": "Redefinir Tudo",
     "help": "Ajuda",
-    "language": "Idioma"
+    "language": "Idioma",
+    "resetWelcome": "Redefinir Boas-vindas",
+    "skipToMain": "Pular para o conteúdo principal",
+    "close": "Fechar"
   },
   "textComparison": {
-    "title": "Comparação de Textos",
+    "title": "Comparação de Texto",
     "textA": {
       "label": "Texto A (Original)",
-      "placeholder": "Digite o texto original..."
+      "placeholder": "Digite o texto original...",
+      "tooltip": "Insira a versão original do seu texto. Pode ser uma tradução existente, um primeiro rascunho ou a versão atual."
     },
     "textB": {
       "label": "Texto B (Revisado)",
-      "placeholder": "Digite o texto revisado..."
+      "placeholder": "Digite o texto revisado...",
+      "tooltip": "Insira a versão revisada do seu texto. Pode ser uma nova tradução, uma versão editada ou uma opção alternativa."
     }
   },
   "context": {
     "title": "Informações de Contexto",
     "referenceText": {
       "label": "Texto de Referência",
-      "placeholder": "ex., Selecionar Quarto"
+      "placeholder": "ex: Select Room",
+      "tooltip": "Insira o texto fonte ou de referência (como o original em inglês). Isso ajuda a fornecer contexto para a análise de comparação."
     },
     "usage": {
       "label": "Contexto e Uso",
-      "placeholder": "ex., Botão do aplicativo móvel para seleção de quarto do hotel"
-    }
+      "placeholder": "ex: Botão de app de celular para selecionar quarto de hotel",
+      "tooltip": "Descreva onde e como este texto é usado. Inclua o contexto da interface do usuário, público-alvo ou quaisquer restrições que afetem a escolha do texto."
+    },
+    "saveButton": "💾 Salvar Comparação no Histórico"
   },
   "analysis": {
     "title": "Análise Visual de Diferenças",
-    "aiTitle": "Análise de IA",
-    "aiDescription": "Gera prompt de análise especializada para avaliação de diferenças de texto por IA.",
+    "aiTitle": "Análise com IA",
+    "aiDescription": "Gere um prompt de análise especializado para avaliação de diferenças de texto por IA.",
     "processing": "Processando...",
-    "visualDiff": "Diff visual",
-    "autoUpdating": "Atualização automática",
-    "refreshDiff": "Atualizar diff",
+    "visualDiff": "Diferenças Visuais",
+    "autoUpdating": "Atualizando automaticamente",
+    "refreshDiff": "Atualizar diferenças",
     "addedText": "Texto adicionado",
     "removedText": "Texto removido",
-    "enterBothTexts": "Digite ambos os textos para ver as diferenças",
+    "enterBothTexts": "Insira ambos os textos para ver as diferenças",
     "readyForAnalysis": "Pronto para análise de diferenças",
-    "addTextToSee": "Adicione texto em ambos os campos para ver diferenças em tempo real no nível de caracteres",
+    "addTextToSee": "Adicione texto em ambos os campos para ver as diferenças em nível de caractere em tempo real",
     "removed": "Removido",
     "added": "Adicionado",
     "unchanged": "Inalterado",
-    "totalCharacters": "Total: {{count}} caracteres"
+    "totalCharacters": "Total: {{count}} caracteres",
+    "emptyTitle": "Insira texto para ver as diferenças",
+    "emptyDescription": "Adicione suas versões de texto para ver uma comparação ao vivo",
+    "realTime": "Tempo real"
+  },
+  "csv": {
+    "title": "Importar/Exportar CSV",
+    "import": {
+      "label": "Importar Arquivo CSV",
+      "tooltip": "Faça o upload de qualquer arquivo CSV com colunas de texto. Detectaremos e mapearemos suas colunas de forma inteligente e automática.",
+      "smartDetection": "✨ Detecção Inteligente: Funciona com qualquer nome de coluna em qualquer idioma",
+      "separatorDetection": "🔍 Detecta separadores automaticamente: vírgula, ponto e vírgula, tabulação, pipe",
+      "commaHandling": "📝 Lida com vírgulas no texto automaticamente (ex: \"Bem-vindo de volta, João!\")"
+    },
+    "export": {
+      "label": "Exportar Dados",
+      "tooltip": "Exporte suas comparações para o formato CSV. Compatível com Excel, Google Sheets e todos os aplicativos de planilhas.",
+      "currentData": "📄 Exportar Dados Atuais",
+      "sampleFile": "📋 Baixar CSV de Amostra",
+      "compatibility": "💡 Formato perfeito para Excel com codificação UTF-8 adequada"
+    },
+    "features": {
+      "title": "✨ Recursos de Importação Inteligente:",
+      "separatorDetection": "Detecta separadores automaticamente: vírgula (,), ponto e vírgula (;), tabulação, pipe (|)",
+      "columnDetection": "Detecta tipos de coluna automaticamente em qualquer idioma",
+      "flexibleNames": "Funciona com nomes de coluna flexíveis (Original/Revisado, A/B, etc.)",
+      "specialChars": "Lida com vírgulas, aspas e caracteres especiais de forma transparente",
+      "utf8Support": "Suporte UTF-8 perfeito para todos os textos internacionais",
+      "noTechnical": "Não é necessário conhecimento técnico de formatação CSV"
+    }
+  },
+  "history": {
+    "title": "Histórico de Comparações",
+    "noHistory": "Nenhum histórico de comparações ainda",
+    "clear": "Limpar Tudo",
+    "reference": "Referência:",
+    "context": "Contexto:",
+    "textA": "Texto A:",
+    "textB": "Texto B:",
+    "notes": "Notas:",
+    "load": "Carregar esta comparação",
+    "delete": "Excluir esta comparação",
+    "empty": "(vazio)"
+  },
+  "constraints": {
+    "title": "Restrições de Texto"
   },
   "metrics": {
     "characters": "Caracteres",
     "words": "Palavras",
     "lines": "Linhas",
-    "referenceText": "Texto de referência",
+    "referenceText": "Texto de Referência",
     "noText": "Sem texto",
-    "chars": "caracteres"
+    "textA": "Texto A",
+    "textB": "Texto B",
+    "bytes": "Bytes (UTF-8)",
+    "textExpansion": "Expansão de texto",
+    "constraints": "Restrições",
+    "byteCharRatio": "Relação Byte/Caractere",
+    "complexScript": "Escrita complexa (emoji/CJK)",
+    "extendedCharacters": "Caracteres estendidos",
+    "basicLatin": "Escrita latina básica",
+    "chars": "caracteres",
+    "latin": "Latim",
+    "hiragana": "Hiragana",
+    "katakana": "Katakana",
+    "cyrillic": "Cirílico",
+    "arabic": "Árabe",
+    "hebrew": "Hebraico",
+    "devanagari": "Devanagari"
+  },
+  "messages": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "loading": "Carregando...",
+    "fileTooBig": "Arquivo muito grande. Por favor, selecione um arquivo CSV menor que 5MB.",
+    "invalidFile": "Por favor, selecione um arquivo CSV.",
+    "noDataExport": "Nenhum dado para exportar. Adicione algumas comparações de texto primeiro.",
+    "importSuccess": "{{count}} registros de comparação importados com sucesso.",
+    "exportSuccess": "Exportados {{count}} registros para CSV."
+  },
+  "welcome": {
+    "title": "Bem-vindo ao Lingo-Diff Pro!",
+    "subtitle": "Ferramenta Profissional de Comparação de Texto",
+    "description": "Ferramenta profissional de comparação e análise de texto. Obtenha métricas técnicas instantâneas, diferenças visuais e insights com IA para avaliação da qualidade do texto.",
+    "keyFeatures": "Principais Recursos:",
+    "feature1": "Restrições Técnicas: Limites de bytes de SMS, espaço na interface de celular, limites de caracteres.",
+    "feature2": "Métricas Inteligentes: Contagem de bytes UTF-8, detecção de escrita, análise de expansão de texto.",
+    "feature3": "Diferenças Visuais: Comparação em nível de caractere com feedback imediato.",
+    "feature4": "Análise com IA: Gere prompts especializados para avaliação de qualidade por LLMs.",
+    "feature5": "Design Universal: Perfeito para localização, edição de conteúdo e comparação de documentos.",
+    "tryExample": "Testar Exemplo",
+    "getStarted": "Entendi, vamos começar!",
+    "showExample": "Mostrar Exemplo"
+  },
+  "sidebar": {
+    "tools": "Ferramentas",
+    "history": "Histórico",
+    "ai": "IA",
+    "collapse": "Recolher barra lateral",
+    "expand": "Expandir barra lateral"
+  },
+  "ai": {
+    "title": "Análise com IA (Beta)",
+    "experimental": "Experimental",
+    "provider": "Provedor de LLM",
+    "groq": "Groq (Rápido e Gratuito)",
+    "openrouter": "OpenRouter",
+    "custom": "API Personalizada",
+    "apiKey": "Chave de API",
+    "apiKeyPlaceholder": "Insira sua chave de API do {{provider}}",
+    "apiKeyNotice": "Sua chave de API é armazenada localmente e nunca é enviada para nossos servidores.",
+    "analyzeButton": "Analisar com IA",
+    "analyzing": "Analisando...",
+    "fillBothTexts": "Preencha o Texto A e o Texto B para habilitar a análise",
+    "enterApiKey": "Insira sua chave de API para habilitar a análise",
+    "clickToAnalyze": "Clique para analisar as diferenças de texto",
+    "analysisComplete": "Análise com IA Concluída",
+    "viewResults": "Ver Resultados",
+    "analysisDescription": "Clique para ver os resultados detalhados da análise",
+    "waitCooldown": "Por favor, aguarde 30 segundos entre as análises para evitar abusos.",
+    "analysisFailed": "Falha ao analisar o texto. Por favor, verifique sua chave de API и tente novamente.",
+    "modalTitle": "Resultados da Análise com IA",
+    "experimentalWarning": "⚠️ Recurso Experimental:",
+    "requiresApiKey": "• Requer chave de API externa (sua própria conta)",
+    "qualityDepends": "• A qualidade da análise depende do modelo escolhido",
+    "verifyManually": "• Sempre verifique as recomendações da IA manualmente",
+    "noAnalysis": "Nenhuma análise disponível ainda.",
+    "copyAnalysis": "Copiar Análise"
+  },
+  "clipboard": {
+    "copyPrompt": "📋 Copiar Prompt para Análise com IA",
+    "copied": "✅ Copiado para a Área de Transferência!",
+    "pleaseProvideText": "Por favor, forneça texto para pelo menos uma versão antes de copiar.",
+    "missingContext": "Você не forneceu um Texto de Referência ou Contexto. A análise da IA será menos precisa. Deseja continuar?",
+    "copyFailed": "Falha ao copiar o prompt.",
+    "notProvided": "[Não fornecido]",
+    "noContext": "[Nenhum contexto fornecido. O uso geral do texto será inferido.]"
   }
 }

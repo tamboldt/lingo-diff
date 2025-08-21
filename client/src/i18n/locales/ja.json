@@ -1,104 +1,197 @@
 {
   "app": {
     "title": "Lingo-Diff",
-    "subtitle": "プロフェッショナルテキスト比較プラットフォーム",
-    "tagline": "プロフェッショナル分析ツールでテキストを比較、分析、完成"
+    "subtitle": "プロフェッショナルテキスト比較ツール",
+    "tagline": "プロ級のツールでテキストを比較、分析、完成させましょう"
   },
   "navigation": {
     "reset": "すべてリセット",
     "help": "ヘルプ",
-    "language": "言語"
+    "language": "言語",
+    "resetWelcome": "ようこそ画面をリセット",
+    "skipToMain": "メインコンテンツへスキップ",
+    "close": "閉じる"
   },
   "textComparison": {
     "title": "テキスト比較",
     "textA": {
-      "label": "テキストA（オリジナル）",
-      "placeholder": "元のテキストを入力...",
-      "tooltip": "元のバージョンのテキストを入力してください。既存の翻訳、初回ドラフト、または現在のバージョンが対象です。"
+      "label": "テキストA (原文)",
+      "placeholder": "原文を入力...",
+      "tooltip": "テキストの原文バージョンを入力します。既存の翻訳、初稿、または現在のバージョンなどが該当します。"
     },
     "textB": {
-      "label": "テキストB（修正版）",
-      "placeholder": "修正したテキストを入力...",
-      "tooltip": "修正版のテキストを入力してください。新しい翻訳、編集版、または代替オプションが対象です。"
+      "label": "テキストB (改訂版)",
+      "placeholder": "改訂版のテキストを入力...",
+      "tooltip": "テキストの改訂版バージョンを入力します。新しい翻訳、編集版、または代替案などが該当します。"
     }
   },
   "context": {
     "title": "コンテキスト情報",
     "referenceText": {
       "label": "参照テキスト",
-      "placeholder": "例：部屋を選択",
-      "tooltip": "ソースまたは参照テキスト（元の英語など）を入力してください。比較分析のコンテキストを提供するのに役立ちます。"
+      "placeholder": "例: Select Room",
+      "tooltip": "ソースまたは参照テキスト（原文の英語など）を入力します。これは比較分析のコンテキストを提供するために役立ちます。"
     },
     "usage": {
-      "label": "コンテキストと使用方法",
-      "placeholder": "例：ホテル客室選択用モバイルアプリボタン",
-      "tooltip": "このテキストがどこでどのように使用されるかを説明してください。UIコンテキスト、対象読者、またはテキスト選択に影響する制約を含めてください。"
+      "label": "コンテキストと用途",
+      "placeholder": "例: ホテルの部屋選択用のモバイルアプリのボタン",
+      "tooltip": "このテキストがどこでどのように使用されるかを記述します。UIのコンテキスト、対象読者、またはテキスト選択に影響する制約を含めてください。"
     },
     "saveButton": "💾 比較を履歴に保存"
   },
   "analysis": {
-    "title": "視覚的差異分析",
+    "title": "差分の可視分析",
     "aiTitle": "AI分析",
-    "aiDescription": "テキスト差異のAI評価用エキスパート分析プロンプトを生成します。",
-    "processing": "処理中..."
+    "aiDescription": "テキストの差異をAIが評価するための、専門的な分析プロンプトを生成します。",
+    "processing": "処理中...",
+    "visualDiff": "差分表示",
+    "autoUpdating": "自動更新中",
+    "refreshDiff": "差分を更新",
+    "addedText": "追加されたテキスト",
+    "removedText": "削除されたテキスト",
+    "enterBothTexts": "両方のテキストを入力して差異を表示",
+    "readyForAnalysis": "差分分析の準備完了",
+    "addTextToSee": "両方のフィールドにテキストを追加して、リアルタイムで文字レベルの差分を確認",
+    "removed": "削除",
+    "added": "追加",
+    "unchanged": "変更なし",
+    "totalCharacters": "合計: {{count}} 文字",
+    "emptyTitle": "テキストを入力して差異を表示",
+    "emptyDescription": "テキストの各バージョンを追加して、リアルタイム比較を表示します",
+    "realTime": "リアルタイム"
   },
   "csv": {
     "title": "CSVインポート/エクスポート",
     "import": {
       "label": "CSVファイルをインポート",
-      "tooltip": "テキスト列を含む任意のCSVファイルをアップロードしてください。列を自動的かつインテリジェントに検出してマッピングします。",
-      "smartDetection": "✨ スマート検出：任意の言語の任意の列名で動作",
-      "separatorDetection": "🔍 区切り文字自動検出：カンマ、セミコロン、タブ、パイプ",
-      "commaHandling": "📝 テキスト内のカンマを自動処理（例：「お帰りなさい、田中さん！」）"
+      "tooltip": "テキスト列を含むCSVファイルをアップロードしてください。列を自動的に検出し、インテリジェントにマッピングします。",
+      "smartDetection": "✨ スマート検出: あらゆる言語の列名に対応",
+      "separatorDetection": "🔍 区切り文字を自動検出: コンマ、セミコロン、タブ、パイプ",
+      "commaHandling": "📝 テキスト内のコンマを自動的に処理 (例: 「おかえりなさい、ジョンさん！」)"
     },
     "export": {
-      "label": "データをエクスポート",
-      "tooltip": "比較をCSV形式でエクスポートします。Excel、Google Sheets、すべてのスプレッドシートアプリケーションと互換性があります。",
+      "label": "データのエクスポート",
+      "tooltip": "比較結果をCSV形式でエクスポートします。Excel、Googleスプレッドシート、およびすべての表計算アプリケーションと互換性があります。",
       "currentData": "📄 現在のデータをエクスポート",
       "sampleFile": "📋 サンプルCSVをダウンロード",
-      "compatibility": "💡 適切なUTF-8エンコーディングでExcelに最適な形式"
+      "compatibility": "💡 適切なUTF-8エンコーディングでExcelに最適なフォーマット"
     },
     "features": {
-      "title": "✨ スマートインポート機能：",
-      "separatorDetection": "区切り文字自動検出：カンマ（,）、セミコロン（;）、タブ、パイプ（|）",
-      "columnDetection": "任意の言語で列タイプを自動検出",
-      "flexibleNames": "柔軟な列名で動作（オリジナル/修正版、A/B等）",
-      "specialChars": "カンマ、引用符、特殊文字をシームレスに処理",
-      "utf8Support": "すべての国際テキストに対応した完璧なUTF-8サポート",
-      "noTechnical": "技術的なCSVフォーマット知識は不要"
+      "title": "✨ スマートインポート機能:",
+      "separatorDetection": "区切り文字を自動検出: コンマ(,)、セミコロン(;)、タブ、パイプ(|)",
+      "columnDetection": "あらゆる言語で列のタイプを自動的に検出",
+      "flexibleNames": "柔軟な列名に対応 (原文/改訂版, A/B など)",
+      "specialChars": "コンマ、引用符、特殊文字をシームレスに処理",
+      "utf8Support": "すべての国際的なテキストに対応する完璧なUTF-8サポート",
+      "noTechnical": "CSVの技術的なフォーマット知識は不要"
     }
   },
   "history": {
-    "title": "差分履歴",
-    "noHistory": "まだ保存された差分はありません",
-    "clear": "すべてクリア"
+    "title": "比較履歴",
+    "noHistory": "比較履歴はまだありません",
+    "clear": "すべて消去",
+    "reference": "参照:",
+    "context": "コンテキスト:",
+    "textA": "テキストA:",
+    "textB": "テキストB:",
+    "notes": "メモ:",
+    "load": "この比較を読み込む",
+    "delete": "この比較を削除",
+    "empty": "(空)"
   },
   "constraints": {
-    "title": "テキスト制約"
+    "title": "テキストの制約"
   },
   "metrics": {
-    "characters": "文字",
-    "words": "単語",
-    "lines": "行",
+    "characters": "文字数",
+    "words": "単語数",
+    "lines": "行数",
     "referenceText": "参照テキスト",
     "noText": "テキストなし",
-    "chars": "文字"
+    "textA": "テキストA",
+    "textB": "テキストB",
+    "bytes": "バイト (UTF-8)",
+    "textExpansion": "テキスト伸長率",
+    "constraints": "制約",
+    "byteCharRatio": "バイト/文字比",
+    "complexScript": "複雑なスクリプト (絵文字/CJK)",
+    "extendedCharacters": "拡張文字",
+    "basicLatin": "基本ラテン文字",
+    "chars": "文字",
+    "latin": "ラテン",
+    "hiragana": "ひらがな",
+    "katakana": "カタカナ",
+    "cyrillic": "キリル",
+    "arabic": "アラビア",
+    "hebrew": "ヘブライ",
+    "devanagari": "デーヴァナーガリー"
   },
   "messages": {
     "success": "成功",
     "error": "エラー",
     "loading": "読み込み中...",
-    "fileTooBig": "ファイルが大きすぎます。5MB未満のCSVファイルを選択してください。",
+    "fileTooBig": "ファイルサイズが大きすぎます。5MB未満のCSVファイルを選択してください。",
     "invalidFile": "CSVファイルを選択してください。",
-    "noDataExport": "エクスポートするデータがありません。まずテキスト比較を追加してください。",
+    "noDataExport": "エクスポートするデータがありません。最初にテキスト比較を追加してください。",
     "importSuccess": "{{count}}件の比較レコードを正常にインポートしました。",
     "exportSuccess": "{{count}}件のレコードをCSVにエクスポートしました。"
   },
   "welcome": {
-    "title": "Lingo-Diffへようこそ",
-    "subtitle": "プロフェッショナルテキスト比較プラットフォーム",
-    "description": "インテリジェント分析ツールで翻訳、改訂、テキストバリアントを比較します。",
-    "showExample": "例を表示",
-    "getStarted": "開始"
+    "title": "Lingo-Diff Proへようこそ！",
+    "subtitle": "プロフェッショナルテキスト比較ツール",
+    "description": "プロフェッショナルなテキスト比較・分析ツール。テキスト品質評価のための技術的なメトリクス、視覚的な差分、AIによる洞察を即座に得られます。",
+    "keyFeatures": "主な機能:",
+    "feature1": "技術的制約: SMSのバイト制限、モバイルUIのスペース、文字数制限。",
+    "feature2": "スマートメトリクス: UTF-8バイト数、スクリプト検出、テキスト伸長率分析。",
+    "feature3": "差分表示: 文字レベルの比較と即時のフィードバック。",
+    "feature4": "AI分析: LLMによる品質評価のための専門的なプロンプトを生成。",
+    "feature5": "ユニバーサルデザイン: ローカリゼーション、コンテンツ編集、文書比較に最適。",
+    "tryExample": "例を試す",
+    "getStarted": "了解しました。始めましょう！",
+    "showExample": "例を表示"
+  },
+  "sidebar": {
+    "tools": "ツール",
+    "history": "履歴",
+    "ai": "AI",
+    "collapse": "サイドバーを折りたたむ",
+    "expand": "サイドバーを展開する"
+  },
+  "ai": {
+    "title": "AI分析 (ベータ版)",
+    "experimental": "実験的機能",
+    "provider": "LLMプロバイダー",
+    "groq": "Groq (高速&無料)",
+    "openrouter": "OpenRouter",
+    "custom": "カスタムAPI",
+    "apiKey": "APIキー",
+    "apiKeyPlaceholder": "{{provider}} のAPIキーを入力してください",
+    "apiKeyNotice": "APIキーはローカルに保存され、当社のサーバーには送信されません。",
+    "analyzeButton": "AIで分析",
+    "analyzing": "分析中...",
+    "fillBothTexts": "分析を有効にするには、テキストAとテキストBの両方を入力してください",
+    "enterApiKey": "分析を有効にするには、APIキーを入力してください",
+    "clickToAnalyze": "クリックしてテキストの差異を分析",
+    "analysisComplete": "AI分析が完了しました",
+    "viewResults": "結果を表示",
+    "analysisDescription": "クリックして詳細な分析結果を表示",
+    "waitCooldown": "不正利用を防ぐため、分析の間は30秒お待ちください。",
+    "analysisFailed": "テキストの分析に失敗しました。APIキーを確認して、もう一度お試しください。",
+    "modalTitle": "AI分析結果",
+    "experimentalWarning": "⚠️ 実験的機能:",
+    "requiresApiKey": "• 外部APIキーが必要です（ご自身のアカウント）",
+    "qualityDepends": "• 分析の品質は選択したモデルに依存します",
+    "verifyManually": "• AIの推奨事項は必ず手動で確認してください",
+    "noAnalysis": "まだ利用可能な分析はありません。",
+    "copyAnalysis": "分析をコピー"
+  },
+  "clipboard": {
+    "copyPrompt": "📋 AI分析用のプロンプトをコピー",
+    "copied": "✅ クリップボードにコピーしました！",
+    "pleaseProvideText": "コピーする前に、少なくとも一方のバージョンのテキストを提供してください。",
+    "missingContext": "参照テキストまたはコンテキストが提供されていません。AIの分析精度が低下します。続行しますか？",
+    "copyFailed": "プロンプトのコピーに失敗しました。",
+    "notProvided": "[未提供]",
+    "noContext": "[コンテキストが提供されていません。一般的なテキスト使用を想定します。]"
   }
 }
