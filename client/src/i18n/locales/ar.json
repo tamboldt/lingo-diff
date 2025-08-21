@@ -93,7 +93,8 @@
     "words": "كلمات",
     "lines": "أسطر",
     "referenceText": "النص المرجعي",
-    "noText": "لا يوجد نص"
+    "noText": "لا يوجد نص",
+    "chars": "أحرف"
   },
   "messages": {
     "success": "نجح",

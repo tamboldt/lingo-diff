@@ -39,7 +39,7 @@ const mockUseTranslation = () => ({
       'metrics.characters': 'Characters',
       'metrics.words': 'Words',
       'metrics.lines': 'Lines',
-      'metrics.chars': 'chars',
+      'metrics.chars': 'characters',
       'analysis.emptyTitle': 'Enter text to see differences',
       'analysis.emptyDescription': 'Add your text versions to see a live comparison',
       'analysis.realTime': 'Real-time'

@@ -81,7 +81,8 @@
     "words": "Wörter",
     "lines": "Zeilen",
     "referenceText": "Referenztext",
-    "noText": "Kein Text"
+    "noText": "Kein Text",
+    "chars": "Zeichen"
   },
   "messages": {
     "success": "Erfolgreich",

@@ -81,7 +81,8 @@
     "words": "Mots",
     "lines": "Lignes",
     "referenceText": "Texte de référence",
-    "noText": "Aucun texte"
+    "noText": "Aucun texte",
+    "chars": "caractères"
   },
   "messages": {
     "success": "Succès",

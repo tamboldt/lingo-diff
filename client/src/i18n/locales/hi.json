@@ -81,7 +81,8 @@
     "words": "शब्द",
     "lines": "पंक्तियां",
     "referenceText": "संदर्भ टेक्स्ट",
-    "noText": "कोई टेक्स्ट नहीं"
+    "noText": "कोई टेक्स्ट नहीं",
+    "chars": "वर्ण"
   },
   "messages": {
     "success": "सफलता",

@@ -13,7 +13,9 @@ const mockUseTranslation = () => ({
     const keys: { [key: string]: string } = {
       'sidebar.tools': 'Tools',
       'sidebar.history': 'History', 
-      'sidebar.ai': 'AI'
+      'sidebar.ai': 'AI',
+      'sidebar.collapse': 'Collapse sidebar',
+      'sidebar.expand': 'Expand sidebar'
     };
     return keys[key] || key;
   }

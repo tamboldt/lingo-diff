@@ -6,10 +6,13 @@ import { FEATURES } from '../config/features';
 // Mock functions when i18n is disabled
 const mockUseTranslation = () => ({ 
   t: (key: string) => {
-    if (key === 'app.title') return 'Lingo-Diff';
-    if (key === 'app.subtitle') return 'Professional Text Comparison Tool';
-    if (key === 'navigation.reset') return 'Reset All';
-    return key.split('.').pop() || key;
+    const keys: { [key: string]: string } = {
+      'app.title': 'Lingo-Diff',
+      'app.subtitle': 'Professional Text Comparison Tool',
+      'navigation.reset': 'Reset All',
+      'navigation.resetWelcome': 'Reset Welcome'
+    };
+    return keys[key] || key;
   }
 });
 
