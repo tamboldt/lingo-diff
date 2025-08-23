@@ -221,6 +221,7 @@
   },
   "sidebar": {
     "tools": "Tools",
+    "constraints": "Constraints",
     "history": "History",
     "ai": "AI",
     "collapse": "Collapse sidebar",

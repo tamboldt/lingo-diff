@@ -12,7 +12,8 @@ const mockUseTranslation = () => ({
   t: (key: string) => {
     const keys: { [key: string]: string } = {
       'sidebar.tools': 'Tools',
-      'sidebar.history': 'History', 
+      'sidebar.constraints': 'Constraints',
+      'sidebar.history': 'History',
       'sidebar.ai': 'AI',
       'sidebar.collapse': 'Collapse sidebar',
       'sidebar.expand': 'Expand sidebar'
@@ -69,12 +70,12 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   onUpdateAIAnalysis
 }) => {
   const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
-  const [activeTab, setActiveTab] = useState<'tools' | 'history' | 'ai'>('tools');
+  const [activeTab, setActiveTab] = useState<'constraints' | 'history' | 'ai'>('constraints');
 
   // Notify parent when expanded state changes
 
   const tabs = [
-    { id: 'tools', label: t('sidebar.tools'), icon: '🛠️' },
+    { id: 'constraints', label: t('sidebar.constraints'), icon: '🛠️' },
     { id: 'history', label: t('sidebar.history'), icon: '📚' },
     { id: 'ai', label: t('sidebar.ai'), icon: '🤖' }
   ] as const;
@@ -82,9 +83,9 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   return (
     <>
       {/* Collapsible Sidebar */}
-      <div 
+      <div
         className="fixed top-16 right-0 h-[calc(100vh-4rem)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
-        style={{ width: isExpanded ? '384px' : '48px' }}
+        style={{ width: isExpanded ? '512px' : '48px' }}
       >
         
         {/* Collapse/Expand Toggle */}
@@ -97,13 +98,13 @@ export const SidePanel: React.FC<SidePanelProps> = ({
                 className="p-2 hover:bg-gray-50 transition-colors"
                 aria-label={t('sidebar.collapse')}
               >
-                <svg 
-                  className="w-4 h-4 text-gray-600" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-4 h-4 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
             ) : (
@@ -132,8 +133,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({
           </div>
         </div>
 
-        {/* Panel Header */}
-        <div className={`flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 ${
+        {/* Panel Header - Adjusted padding to align with main screen */}
+        <div className={`flex items-center justify-between px-4 pt-5 pb-3 border-b border-gray-200 bg-gray-50 ${
           isExpanded ? 'opacity-100' : 'opacity-0'
         } transition-opacity duration-300`}>
           <h2 className="text-lg font-semibold text-gray-800">{t('sidebar.tools')}</h2>
@@ -163,15 +164,15 @@ export const SidePanel: React.FC<SidePanelProps> = ({
         <div className={`flex-1 overflow-y-auto ${
           isExpanded ? 'opacity-100' : 'opacity-0'
         } transition-opacity duration-300 h-full`}>
-          {activeTab === 'tools' && (
+          {activeTab === 'constraints' && (
             <div className="space-y-6 p-4">
-              <CSVManager 
+              <CSVManager
                 onImportRecords={onImportRecords}
                 currentRecords={currentRecords}
               />
-              <ConstraintsPanel 
-                constraints={constraints} 
-                onConstraintsChange={onConstraintsChange} 
+              <ConstraintsPanel
+                constraints={constraints}
+                onConstraintsChange={onConstraintsChange}
               />
             </div>
           )}
