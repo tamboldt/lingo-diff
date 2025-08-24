@@ -84,7 +84,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
     <>
       {/* Collapsible Sidebar */}
       <div
-        className="fixed top-16 right-0 h-[calc(100vh-4rem)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
+        className="fixed top-9 right-0 h-[calc(100vh-3rem-1px)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
         style={{ width: isExpanded ? '512px' : '48px' }}
       >
         
@@ -134,7 +134,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
         </div>
 
         {/* Panel Header - Adjusted padding to align with main screen */}
-        <div className={`flex items-center justify-between px-4 pt-5 pb-3 border-b border-gray-200 bg-gray-50 ${
+        <div className={`flex items-center justify-between px-4 border-b border-gray-200 bg-gray-50 ${
           isExpanded ? 'opacity-100' : 'opacity-0'
         } transition-opacity duration-300`}>
           <h2 className="text-lg font-semibold text-gray-800">{t('sidebar.tools')}</h2>
