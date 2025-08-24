@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import '../styles/richTextEditor.css';
 
 interface RichTextEditorProps {
   value: string;
@@ -28,13 +29,35 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
     if (htmlData && htmlData.length > plainText.length) {
       // Rich content detected
-      e.preventDefault();
       setHasRichContent(true);
       
       if (isRichMode && richEditorRef.current) {
-        // In rich mode: paste as HTML
-        richEditorRef.current.innerHTML = htmlData;
-        onChange(richEditorRef.current.innerText || richEditorRef.current.textContent || '');
+        // In rich mode: paste as HTML and retain formatting
+        e.preventDefault();
+        
+        // Insert HTML at cursor position
+        const selection = window.getSelection();
+        if (selection && selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          range.deleteContents();
+          
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = htmlData;
+          const fragment = document.createDocumentFragment();
+          
+          while (tempDiv.firstChild) {
+            fragment.appendChild(tempDiv.firstChild);
+          }
+          
+          range.insertNode(fragment);
+          
+          // Move cursor to end of inserted content
+          range.collapse(false);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+        
+        handleRichEditorChange();
       } else {
         // In plain mode: extract plain text but show rich content detected
         onChange(plainText);
@@ -50,6 +73,31 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     }
   };
 
+  // Handle key press to fix Enter key behavior
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        
+        // Create a single line break
+        const br = document.createElement('br');
+        range.deleteContents();
+        range.insertNode(br);
+        
+        // Move cursor after the line break
+        range.setStartAfter(br);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        handleRichEditorChange();
+      }
+    }
+  };
+
   // Format text functions
   const formatText = (command: string, value?: string) => {
     document.execCommand(command, false, value);
@@ -58,10 +106,10 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
   // Sync plain text to rich editor when switching modes
   useEffect(() => {
-    if (isRichMode && richEditorRef.current) {
+    if (isRichMode && richEditorRef.current && !hasRichContent) {
       richEditorRef.current.innerText = value;
     }
-  }, [isRichMode, value]);
+  }, [isRichMode, value, hasRichContent]);
 
   return (
     <div className="space-y-2">
@@ -129,10 +177,11 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
           <div
             ref={richEditorRef}
             contentEditable
-            className="min-h-[120px] p-3 border border-t-0 border-gray-300 rounded-b-md focus:border-indigo-500 focus:ring-indigo-500 resize-y overflow-auto"
-            style={{ minHeight: '120px' }}
+            className="rich-text-editor h-[120px] p-3 border border-t-0 border-gray-300 rounded-b-md focus:border-indigo-500 focus:ring-indigo-500 overflow-y-auto font-mono text-sm"
+            style={{ height: '120px' }}
             onInput={handleRichEditorChange}
             onPaste={handlePaste}
+            onKeyDown={handleKeyDown}
             data-placeholder={placeholder}
             suppressContentEditableWarning={true}
           />
@@ -146,8 +195,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             onPaste={handlePaste}
-            rows={3}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+            className="mt-1 block w-full h-[120px] rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20 resize-none"
+            style={{ height: '120px' }}
             placeholder={placeholder}
           />
           <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">

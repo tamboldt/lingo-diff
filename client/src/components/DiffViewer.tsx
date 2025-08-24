@@ -168,7 +168,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
       
       {/* Mode Selection Bar */}
       <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex flex-col gap-3">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
             <span className="text-sm font-medium text-gray-700">Diff Mode:</span>
             <div className="flex flex-wrap gap-1">
@@ -189,14 +189,14 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
             </div>
           </div>
           {selectedMode === 'auto' && (
-            <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded border self-start sm:self-center">
+            <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded border self-start">
               Using: <span className="font-medium text-blue-600">{t(`analysis.mode.${effectiveMode}`)}</span>
             </div>
           )}
         </div>
       </div>
       
-      <div className="bg-gray-50 rounded-md p-3 min-h-[100px]">
+      <div className="bg-gray-50 rounded-md p-3 h-[200px] overflow-y-auto">
         {hasContent ? (
           <div className={effectiveMode === 'line' ? 'space-y-0' : 'whitespace-pre-wrap break-words'}>
             {diffResult.length > 0 ? (

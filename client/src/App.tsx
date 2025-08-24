@@ -220,11 +220,11 @@ export default function App() {
           </div>
 
           {/* MAIN WORKFLOW: TEXT INPUTS AND DIFF */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">{/* Focus on main content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">{/* Focus on main content */}
             
             {/* LEFT: TEXT COMPARISON - THE CORE DIFF INPUTS */}
             <div className="space-y-4">
-              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
+              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200 h-fit">
                 <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                   <span className="text-green-500 mr-2">📝</span>
                   {t('textComparison.title')}
@@ -250,7 +250,7 @@ export default function App() {
 
             {/* RIGHT: LIVE DIFF VISUALIZATION - THE MAIN OUTPUT */}
             <div className="space-y-4">
-              <div className="bg-white p-6 rounded-lg shadow-lg border-2 border-blue-200 bg-gradient-to-br from-white to-blue-50">
+              <div className="bg-white p-6 rounded-lg shadow-lg border-2 border-blue-200 bg-gradient-to-br from-white to-blue-50 h-fit">
                 <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                   <svg className="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

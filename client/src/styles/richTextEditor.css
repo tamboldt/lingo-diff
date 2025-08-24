@@ -1,0 +1,49 @@
+/* Rich Text Editor Styles */
+.rich-text-editor[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: #9CA3AF;
+  font-style: italic;
+}
+
+.rich-text-editor[contenteditable="true"]:focus:empty:before {
+  content: "";
+}
+
+/* Prevent double line spacing in contentEditable */
+.rich-text-editor * {
+  margin: 0;
+  padding: 0;
+}
+
+.rich-text-editor p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.rich-text-editor br {
+  line-height: 1.5;
+}
+
+/* Format styles */
+.rich-text-editor strong, 
+.rich-text-editor b {
+  font-weight: bold;
+}
+
+.rich-text-editor em, 
+.rich-text-editor i {
+  font-style: italic;
+}
+
+.rich-text-editor u {
+  text-decoration: underline;
+}
+
+/* Prevent browser default behaviors that cause issues */
+.rich-text-editor div {
+  display: inline;
+}
+
+.rich-text-editor div br {
+  display: block;
+}
