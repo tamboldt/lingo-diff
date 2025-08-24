@@ -4,6 +4,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translation files
 import en from './locales/en.json';
+import enUS from './locales/en-US.json';
+import enGB from './locales/en-GB.json';
 import es419 from './locales/es-419.json';
 import ptBR from './locales/pt-BR.json';
 import fr from './locales/fr.json';
@@ -18,6 +20,8 @@ import hi from './locales/hi.json';
 
 const resources = {
   'en': { translation: en },
+  'en-US': { translation: enUS },
+  'en-GB': { translation: enGB },
   'es-419': { translation: es419 },
   'pt-BR': { translation: ptBR },
   'fr': { translation: fr },
@@ -37,6 +41,8 @@ export const RTL_LANGUAGES = ['ar', 'he'];
 // Language display names in their native scripts  
 export const LANGUAGE_NAMES = {
   'en': 'English',
+  'en-US': 'English (US)',
+  'en-GB': 'English (UK)',
   'es-419': 'Español (Latinoamérica)',
   'pt-BR': 'Português (Brasil)',
   'fr': 'Français',
@@ -55,8 +61,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en', // fallback language
-    fallbackLng: 'en',
+    lng: 'en-US', // fallback language
+    fallbackLng: 'en-US',
     
     interpolation: {
       escapeValue: false // React already does escaping

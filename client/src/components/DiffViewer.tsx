@@ -196,7 +196,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         </div>
       </div>
       
-      <div className="bg-gray-50 rounded-md p-3 h-[200px] overflow-y-auto">
+      <div className="bg-gray-50 rounded-md p-3 h-[320px] overflow-y-auto">
         {hasContent ? (
           <div className={effectiveMode === 'line' ? 'space-y-0' : 'whitespace-pre-wrap break-words'}>
             {diffResult.length > 0 ? (
