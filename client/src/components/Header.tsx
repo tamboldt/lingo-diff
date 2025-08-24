@@ -3,29 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { LanguageSelector } from './LanguageSelector';
 import { FEATURES } from '../config/features';
 
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({ 
-  t: (key: string) => {
-    const keys: { [key: string]: string } = {
-      'app.title': 'Lingo-Diff',
-      'app.subtitle': 'Professional Text Comparison Tool',
-      'navigation.reset': 'Reset All',
-      'navigation.resetWelcome': 'Reset Welcome'
-    };
-    return keys[key] || key;
-  }
-});
-
 interface HeaderProps {
   onReset: () => void;
   onResetWelcome?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div 

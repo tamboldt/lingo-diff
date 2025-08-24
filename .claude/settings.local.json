@@ -23,7 +23,8 @@
       "Bash(fi)",
       "Bash(git commit:*)",
       "Bash(do)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []

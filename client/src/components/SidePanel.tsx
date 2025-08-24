@@ -84,7 +84,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
     <>
       {/* Collapsible Sidebar */}
       <div
-        className="fixed top-9 right-0 h-[calc(100vh-3rem-1px)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
+        className="fixed top-8 right-0 h-[calc(100vh-3rem-1px)] bg-white shadow-xl border-l border-gray-200 transition-all duration-300 ease-in-out z-30"
         style={{ width: isExpanded ? '512px' : '48px' }}
       >
         
