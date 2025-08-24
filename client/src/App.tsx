@@ -8,72 +8,12 @@ import { TextMetricsCard } from './components/TextMetricsCard';
 import { InfoTooltip } from './components/Tooltip';
 import { SidePanel } from './components/SidePanel';
 import { AIAnalysisModal } from './components/AIAnalysisModal';
+import { RichTextEditor } from './components/RichTextEditor';
 import { getTextMetrics } from './utils/localizationMetrics';
 import { TextComparisonRecord } from './utils/smartCSV';
-import { FEATURES } from './config/features';
-
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({
-  t: (key: string) => {
-    // Return the key as fallback when i18n is disabled
-    const keys: { [key: string]: string } = {
-      'textComparison.title': 'Text Comparison',
-      'textComparison.textA.label': 'Text A (Original)',
-      'textComparison.textA.placeholder': 'Enter original text...',
-      'textComparison.textA.tooltip': 'Enter the original version of your text. This could be an existing translation, first draft, or current version.',
-      'textComparison.textB.label': 'Text B (Revised)',
-      'textComparison.textB.placeholder': 'Enter revised text...',
-      'textComparison.textB.tooltip': 'Enter the revised version of your text. This could be a new translation, edited version, or alternative option.',
-      'analysis.title': 'Visual Difference Analysis',
-      'context.title': 'Context Information',
-      'context.referenceText.label': 'Reference Text',
-      'context.referenceText.placeholder': 'e.g., Select Room',
-      'context.referenceText.tooltip': 'Enter the source or reference text (like the original English). This helps provide context for comparison analysis.',
-      'context.usage.label': 'Context & Usage',
-      'context.usage.placeholder': 'e.g., Mobile app button for hotel room selection',
-      'context.usage.tooltip': 'Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice.',
-      'context.saveButton': '💾 Save Comparison to History',
-      'analysis.aiTitle': 'AI Analysis',
-      'analysis.aiDescription': 'Generate expert analysis prompt for AI evaluation of text differences.',
-      'metrics.referenceText': 'Reference Text',
-      'metrics.characters': 'Characters',
-      'metrics.words': 'Words',
-      'metrics.lines': 'Lines',
-      'metrics.chars': 'characters',
-      'analysis.emptyTitle': 'Enter text to see differences',
-      'analysis.emptyDescription': 'Add your text versions to see a live comparison',
-      'analysis.realTime': 'Real-time',
-      'welcome.quickStartGuide': 'Quick Start Guide',
-      'welcome.step1.title': 'Enter Your Text',
-      'welcome.step1.description': 'Add both versions in the boxes below',
-      'welcome.step2.title': 'View Differences',
-      'welcome.step2.description': 'See highlighted changes instantly',
-      'welcome.step3.title': 'Get AI Analysis',
-      'welcome.step3.description': 'Copy prompt for expert evaluation',
-      'advancedOptions.title': 'Advanced Options',
-      'advancedOptions.optional': 'Optional',
-      'advancedOptions.description': 'Add context information and perform AI analysis for better insights',
-      'constraints.technicalConstraints': 'Technical Constraints',
-      'constraints.quickPresets': 'Quick Presets',
-      'ai.forEveryone': 'For everyone:',
-      // Diff mode translations
-      'analysis.mode.auto': 'Auto',
-      'analysis.mode.character': 'Character',
-      'analysis.mode.word': 'Word',
-      'analysis.mode.line': 'Line',
-      'analysis.mode.sentence': 'Sentence',
-      'analysis.mode.tooltip.auto': 'Automatically choose the best diff mode based on text size',
-      'analysis.mode.tooltip.character': 'Compare character by character - best for small text changes',
-      'analysis.mode.tooltip.word': 'Compare word by word - ideal for longer texts',
-      'analysis.mode.tooltip.line': 'Compare line by line - perfect for large documents',
-      'analysis.mode.tooltip.sentence': 'Compare sentence by sentence - good for structured text'
-    };
-    return keys[key] || key;
-  }
-});
 
 export default function App() {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
   
   // State for all user inputs
   const [sourceTerm, setSourceTerm] = useState('');
@@ -290,52 +230,20 @@ export default function App() {
                   {t('textComparison.title')}
                 </h2>
                 <div className="space-y-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <label htmlFor="candidate1" className="block text-sm font-medium text-gray-700">{t('textComparison.textA.label')}</label>
-                      <InfoTooltip content={t('textComparison.textA.tooltip')} />
-                    </div>
-                    <div className="relative">
-                      <textarea
-                        id="candidate1"
-                        value={originalText}
-                        onChange={(e) => setOriginalText(e.target.value)}
-                        rows={3}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
-                        placeholder={t('textComparison.textA.placeholder')}
-                        aria-describedby="candidate1-help"
-                      />
-                      <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
-                        {originalText.length} {t('metrics.chars')}
-                      </div>
-                    </div>
-                    <div id="candidate1-help" className="sr-only">
-                      Enter the original version of your text for comparison
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <label htmlFor="candidate2" className="block text-sm font-medium text-gray-700">{t('textComparison.textB.label')}</label>
-                      <InfoTooltip content={t('textComparison.textB.tooltip')} />
-                    </div>
-                    <div className="relative">
-                      <textarea
-                        id="candidate2"
-                        value={modifiedText}
-                        onChange={(e) => setModifiedText(e.target.value)}
-                        rows={3}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
-                        placeholder={t('textComparison.textB.placeholder')}
-                        aria-describedby="candidate2-help"
-                      />
-                      <div className="absolute bottom-2 right-3 text-xs font-bold text-gray-600 bg-white/80 px-2 py-1 rounded">
-                        {modifiedText.length} {t('metrics.chars')}
-                      </div>
-                    </div>
-                    <div id="candidate2-help" className="sr-only">
-                      Enter the revised version of your text for comparison
-                    </div>
-                  </div>
+                  <RichTextEditor
+                    id="candidate1"
+                    value={originalText}
+                    onChange={setOriginalText}
+                    label={t('textComparison.textA.label')}
+                    placeholder={t('textComparison.textA.placeholder')}
+                  />
+                  <RichTextEditor
+                    id="candidate2"
+                    value={modifiedText}
+                    onChange={setModifiedText}
+                    label={t('textComparison.textB.label')}
+                    placeholder={t('textComparison.textB.placeholder')}
+                  />
                 </div>
               </div>
             </div>

@@ -58,7 +58,21 @@
     "totalCharacters": "Total: {{count}} characters",
     "emptyTitle": "Enter text to see differences",
     "emptyDescription": "Add your text versions to see a live comparison",
-    "realTime": "Real-time"
+    "realTime": "Real-time",
+    "mode": {
+      "auto": "Auto",
+      "character": "Character",
+      "word": "Word",
+      "line": "Line",
+      "sentence": "Sentence",
+      "tooltip": {
+        "auto": "Automatically choose the best diff mode based on text size",
+        "character": "Compare character by character - best for small text changes",
+        "word": "Compare word by word - ideal for longer texts",
+        "line": "Compare line by line - perfect for large documents",
+        "sentence": "Compare sentence by sentence - good for structured text"
+      }
+    }
   },
   "csv": {
     "title": "CSV Import/Export",

@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { diffChars, diffWords, diffLines, diffSentences } from 'diff';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 
 // Types for the component props
 export type DiffMode = 'auto' | 'character' | 'word' | 'line' | 'sentence';
@@ -16,39 +15,8 @@ interface DiffViewerProps {
  * Displays character-by-character differences between two text strings
  * Uses the 'diff' library to highlight additions (green) and deletions (red)
  */
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({
-  t: (key: string) => {
-    const keys: { [key: string]: string } = {
-      'analysis.visualDiff': 'Visual Diff',
-      'analysis.autoUpdating': 'Auto-updating',
-      'analysis.refreshDiff': 'Refresh diff',
-      'analysis.addedText': 'Added text',
-      'analysis.removedText': 'Removed text',
-      'analysis.enterBothTexts': 'Enter both texts to see differences',
-      'analysis.readyForAnalysis': 'Ready for diff analysis',
-      'analysis.addTextToSee': 'Add text to both fields to see live differences',
-      'analysis.removed': 'Removed',
-      'analysis.added': 'Added',
-      'analysis.unchanged': 'Unchanged',
-      'analysis.totalCharacters': 'Total: {{count}} characters',
-      'analysis.mode.auto': 'Auto',
-      'analysis.mode.character': 'Character',
-      'analysis.mode.word': 'Word',
-      'analysis.mode.line': 'Line',
-      'analysis.mode.sentence': 'Sentence',
-      'analysis.mode.tooltip.auto': 'Automatically choose the best diff mode based on text size',
-      'analysis.mode.tooltip.character': 'Compare character by character - best for small text changes',
-      'analysis.mode.tooltip.word': 'Compare word by word - ideal for longer texts',
-      'analysis.mode.tooltip.line': 'Compare line by line - perfect for large documents',
-      'analysis.mode.tooltip.sentence': 'Compare sentence by sentence - good for structured text'
-    };
-    return keys[key] || key;
-  }
-});
-
 export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedText }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedMode, setSelectedMode] = useState<DiffMode>('auto');
 
