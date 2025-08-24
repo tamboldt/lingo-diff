@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { diffChars } from 'diff';
+import { diffChars, diffWords, diffLines, diffSentences } from 'diff';
 import { useTranslation } from 'react-i18next';
 import { FEATURES } from '../config/features';
 
 // Types for the component props
+export type DiffMode = 'auto' | 'character' | 'word' | 'line' | 'sentence';
+
 interface DiffViewerProps {
   originalText: string;
   modifiedText: string;
@@ -25,11 +27,21 @@ const mockUseTranslation = () => ({
       'analysis.removedText': 'Removed text',
       'analysis.enterBothTexts': 'Enter both texts to see differences',
       'analysis.readyForAnalysis': 'Ready for diff analysis',
-      'analysis.addTextToSee': 'Add text to both fields to see live character-level differences',
+      'analysis.addTextToSee': 'Add text to both fields to see live differences',
       'analysis.removed': 'Removed',
       'analysis.added': 'Added',
       'analysis.unchanged': 'Unchanged',
-      'analysis.totalCharacters': 'Total: {{count}} characters'
+      'analysis.totalCharacters': 'Total: {{count}} characters',
+      'analysis.mode.auto': 'Auto',
+      'analysis.mode.character': 'Character',
+      'analysis.mode.word': 'Word',
+      'analysis.mode.line': 'Line',
+      'analysis.mode.sentence': 'Sentence',
+      'analysis.mode.tooltip.auto': 'Automatically choose the best diff mode based on text size',
+      'analysis.mode.tooltip.character': 'Compare character by character - best for small text changes',
+      'analysis.mode.tooltip.word': 'Compare word by word - ideal for longer texts',
+      'analysis.mode.tooltip.line': 'Compare line by line - perfect for large documents',
+      'analysis.mode.tooltip.sentence': 'Compare sentence by sentence - good for structured text'
     };
     return keys[key] || key;
   }
@@ -38,16 +50,51 @@ const mockUseTranslation = () => ({
 export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedText }) => {
   const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedMode, setSelectedMode] = useState<DiffMode>('auto');
+
+  // Function to determine optimal diff mode based on text characteristics
+  const getOptimalDiffMode = useMemo((): DiffMode => {
+    const totalLength = originalText.length + modifiedText.length;
+    const totalLines = (originalText.split('\n').length + modifiedText.split('\n').length);
+    const totalWords = (originalText.split(/\s+/).length + modifiedText.split(/\s+/).length);
+    
+    // Auto-detection logic based on text characteristics
+    if (totalLength < 200) return 'character';  // Small text: character-level
+    if (totalLines > 20) return 'line';         // Multi-line: line-level
+    if (totalWords > 50) return 'word';         // Medium text: word-level
+    if (totalLength > 500) return 'sentence';   // Long text: sentence-level
+    return 'character';                         // Default to character-level
+  }, [originalText, modifiedText]);
+
+  // Get the effective diff mode (auto resolves to optimal mode)
+  const effectiveMode = selectedMode === 'auto' ? getOptimalDiffMode : selectedMode;
 
   // Memoize diff calculation to avoid unnecessary recalculations
   const diffResult = useMemo(() => {
     if (!originalText && !modifiedText) return [];
     
     setIsProcessing(true);
-    const result = diffChars(originalText, modifiedText);
+    
+    let result;
+    switch (effectiveMode) {
+      case 'word':
+        result = diffWords(originalText, modifiedText);
+        break;
+      case 'line':
+        result = diffLines(originalText, modifiedText);
+        break;
+      case 'sentence':
+        result = diffSentences(originalText, modifiedText);
+        break;
+      case 'character':
+      default:
+        result = diffChars(originalText, modifiedText);
+        break;
+    }
+    
     setTimeout(() => setIsProcessing(false), 100); // Brief processing indicator
     return result;
-  }, [originalText, modifiedText]);
+  }, [originalText, modifiedText, effectiveMode]);
 
   // Calculate diff statistics
   const diffStats = useMemo(() => {
@@ -59,32 +106,50 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
 
   // Helper function to render diff parts with appropriate styling
   const renderDiffPart = (part: any, index: number) => {
+    const isLineMode = effectiveMode === 'line';
+    const baseClasses = isLineMode ? 'block py-1 px-2 mb-1 font-mono text-sm' : 'inline px-1 py-0.5 font-mono text-sm';
+    
     if (part.added) {
       // Added text - display in green
+      const addedClasses = isLineMode 
+        ? 'bg-green-50 border-l-4 border-green-400 text-green-900'
+        : 'bg-green-100 text-green-800 rounded';
+        
       return (
         <span
           key={index}
-          className="bg-green-100 text-green-800 px-1 py-0.5 rounded font-mono text-sm"
+          className={`${baseClasses} ${addedClasses}`}
           title={t('analysis.addedText')}
         >
+          {isLineMode && <span className="inline-block w-4 text-green-600 font-bold mr-1">+</span>}
           {part.value}
         </span>
       );
     } else if (part.removed) {
       // Removed text - display in red
+      const removedClasses = isLineMode 
+        ? 'bg-red-50 border-l-4 border-red-400 text-red-900'
+        : 'bg-red-100 text-red-800 rounded line-through';
+        
       return (
         <span
           key={index}
-          className="bg-red-100 text-red-800 px-1 py-0.5 rounded font-mono text-sm line-through"
+          className={`${baseClasses} ${removedClasses}`}
           title={t('analysis.removedText')}
         >
+          {isLineMode && <span className="inline-block w-4 text-red-600 font-bold mr-1">-</span>}
           {part.value}
         </span>
       );
     } else {
       // Unchanged text - display normally
+      const unchangedClasses = isLineMode 
+        ? 'bg-gray-50 border-l-4 border-gray-200 text-gray-800'
+        : '';
+        
       return (
-        <span key={index} className="font-mono text-sm">
+        <span key={index} className={`${baseClasses} ${unchangedClasses}`}>
+          {isLineMode && <span className="inline-block w-4 text-gray-400 mr-1"> </span>}
           {part.value}
         </span>
       );
@@ -133,9 +198,35 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         </div>
       </div>
       
+      {/* Mode Selection Bar */}
+      <div className="flex items-center justify-between mb-4 p-3 bg-gray-50 rounded-lg">
+        <div className="flex items-center space-x-1">
+          <span className="text-sm font-medium text-gray-700 mr-2">Diff Mode:</span>
+          {(['auto', 'character', 'word', 'sentence', 'line'] as DiffMode[]).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => setSelectedMode(mode)}
+              className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                selectedMode === mode
+                  ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                  : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+              }`}
+              title={t(`analysis.mode.tooltip.${mode}`)}
+            >
+              {t(`analysis.mode.${mode}`)}
+            </button>
+          ))}
+        </div>
+        {selectedMode === 'auto' && (
+          <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded border">
+            Using: <span className="font-medium text-blue-600">{t(`analysis.mode.${effectiveMode}`)}</span>
+          </div>
+        )}
+      </div>
+      
       <div className="bg-gray-50 rounded-md p-3 min-h-[100px]">
         {hasContent ? (
-          <div className="whitespace-pre-wrap break-words">
+          <div className={effectiveMode === 'line' ? 'space-y-0' : 'whitespace-pre-wrap break-words'}>
             {diffResult.length > 0 ? (
               diffResult.map(renderDiffPart)
             ) : (
