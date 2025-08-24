@@ -217,7 +217,7 @@ export default function App() {
   }, [sourceTerm, context, originalText, modifiedText, comparisonHistory]);
 
   return (
-    <div className="min-h-screen bg-gray-50 transition-all duration-300" style={{paddingRight: isSidebarExpanded ? '384px' : '48px'}}>
+    <div className="min-h-screen bg-gray-50 transition-all duration-300" style={{paddingRight: isSidebarExpanded ? '512px' : '48px'}}>
       {/* Skip to main content link for screen readers */}
       <a 
         href="#main-content" 
@@ -232,7 +232,7 @@ export default function App() {
         />
       )}
       <Header onReset={handleReset} onResetWelcome={handleResetWelcome} />
-      <main id="main-content" className="p-4 sm:p-6 md:p-8 border-r border-gray-200" role="main" style={{ marginRight: '-3rem' }}>
+      <main id="main-content" className="p-4 sm:p-6 md:p-8 border-r border-gray-200" role="main" style={{ marginRight: '-3.5rem' }}>
         <div className="max-w-6xl mx-auto">
 
           {/* WORKFLOW GUIDE */}

@@ -37,7 +37,7 @@ export const ConstraintsPanel: React.FC<ConstraintsPanelProps> = ({
   onConstraintsChange
 }) => {
   const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const handleConstraintChange = (key: string, value: string) => {
     const numValue = parseInt(value) || 0;
