@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 
 interface LLMIntegrationProps {
   sourceTerm: string;
@@ -21,7 +20,7 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   onOpenModal,
   onUpdateAnalysis
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
   const [provider, setProvider] = useState<'groq' | 'openrouter'>('groq');
   const [apiKey, setApiKey] = useState('');
@@ -30,10 +29,6 @@ export const LLMIntegration: React.FC<LLMIntegrationProps> = ({
   const [error, setError] = useState<string>('');
   const [lastAnalysisTime, setLastAnalysisTime] = useState<number>(0);
 
-  // Don't render if feature is disabled
-  if (!FEATURES.LLM_INTEGRATION) {
-    return null;
-  }
 
   const hasRequiredData = originalText && modifiedText;
 

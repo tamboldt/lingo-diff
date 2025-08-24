@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 
 interface WelcomeModalProps {
   onClose: () => void;
@@ -7,7 +6,7 @@ interface WelcomeModalProps {
 }
 
 export const WelcomeModal = ({ onClose, onShowExample }: WelcomeModalProps) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = useTranslation();
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-8 transform transition-all animate-fade-in-up">

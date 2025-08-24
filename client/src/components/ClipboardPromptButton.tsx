@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 
 interface Props {
   sourceTerm: string;
@@ -51,7 +50,7 @@ ${modifiedText}
 };
 
 export const ClipboardPromptButton = ({ sourceTerm, context, originalText, modifiedText }: Props) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = useTranslation();
   const [buttonText, setButtonText] = useState(t('clipboard.copyPrompt'));
 
   const handleCopy = () => {

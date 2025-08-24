@@ -5,19 +5,6 @@ import { ConstraintsPanel } from './ConstraintsPanel';
 import { ComparisonHistory } from './ComparisonHistory';
 import { LLMIntegration } from './LLMIntegration';
 import { TextComparisonRecord } from '../utils/smartCSV';
-import { FEATURES } from '../config/features';
-
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({
-  t: (key: string) => {
-    const keys: { [key: string]: string } = {
-      'sidebar.tools': 'Tools',
-      'sidebar.history': 'History', 
-      'sidebar.ai': 'AI'
-    };
-    return keys[key] || key;
-  }
-});
 
 interface SidePanelProps {
   isExpanded: boolean;
@@ -66,7 +53,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({
   onOpenAIModal,
   onUpdateAIAnalysis
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'tools' | 'history' | 'ai'>('tools');
 
   // Notify parent when expanded state changes

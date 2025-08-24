@@ -10,46 +10,9 @@ import { SidePanel } from './components/SidePanel';
 import { AIAnalysisModal } from './components/AIAnalysisModal';
 import { getTextMetrics } from './utils/localizationMetrics';
 import { TextComparisonRecord } from './utils/smartCSV';
-import { FEATURES } from './config/features';
-
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({
-  t: (key: string) => {
-    // Return the key as fallback when i18n is disabled
-    const keys: { [key: string]: string } = {
-      'textComparison.title': 'Text Comparison',
-      'textComparison.textA.label': 'Text A (Original)',
-      'textComparison.textA.placeholder': 'Enter original text...',
-      'textComparison.textA.tooltip': 'Enter the original version of your text. This could be an existing translation, first draft, or current version.',
-      'textComparison.textB.label': 'Text B (Revised)',
-      'textComparison.textB.placeholder': 'Enter revised text...',
-      'textComparison.textB.tooltip': 'Enter the revised version of your text. This could be a new translation, edited version, or alternative option.',
-      'analysis.title': 'Visual Difference Analysis',
-      'context.title': 'Context Information',
-      'context.referenceText.label': 'Reference Text',
-      'context.referenceText.placeholder': 'e.g., Select Room',
-      'context.referenceText.tooltip': 'Enter the source or reference text (like the original English). This helps provide context for comparison analysis.',
-      'context.usage.label': 'Context & Usage',
-      'context.usage.placeholder': 'e.g., Mobile app button for hotel room selection',
-      'context.usage.tooltip': 'Describe where and how this text is used. Include UI context, target audience, or any constraints that affect the text choice.',
-      'context.saveButton': '💾 Save Comparison to History',
-      'analysis.aiTitle': 'AI Analysis',
-      'analysis.aiDescription': 'Generate expert analysis prompt for AI evaluation of text differences.',
-      'metrics.referenceText': 'Reference Text',
-      'metrics.characters': 'Characters',
-      'metrics.words': 'Words',
-      'metrics.lines': 'Lines',
-      'metrics.chars': 'chars',
-      'analysis.emptyTitle': 'Enter text to see differences',
-      'analysis.emptyDescription': 'Add your text versions to see a live comparison',
-      'analysis.realTime': 'Real-time'
-    };
-    return keys[key] || key;
-  }
-});
 
 export default function App() {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
   
   // State for all user inputs
   const [sourceTerm, setSourceTerm] = useState('');
@@ -228,28 +191,28 @@ export default function App() {
               <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <h3 className="text-lg font-medium text-blue-900">Quick Start Guide</h3>
+              <h3 className="text-lg font-medium text-blue-900">{t('quickstart.title')}</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-start">
                 <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</span>
                 <div>
-                  <p className="font-medium text-blue-900">Enter Your Text</p>
-                  <p className="text-blue-700">Add both versions in the boxes below</p>
+                  <p className="font-medium text-blue-900">{t('quickstart.step1.title')}</p>
+                  <p className="text-blue-700">{t('quickstart.step1.description')}</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</span>
                 <div>
-                  <p className="font-medium text-blue-900">View Differences</p>
-                  <p className="text-blue-700">See highlighted changes instantly</p>
+                  <p className="font-medium text-blue-900">{t('quickstart.step2.title')}</p>
+                  <p className="text-blue-700">{t('quickstart.step2.description')}</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</span>
                 <div>
-                  <p className="font-medium text-blue-900">Get AI Analysis</p>
-                  <p className="text-blue-700">Copy prompt for expert evaluation</p>
+                  <p className="font-medium text-blue-900">{t('quickstart.step3.title')}</p>
+                  <p className="text-blue-700">{t('quickstart.step3.description')}</p>
                 </div>
               </div>
             </div>
@@ -276,8 +239,7 @@ export default function App() {
                         id="candidate1"
                         value={originalText}
                         onChange={(e) => setOriginalText(e.target.value)}
-                        rows={3}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20 h-[120px] resize-none"
                         placeholder={t('textComparison.textA.placeholder')}
                         aria-describedby="candidate1-help"
                       />
@@ -299,8 +261,7 @@ export default function App() {
                         id="candidate2"
                         value={modifiedText}
                         onChange={(e) => setModifiedText(e.target.value)}
-                        rows={3}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base sm:text-sm font-mono py-3 px-4 pr-20 h-[120px] resize-none"
                         placeholder={t('textComparison.textB.placeholder')}
                         aria-describedby="candidate2-help"
                       />
@@ -386,8 +347,8 @@ export default function App() {
                   <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
-                  <h3 className="text-lg font-semibold text-gray-800">Advanced Options</h3>
-                  <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Optional</span>
+                  <h3 className="text-lg font-semibold text-gray-800">{t('advanced.title')}</h3>
+                  <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{t('advanced.optional')}</span>
                 </div>
                 <svg 
                   className={`w-5 h-5 text-gray-600 transition-transform ${showContextSection ? 'rotate-180' : ''}`}
@@ -398,7 +359,7 @@ export default function App() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
-              <p className="text-sm text-gray-600 mt-1 text-left">Add context information and perform AI analysis for better insights</p>
+              <p className="text-sm text-gray-600 mt-1 text-left">{t('advanced.description')}</p>
             </button>
 
             {showContextSection && (
@@ -464,11 +425,11 @@ export default function App() {
                   </svg>
                   {t('analysis.aiTitle')}
                   <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Free
+                    {t('advanced.free')}
                   </span>
                 </h2>
                 <p className="text-sm text-gray-600 mb-4">
-                  <strong>For everyone:</strong> Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.
+                  <strong>{t('advanced.forEveryone')}</strong> {t('advanced.copyPromptInstructions')}
                 </p>
                 <ClipboardPromptButton 
                   sourceTerm={sourceTerm}
@@ -477,7 +438,7 @@ export default function App() {
                   modifiedText={modifiedText}
                 />
                 <p className="text-xs text-gray-500 mt-2">
-                  💡 After copying, open your AI assistant in a new tab and paste the prompt for analysis
+                  {t('advanced.afterCopying')}
                 </p>
               </div>
               </div>

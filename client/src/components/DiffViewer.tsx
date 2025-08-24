@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { diffChars } from 'diff';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
-
 // Types for the component props
 interface DiffViewerProps {
   originalText: string;
@@ -14,29 +12,9 @@ interface DiffViewerProps {
  * Displays character-by-character differences between two text strings
  * Uses the 'diff' library to highlight additions (green) and deletions (red)
  */
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({
-  t: (key: string) => {
-    const keys: { [key: string]: string } = {
-      'analysis.visualDiff': 'Visual Diff',
-      'analysis.autoUpdating': 'Auto-updating',
-      'analysis.refreshDiff': 'Refresh diff',
-      'analysis.addedText': 'Added text',
-      'analysis.removedText': 'Removed text',
-      'analysis.enterBothTexts': 'Enter both texts to see differences',
-      'analysis.readyForAnalysis': 'Ready for diff analysis',
-      'analysis.addTextToSee': 'Add text to both fields to see live character-level differences',
-      'analysis.removed': 'Removed',
-      'analysis.added': 'Added',
-      'analysis.unchanged': 'Unchanged',
-      'analysis.totalCharacters': 'Total: {{count}} characters'
-    };
-    return keys[key] || key;
-  }
-});
 
 export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedText }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Memoize diff calculation to avoid unnecessary recalculations
@@ -133,7 +111,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
         </div>
       </div>
       
-      <div className="bg-gray-50 rounded-md p-3 min-h-[100px]">
+      <div className="bg-gray-50 rounded-md p-3 h-[120px] overflow-y-auto">
         {hasContent ? (
           <div className="whitespace-pre-wrap break-words">
             {diffResult.length > 0 ? (

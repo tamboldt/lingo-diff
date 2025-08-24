@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 import { TextComparisonRecord } from '../utils/csvHandler';
 
 interface ComparisonHistoryProps {
@@ -18,7 +17,7 @@ export const ComparisonHistory: React.FC<ComparisonHistoryProps> = ({
   onClearHistory,
   className = ''
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(true);
 
   if (records.length === 0) {

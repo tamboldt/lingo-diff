@@ -10,7 +10,8 @@
     "language": "Language",
     "resetWelcome": "Reset Welcome",
     "skipToMain": "Skip to main content",
-    "close": "Close"
+    "close": "Close",
+    "homepage": "Go to homepage"
   },
   "textComparison": {
     "title": "Text Comparison",
@@ -129,6 +130,7 @@
     "loading": "Loading...",
     "fileTooBig": "File too large. Please select a CSV file smaller than 5MB.",
     "invalidFile": "Please select a CSV file.",
+    "selectCsvFile": "Please select a CSV file.",
     "noDataExport": "No data to export. Add some text comparisons first.",
     "importSuccess": "Successfully imported {{count}} comparison records.",
     "exportSuccess": "Exported {{count}} records to CSV."
@@ -146,6 +148,30 @@
     "tryExample": "Try Example",
     "getStarted": "Got It, Let's Start!",
     "showExample": "Show Example"
+  },
+  "quickstart": {
+    "title": "Quick Start Guide",
+    "step1": {
+      "title": "Enter Your Text",
+      "description": "Add both versions in the boxes below"
+    },
+    "step2": {
+      "title": "View Differences", 
+      "description": "See highlighted changes instantly"
+    },
+    "step3": {
+      "title": "Get AI Analysis",
+      "description": "Copy prompt for expert evaluation"
+    }
+  },
+  "advanced": {
+    "title": "Advanced Options",
+    "optional": "Optional",
+    "description": "Add context information and perform AI analysis for better insights",
+    "free": "Free",
+    "forEveryone": "For everyone:",
+    "copyPromptInstructions": "Copy the analysis prompt below, then paste it into ChatGPT, Claude, or your preferred AI assistant for expert text evaluation. No API key required.",
+    "afterCopying": "💡 After copying, open your AI assistant in a new tab and paste the prompt for analysis"
   },
   "sidebar": {
     "tools": "Tools",
@@ -180,7 +206,15 @@
     "qualityDepends": "• Analysis quality depends on chosen model",
     "verifyManually": "• Always verify AI recommendations manually",
     "noAnalysis": "No analysis available yet.",
-    "copyAnalysis": "Copy Analysis"
+    "copyAnalysis": "Copy Analysis",
+    "prompt": {
+      "noContextProvided": "No context provided",
+      "noReferenceProvided": "No reference provided",
+      "noCulturalConcerns": "No specific cultural concerns identified",
+      "contextConsidered": "Context considered in evaluation",
+      "textBRecommended": "Text B is recommended for better conciseness",
+      "textAMoreDetailed": "Text A provides more detailed information"
+    }
   },
   "clipboard": {
     "copyPrompt": "📋 Copy Prompt for AI Analysis",

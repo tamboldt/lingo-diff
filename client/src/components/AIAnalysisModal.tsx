@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 
 interface AIAnalysisModalProps {
   isOpen: boolean;
@@ -15,7 +14,7 @@ export const AIAnalysisModal: React.FC<AIAnalysisModalProps> = ({
   analysis,
   isAnalyzing
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (

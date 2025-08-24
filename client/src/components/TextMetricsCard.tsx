@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FEATURES } from '../config/features';
 import { TextMetrics, checkConstraints } from '../utils/localizationMetrics';
 
 interface TextMetricsCardProps {
@@ -20,7 +19,7 @@ export const TextMetricsCard: React.FC<TextMetricsCardProps> = ({
   isSource = false,
   className = ''
 }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : { t: (key: string) => key.split('.').pop() || key };
+  const { t } = useTranslation();
   const constraintChecks = constraints ? checkConstraints(text, constraints) : [];
 
   const getExpansionColor = (rate: number) => {

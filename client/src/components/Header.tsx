@@ -1,17 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSelector } from './LanguageSelector';
-import { FEATURES } from '../config/features';
-
-// Mock functions when i18n is disabled
-const mockUseTranslation = () => ({ 
-  t: (key: string) => {
-    if (key === 'app.title') return 'Lingo-Diff';
-    if (key === 'app.subtitle') return 'Professional Text Comparison Tool';
-    if (key === 'navigation.reset') return 'Reset All';
-    return key.split('.').pop() || key;
-  }
-});
 
 interface HeaderProps {
   onReset: () => void;
@@ -19,7 +8,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
-  const { t } = FEATURES.I18N_ENABLED ? useTranslation() : mockUseTranslation();
+  const { t } = useTranslation();
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -28,7 +17,7 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
           <div 
             className="flex items-center cursor-pointer hover:opacity-80 transition-opacity" 
             onClick={() => window.location.href = '/'}
-            title="Go to homepage"
+            title={t('navigation.homepage')}
           >
             <svg className="w-8 h-8 text-blue-600 mr-3" fill="none" viewBox="0 0 32 32" aria-label="Lingo-Diff logo">
               {/* Background */}
@@ -61,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onResetWelcome }) => {
             </span>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-3">
-            {FEATURES.I18N_ENABLED && <LanguageSelector />}
+            <LanguageSelector />
             <div className="flex space-x-1 sm:space-x-2">
               <button
                 onClick={onReset}
