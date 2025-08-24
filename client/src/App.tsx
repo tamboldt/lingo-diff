@@ -55,7 +55,18 @@ const mockUseTranslation = () => ({
       'advancedOptions.description': 'Add context information and perform AI analysis for better insights',
       'constraints.technicalConstraints': 'Technical Constraints',
       'constraints.quickPresets': 'Quick Presets',
-      'ai.forEveryone': 'For everyone:'
+      'ai.forEveryone': 'For everyone:',
+      // Diff mode translations
+      'analysis.mode.auto': 'Auto',
+      'analysis.mode.character': 'Character',
+      'analysis.mode.word': 'Word',
+      'analysis.mode.line': 'Line',
+      'analysis.mode.sentence': 'Sentence',
+      'analysis.mode.tooltip.auto': 'Automatically choose the best diff mode based on text size',
+      'analysis.mode.tooltip.character': 'Compare character by character - best for small text changes',
+      'analysis.mode.tooltip.word': 'Compare word by word - ideal for longer texts',
+      'analysis.mode.tooltip.line': 'Compare line by line - perfect for large documents',
+      'analysis.mode.tooltip.sentence': 'Compare sentence by sentence - good for structured text'
     };
     return keys[key] || key;
   }

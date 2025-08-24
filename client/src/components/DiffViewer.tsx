@@ -199,29 +199,33 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ originalText, modifiedTe
       </div>
       
       {/* Mode Selection Bar */}
-      <div className="flex items-center justify-between mb-4 p-3 bg-gray-50 rounded-lg">
-        <div className="flex items-center space-x-1">
-          <span className="text-sm font-medium text-gray-700 mr-2">Diff Mode:</span>
-          {(['auto', 'character', 'word', 'sentence', 'line'] as DiffMode[]).map((mode) => (
-            <button
-              key={mode}
-              onClick={() => setSelectedMode(mode)}
-              className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
-                selectedMode === mode
-                  ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
-              }`}
-              title={t(`analysis.mode.tooltip.${mode}`)}
-            >
-              {t(`analysis.mode.${mode}`)}
-            </button>
-          ))}
-        </div>
-        {selectedMode === 'auto' && (
-          <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded border">
-            Using: <span className="font-medium text-blue-600">{t(`analysis.mode.${effectiveMode}`)}</span>
+      <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <span className="text-sm font-medium text-gray-700">Diff Mode:</span>
+            <div className="flex flex-wrap gap-1">
+              {(['auto', 'character', 'word', 'sentence', 'line'] as DiffMode[]).map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => setSelectedMode(mode)}
+                  className={`px-2 py-1 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
+                    selectedMode === mode
+                      ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                      : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                  title={t(`analysis.mode.tooltip.${mode}`)}
+                >
+                  {t(`analysis.mode.${mode}`)}
+                </button>
+              ))}
+            </div>
           </div>
-        )}
+          {selectedMode === 'auto' && (
+            <div className="text-xs text-gray-500 bg-white px-2 py-1 rounded border self-start sm:self-center">
+              Using: <span className="font-medium text-blue-600">{t(`analysis.mode.${effectiveMode}`)}</span>
+            </div>
+          )}
+        </div>
       </div>
       
       <div className="bg-gray-50 rounded-md p-3 min-h-[100px]">
